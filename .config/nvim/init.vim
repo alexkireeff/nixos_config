@@ -1,4 +1,4 @@
-" TODO make vim autocomplete work better
+" TODO make vim autocomplete work better or use coc
 
 set tabstop=2
 set softtabstop=2
