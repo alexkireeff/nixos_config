@@ -1,3 +1,5 @@
+" TODO make vim autocomplete work better
+
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
