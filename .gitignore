@@ -1,0 +1,14 @@
+# Turn .gitignore to whitelist
+*
+!*/
+
+!.gitignore
+
+!.zshrc
+
+!.vimrc
+!.config/nvim/init.vim
+
+!.tmux.conf
+
+!.gitconfig
