@@ -12,3 +12,5 @@
 !.tmux.conf
 
 !.gitconfig
+
+!configuration.nix
