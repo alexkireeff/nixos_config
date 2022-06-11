@@ -15,6 +15,8 @@ in {
   environment.loginShellInit =
     ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
 
+  programs.light.enable = true;
+
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
@@ -40,11 +42,11 @@ in {
 
       # sway
       grim # screenshot
-      swaylock # lock screen
       swayidle # idle controller
+      swaylock # lock screen
       wl-clipboard # clipboard
       wofi # menu
-      i3status # status for bar
+      i3status # status for bar # TODO status bar not working, just want normal one minus a few things and with second by second time update
     ];
 
     wayland.windowManager.sway = {
@@ -53,6 +55,9 @@ in {
       config = {
         terminal = "alacritty";
         menu = "wofi --style=${CD}/wofi.css --show run";
+        modifier = "Control";
+        # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/sway.nix
+
         focus.forceWrapping = false;
         focus.followMouse = true;
 
@@ -60,21 +65,22 @@ in {
           statusCommand = "%{pkgs.i3status}/bin/i3status";
           command = "${pkgs.sway}/bin/swaybar";
         }];
-        # TODO put custom keys in here too
         # TODO put brightness and volume keys here
+        # TODO mess with common key bindings
       };
     };
 
     services.swayidle = {
-      # TODO on laptop close, hibernate computer
       enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.swaylock}/bin/swaylock";
+        }
+      ];
       timeouts = [
         {
           timeout = 60 * 4;
-          command = "${pkgs.swaylock}/bin/swaylock";
-        }
-        {
-          timeout = 60 * 10;
           command = "systemctl suspend-then-hibernate";
         }
       ];
@@ -93,18 +99,28 @@ in {
       text-color = "000000";
 
       ring-clear-color = "ffffff";
+      inside-clear-color = "000000";
+      line-clear-color = "000000";
+      text-clear-color = "000000";
 
       ring-caps-lock-color = "ffffff";
+      inside-caps-lock-color = "000000";
+      line-caps-lock-color = "000000";
+      text-caps-lock-color = "000000";
 
       ring-ver-color = "0061ff";
+      inside-ver-color = "000000";
+      line-ver-color = "000000";
+      text-ver-color = "000000";
 
       ring-wrong-color = "ff0000";
+      inside-wrong-color = "000000";
+      line-wrong-color = "000000";
+      text-wrong-color = "000000";
 
       indicator-radius = 10;
       indicator-idle-visible = true;
       indicator-caps-lock = false;
-
-      inside-clear-color = "000000";
 
       disable-caps-lock-text = true;
     };
