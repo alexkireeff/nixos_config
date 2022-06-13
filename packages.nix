@@ -46,7 +46,7 @@ in {
       swaylock # lock screen
       wl-clipboard # clipboard
       wofi # menu
-      i3status # status for bar # TODO status bar not working, just want normal one minus a few things and with second by second time update
+      i3status # status for bar
     ];
 
     wayland.windowManager.sway = {
