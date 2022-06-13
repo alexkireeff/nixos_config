@@ -3,6 +3,7 @@
 {
 
   # TODO FUTURE remove udevmonConfig and plugins when error fixed
+  # TODO FUTURE figure out how to make it transition to long press faster
   services.interception-tools = {
     enable = true;
     plugins = [ pkgs.interception-tools-plugins.caps2esc ];
@@ -14,7 +15,6 @@
     '';
   };
 
-  # TODO FUTURE bluetooth
   services.pipewire = {
     enable = true;
     alsa.enable = true; # low level soundcard interface

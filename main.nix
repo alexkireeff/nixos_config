@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
 
+# TODO refactor everything so it doesn't make my eyes bleed
+
 let CD = builtins.toString ./.;
 
 in {
@@ -44,7 +46,7 @@ in {
     users.user = {
       shell = pkgs.zsh;
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ];
+      extraGroups = [ "wheel" "networkmanager" "video" ];
       # permissions on below file should be 600
       # TODO FUTURE change password file to be secret when if that becomes a thing
       passwordFile = "/etc/nixos/user_pass_hash";
