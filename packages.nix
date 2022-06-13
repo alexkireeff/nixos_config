@@ -55,14 +55,13 @@ in {
       config = {
         terminal = "alacritty";
         menu = "wofi --style=${CD}/wofi.css --show run";
-        modifier = "Control";
         # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/sway.nix
 
         focus.forceWrapping = false;
         focus.followMouse = true;
 
         bars = [{
-          statusCommand = "%{pkgs.i3status}/bin/i3status";
+          statusCommand = "i3status -c ${CD}/i3status.config";
           command = "${pkgs.sway}/bin/swaybar";
         }];
         # TODO put brightness and volume keys here

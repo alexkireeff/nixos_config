@@ -8,7 +8,6 @@
 
   boot.kernelModules = [ "tcp_bbr" ];
 
-  # TODO put more security stuff in here
   boot.kernel.sysctl = {
     # Disable SysRq key
     "kernel.sysrq" = 0;
@@ -39,8 +38,7 @@
     "net.ipv4.tcp_rfc1337" = 1;
     # Latency reduction
     "net.ipv4.tcp_fastopen" = 3;
-    ## Bufferfloat mitigations
-    # Requires >= 4.9 & kernel module
+    # Bufferfloat mitigations
     "net.ipv4.tcp_congestion_control" = "bbr";
     # Set network stack scheduler
     "net.core.default_qdisc" = "cake";
