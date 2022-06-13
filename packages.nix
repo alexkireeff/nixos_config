@@ -78,7 +78,7 @@ in {
       }];
       timeouts = [{
         timeout = 60 * 4;
-        command = "systemctl suspend-then-hibernate";
+        command = "[[ $(cat /sys/class/power_supply/AC/online) -eq 0 ]] && systemctl suspend-then-hibernate";
       }];
     };
 
