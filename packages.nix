@@ -10,7 +10,10 @@ in {
   imports = [ "${home-manager}/nixos" ];
 
   environment.defaultPackages = lib.mkForce [ ];
-  environment.systemPackages = with pkgs; [ home-manager pulseaudio ];
+  environment.systemPackages = with pkgs; [
+    home-manager
+    pulseaudio
+  ];
 
   environment.loginShellInit =
     ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
@@ -47,14 +50,22 @@ in {
       wl-clipboard # clipboard
       wofi # menu
       i3status # status for bar
+
+      # other
+      python3
+
+      # command line utilities
+      tree
+      unzip
+
     ];
 
     wayland.windowManager.sway = {
       enable = true;
 
       config = {
-        terminal = "alacritty";
         menu = "wofi --style=${CD}/wofi.css --show run";
+        terminal = "alacritty";
         # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/sway.nix
 
         focus.forceWrapping = false;
@@ -64,10 +75,12 @@ in {
           statusCommand = "i3status -c ${CD}/i3status.config";
           command = "${pkgs.sway}/bin/swaybar";
         }];
+
+      # TODO mess with common key bindings
+
       };
       extraConfig =
         "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 10\nbindsym XF86MonBrightnessUp exec light -A 10\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'\n      ";
-      # TODO mess with common key bindings
     };
 
     services.swayidle = {
@@ -78,7 +91,8 @@ in {
       }];
       timeouts = [{
         timeout = 60 * 4;
-        command = "[[ $(cat /sys/class/power_supply/AC/online) -eq 0 ]] && systemctl suspend-then-hibernate";
+        command =
+          "[[ $(cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && systemctl suspend-then-hibernate";
       }];
     };
 
