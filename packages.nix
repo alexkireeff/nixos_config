@@ -52,6 +52,7 @@ in {
       python3
 
       # command line utilities
+      dtach
       tree
       unzip
 
@@ -62,7 +63,7 @@ in {
 
       config = {
         menu = "wofi --style=${CD}/wofi.css --show run";
-        modifier = "Mod1";
+        modifier = "Mod1"; # TODO or maybe control
         terminal = "${pkgs.alacritty}/bin/alacritty";
         # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/sway.nix
 
@@ -157,11 +158,6 @@ in {
       enable = true;
       userName = "user";
       userEmail = "user@computer";
-    };
-
-    programs.tmux = {
-      enable = true;
-      extraConfig = builtins.readFile "${CD}/tmux.config";
     };
 
     programs.ssh = {
