@@ -4,8 +4,10 @@
   lib,
   ...
 }: let
-  CD = builtins.toString ./.;
+  computerName = "laptop";
+  sshServer = false;
 
+  CD = builtins.toString ./.;
   home-manager =
     builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/master.tar.gz";
@@ -306,7 +308,6 @@ in {
   };
 
   # TODO FUTURE remove udevmonConfig and plugins when error fixed
-  # TODO FUTURE figure out how to make it transition to long press faster
   services.interception-tools = {
     enable = true;
     plugins = [pkgs.interception-tools-plugins.caps2esc];
