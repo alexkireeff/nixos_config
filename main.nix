@@ -94,11 +94,6 @@ in {
         wofi # menu
         i3status # status for bar
 
-        # python
-        python310
-        python310Packages.pandas # TODO figure out how to allow access
-        # python3Packages.bayesian-optimization # broken
-
         # command line utilities
         dtach
         tree
@@ -141,6 +136,17 @@ in {
         extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'\n      ";
       };
 
+      # blue light filter
+      services.gammastep = {
+        enable = true;
+        latitude = 38.897957;
+        longitude = -77.036556;
+        temperature = {
+          day = 6500;
+          night = 2000;
+        };
+      };
+
       services.swayidle = {
         enable = true;
         events = [
@@ -160,34 +166,32 @@ in {
       programs.alacritty = {
         # make it not mess with the text when resizing window?
         enable = true;
-        settings.font = {
-          bold = {
-            family = "Meslo LGM Nerd Font";
-            style = "Bold";
+        settings = {
+          key_bindings = [
+            {
+              key = "N";
+              mods = "Control|Shift";
+              action = "SpawnNewInstance";
+            }
+          ];
+          font = {
+            bold = {
+              family = "Meslo LGM Nerd Font";
+              style = "Bold";
+            };
+            bold_italic = {
+              family = "Meslo LGM Nerd Font";
+              style = "Bold Italic";
+            };
+            italic = {
+              family = "Meslo LGM Nerd Font";
+              style = "Italic";
+            };
+            normal = {
+              family = "Meslo LGM Nerd Font";
+              style = "Regular";
+            };
           };
-          bold_italic = {
-            family = "Meslo LGM Nerd Font";
-            style = "Bold Italic";
-          };
-          italic = {
-            family = "Meslo LGM Nerd Font";
-            style = "Italic";
-          };
-          normal = {
-            family = "Meslo LGM Nerd Font";
-            style = "Regular";
-          };
-        };
-      };
-
-      # blue light filter
-      services.gammastep = {
-        enable = true;
-        latitude = 38.897957;
-        longitude = -77.036556;
-        temperature = {
-          day = 6500;
-          night = 2000;
         };
       };
 
@@ -246,6 +250,7 @@ in {
         enable = true;
         extraConfig = builtins.readFile "${CD}/nvim.config";
         plugins = with pkgs.vimPlugins; [
+          # TODO fix airline
           airline # make bottom bar pretty
           python-syntax # python syntax
           vim-nix # nix syntax
@@ -257,14 +262,35 @@ in {
         extraConfig = builtins.readFile "${CD}/ssh.config";
       };
 
-      programs.zsh = {
+      programs.zsh = let 
+          dotDirectory = ".config/zsh";
+      in {
         enable = true;
+        dotDir = dotDirectory;
         initExtra = builtins.readFile "${CD}/zsh.config";
         initExtraFirst = ''
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-          source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
         '';
+        loginExtra = ''
+          compinit -d "${dotDirectory}/zcompdump-$ZSH_VERSION"
+        '';
+        plugins = [
+          {
+            name = "powerlevel10k";
+            src = pkgs.zsh-powerlevel10k;
+            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+          }
+          {
+            name = "powerlevel10k-config";
+            src = lib.cleanSource (builtins.toPath "${CD}/powerlevel10k-config");
+            file = "p10k.config";
+          }
+          {
+            name = "zsh-vi-mode";
+            src = pkgs.zsh-vi-mode;
+            file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+          }
+        ];
       };
     };
 
