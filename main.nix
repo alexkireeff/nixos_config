@@ -15,6 +15,7 @@ in {
   imports = ["${home-manager}/nixos"];
 
   # TODO FUTURE use btrfs if stable (or zfs if it gets a more permissive license)
+  # TODO https://nixos.wiki/wiki/Remote_LUKS_Unlocking
 
   boot = {
     kernelPackages = pkgs.linuxPackages_hardened;
@@ -84,7 +85,7 @@ in {
         # TODO FUTURE configure firefox
 
         # font
-        (nerdfonts.override {fonts = ["Meslo"];})
+        (nerdfonts.override {fonts = ["RobotoMono"]; })
 
         # sway
         grim # screenshot
@@ -176,19 +177,19 @@ in {
           ];
           font = {
             bold = {
-              family = "Meslo LGM Nerd Font";
+              family = "Roboto Mono Nerd Font";
               style = "Bold";
             };
             bold_italic = {
-              family = "Meslo LGM Nerd Font";
+              family = "Roboto Mono Nerd Font";
               style = "Bold Italic";
             };
             italic = {
-              family = "Meslo LGM Nerd Font";
+              family = "Roboto Mono Nerd Font";
               style = "Italic";
             };
             normal = {
-              family = "Meslo LGM Nerd Font";
+              family = "Roboto Mono Nerd Font";
               style = "Regular";
             };
           };
@@ -250,8 +251,7 @@ in {
         enable = true;
         extraConfig = builtins.readFile "${CD}/nvim.config";
         plugins = with pkgs.vimPlugins; [
-          # TODO fix airline
-          airline # make bottom bar pretty
+          airline # make vim bottom bar pretty
           python-syntax # python syntax
           vim-nix # nix syntax
         ];
@@ -262,8 +262,8 @@ in {
         extraConfig = builtins.readFile "${CD}/ssh.config";
       };
 
-      programs.zsh = let 
-          dotDirectory = ".config/zsh";
+      programs.zsh = let
+        dotDirectory = ".config/zsh";
       in {
         enable = true;
         dotDir = dotDirectory;

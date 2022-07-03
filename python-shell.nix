@@ -1,10 +1,12 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
-  # TODO update shell prompt to include a string with the shell name
+  # TODO FUTURE use nix flake and then use nix run
   nativeBuildInputs = with pkgs; [
     black
     python3
     python3Packages.pandas
     python3Packages.pytorch
   ];
+
+  shellHook = "exec zsh";
 }
