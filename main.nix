@@ -13,7 +13,11 @@
     "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in {
   imports = ["${home-manager}/nixos"];
-
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
   # TODO FUTURE use btrfs if stable (or zfs if it gets a more permissive license)
   # TODO https://nixos.wiki/wiki/Remote_LUKS_Unlocking
 
@@ -82,7 +86,7 @@ in {
         sshfs # connect to ssh filesystem
 
         # font
-        (nerdfonts.override {fonts = ["RobotoMono"]; })
+        (nerdfonts.override {fonts = ["RobotoMono"];})
 
         # sway
         grim # screenshot
@@ -194,11 +198,113 @@ in {
       };
 
       programs.firefox = {
+        # TODO nuke the desktop folder that is being created
+        # https://superuser.com/questions/1266254/prevent-firefox-from-creating-desktop-folder
+
         enable = true;
-        # TODO about:config: pdf size width
-        # TODO settings: privacy ones
-          # TODO search engines: !g google, !w wikipedia, !s scholar, !d ddg by default
-        # TODO extensions: tridactyl, ublock, cookie manager, privacy badger, video speed controller, dark reader
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          # NOTE need to enable these by hand
+
+          # privacy
+          privacy-badger
+          ublock-origin
+
+          # dark mode
+          darkreader
+
+          # paywalls
+          bypass-paywalls-clean
+
+          # NOTE CookieManager - Cookie Editor
+
+          # navigation (test vimium)
+          tridactyl
+          # looks like tridactyl has its own user config
+          # maybe use that
+
+          # control video speed
+          videospeed
+        ];
+        profiles.default = {
+          id = 0;
+          name = "Default";
+          isDefault = true;
+          bookmarks = {
+            "google" = {
+              keyword = "!g";
+              url = "https://www.google.com/search?q=%s";
+            };
+            "wikipedia" = {
+              keyword = "!w";
+              url = "https://en.wikipedia.org/wiki/%s";
+            };
+            "youtube" = {
+              keyword = "!y";
+              url = "https://www.youtube.com/results?search_query=%s";
+            };
+          };
+          settings = {
+            # Go through about:preferences, changing what you want and compare that to about:config
+            # General
+            "layout.css.prefers-color-scheme.content-override" = 0;
+            "font.name.serif.x-western" = "RobotoMono Nerd Font"; # NOTE this is dependent on installed font
+            "browser.display.background_color" = "#000000";
+            "browser.download.viewableInternally.typeWasRegistered.avif" = true;
+            "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.avif" = true;
+            "browser.download.viewableInternally.typeWasRegistered.webp" = true;
+            "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.webp" = true;
+            "browser.download.always_ask_before_handling_new_types" = true;
+            "media.eme.enabled" = true;
+            "widget.gtk.overlay-scrollbars.enabled" = true;
+            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
+            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
+
+            # Home
+            "browser.startup.homepage" = "about:blank";
+            "browser.newtabpage.enabled" = false;
+            "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+            "browser.newtabpage.activity-stream.feeds.topsites" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
+            "browser.newtabpage.activity-stream.showSearch" = false;
+            "browser.newtabpage.activity-stream.showSponsored" = false;
+            "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+
+            # Search
+            # TODO FUTURE change search engine preferences programmatically
+            "browser.search.suggest.enabled" = false;
+            "browser.urlbar.showSearchSuggestionsFirst" = false;
+            "browser.urlbar.suggest.searches" = false;
+            "browser.urlbar.shortcuts.bookmarks" = false;
+            "browser.urlbar.shortcuts.history" = false;
+            "browser.urlbar.shortcuts.tabs" = false;
+
+            # Privacy
+            "privacy.donottrackheader.enabled" = true;
+            "signon.rememberSignons" = false;
+            "extensions.formautofill.addresses.enabled" = false;
+            "extensions.formautofill.creditCards.enabled" = false;
+            "browser.formfill.enable" = false;
+            "places.history.enabled" = false;
+            "privacy.history.custom" = true;
+            "browser.urlbar.suggest.bookmark" = false;
+            "browser.urlbar.suggest.engines" = false;
+            "browser.urlbar.suggest.history" = false;
+            "browser.urlbar.suggest.openpage" = false;
+            "browser.urlbar.suggest.topsites" = false;
+            "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
+            "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+            "datareporting.healthreport.uploadEnabled" = false;
+            "browser.discovery.enabled" = false;
+            "app.shield.optoutstudies.enabled" = false;
+            "dom.security.https_only_mode" = true;
+            "dom.security.https_only_mode_ever_enabled" = true;
+
+            "pdfjs.defaultZoomValue" = "page-width";
+          };
+        };
       };
 
       programs.git = {
