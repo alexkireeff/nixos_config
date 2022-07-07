@@ -79,10 +79,7 @@ in {
     users.user = {pkgs, ...}: {
       home.packages = with pkgs; [
         alejandra # nix formatter
-        sshfs
-
-        firefox
-        # TODO FUTURE configure firefox
+        sshfs # connect to ssh filesystem
 
         # font
         (nerdfonts.override {fonts = ["RobotoMono"]; })
@@ -96,12 +93,12 @@ in {
         i3status # status for bar
 
         # command line utilities
-        dtach
-        tree
-        unzip
+        dtach # for keeping ssh open
+        tree # see whats in a dir
+        unzip # open .zip files
 
         # other
-        speedcrunch
+        speedcrunch # calculator
       ];
 
       programs.home-manager.enable = true;
@@ -194,6 +191,14 @@ in {
             };
           };
         };
+      };
+
+      programs.firefox = {
+        enable = true;
+        # TODO about:config: pdf size width
+        # TODO settings: privacy ones
+          # TODO search engines: !g google, !w wikipedia, !s scholar, !d ddg by default
+        # TODO extensions: tridactyl, ublock, cookie manager, privacy badger, video speed controller, dark reader
       };
 
       programs.git = {
