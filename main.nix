@@ -201,6 +201,10 @@ in {
               keyword = "!g";
               url = "https://www.google.com/search?q=%s";
             };
+            "google scholar" = {
+              keyword = "!s";
+              url = "https://scholar.google.com/scholar?q=as";
+            };
             "wikipedia" = {
               keyword = "!w";
               url = "https://en.wikipedia.org/wiki/%s";
