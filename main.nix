@@ -5,6 +5,7 @@
   ...
 }: let
   computerName = "laptop";
+  # TODO split laptopt specific stuff into seperate file
   sshServer = false;
 
   CD = builtins.toString ./.;
@@ -213,7 +214,8 @@ in {
             # Go through about:preferences, changing what you want and compare that to about:config
             # General
             "layout.css.prefers-color-scheme.content-override" = 0;
-            "font.name.serif.x-western" = "RobotoMono Nerd Font"; # NOTE this is dependent on installed font
+            # NOTE this is dependent on installed font
+            "font.name.serif.x-western" = "RobotoMono Nerd Font";
             "browser.display.background_color" = "#000000";
             "browser.download.viewableInternally.typeWasRegistered.avif" = true;
             "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.avif" = true;
@@ -351,20 +353,6 @@ in {
         extraConfig = builtins.readFile "${CD}/ssh.config";
       };
 
-      # make firefox not create ~/Desktop
-      # https://bugzilla.mozilla.org/show_bug.cgi?id=1082717
-      programs.xdg_user_dirs = {
-        enable = true;
-        desktop = "$HOME/downloads";
-        documents = "$HOME/downloads";
-        download = "$HOME/downloads";
-        music = "$HOME/downloads";
-        pictures = "$HOME/downloads";
-        publicShare = "$HOME/downloads";
-        templates = "$HOME/downloads";
-        videos = "$HOME/downloads";
-      };
-
       programs.zsh = let
         dotDirectory = ".config/zsh";
       in {
@@ -423,6 +411,21 @@ in {
         enable = true;
 
         extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'\n      ";
+      };
+
+      # make firefox not create ~/Desktop
+      # https://bugzilla.mozilla.org/show_bug.cgi?id=1082717
+      xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
+        desktop = "$HOME/downloads";
+        documents = "$HOME/downloads";
+        download = "$HOME/downloads";
+        music = "$HOME/downloads";
+        pictures = "$HOME/downloads";
+        publicShare = "$HOME/downloads";
+        templates = "$HOME/downloads";
+        videos = "$HOME/downloads";
       };
     };
 
