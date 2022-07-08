@@ -227,7 +227,7 @@ in {
         ];
         profiles.default = {
           id = 0;
-          name = "Default";
+          name = "default";
           isDefault = true;
           bookmarks = {
             "google" = {
@@ -260,7 +260,7 @@ in {
             "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
 
             # Home
-            "browser.startup.homepage" = "about:blank";
+            "browser.startup.homepage" = "duckduckgo.com";
             "browser.newtabpage.enabled" = false;
             "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
             "browser.newtabpage.activity-stream.feeds.topsites" = false;
@@ -273,7 +273,11 @@ in {
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
             # Search
-            # TODO FUTURE change search engine preferences programmatically
+            # NOTE have to manually:
+            # delete unwanted search engines
+            # change search engine
+            # enable installed extensions
+            # clear toolbar extensions and slots
             "browser.search.suggest.enabled" = false;
             "browser.urlbar.showSearchSuggestionsFirst" = false;
             "browser.urlbar.suggest.searches" = false;
@@ -302,8 +306,16 @@ in {
             "dom.security.https_only_mode" = true;
             "dom.security.https_only_mode_ever_enabled" = true;
 
+            # reading PDFs
             "pdfjs.defaultZoomValue" = "page-width";
+
+            # enable userChrome.css
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+            # remove pocket
+            "extensions.pocket.enabled" = false;
           };
+          userChrome = builtins.readFile "${CD}/firefox.css";
         };
       };
 
