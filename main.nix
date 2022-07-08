@@ -109,35 +109,6 @@ in {
 
       home.stateVersion = "22.05";
 
-      wayland.windowManager.sway = {
-        config = {
-          bars = [
-            {
-              statusCommand = "i3status -c ${CD}/i3status.config";
-              command = "${pkgs.sway}/bin/swaybar";
-            }
-          ];
-
-          focus.forceWrapping = false;
-          focus.followMouse = true;
-
-          keybindings = let
-            cfg = config.home-manager.users.user.wayland.windowManager.sway.config;
-          in
-            lib.mkOptionDefault {
-              "${cfg.modifier}+t" = "${cfg.terminal}";
-            };
-
-          menu = "wofi --style=${CD}/wofi.css --show run";
-          modifier = "Mod1";
-          terminal = "${pkgs.alacritty}/bin/alacritty";
-        };
-
-        enable = true;
-
-        extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'\n      ";
-      };
-
       # blue light filter
       services.gammastep = {
         enable = true;
@@ -198,13 +169,8 @@ in {
       };
 
       programs.firefox = {
-        # TODO nuke the desktop folder that is being created
-        # https://superuser.com/questions/1266254/prevent-firefox-from-creating-desktop-folder
-
         enable = true;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          # NOTE need to enable these by hand
-
           # privacy
           privacy-badger
           ublock-origin
@@ -385,6 +351,20 @@ in {
         extraConfig = builtins.readFile "${CD}/ssh.config";
       };
 
+      # make firefox not create ~/Desktop
+      # https://bugzilla.mozilla.org/show_bug.cgi?id=1082717
+      programs.xdg_user_dirs = {
+        enable = true;
+        desktop = "$HOME/downloads";
+        documents = "$HOME/downloads";
+        download = "$HOME/downloads";
+        music = "$HOME/downloads";
+        pictures = "$HOME/downloads";
+        publicShare = "$HOME/downloads";
+        templates = "$HOME/downloads";
+        videos = "$HOME/downloads";
+      };
+
       programs.zsh = let
         dotDirectory = ".config/zsh";
       in {
@@ -414,6 +394,35 @@ in {
             file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
           }
         ];
+      };
+
+      wayland.windowManager.sway = {
+        config = {
+          bars = [
+            {
+              statusCommand = "i3status -c ${CD}/i3status.config";
+              command = "${pkgs.sway}/bin/swaybar";
+            }
+          ];
+
+          focus.forceWrapping = false;
+          focus.followMouse = true;
+
+          keybindings = let
+            cfg = config.home-manager.users.user.wayland.windowManager.sway.config;
+          in
+            lib.mkOptionDefault {
+              "${cfg.modifier}+t" = "${cfg.terminal}";
+            };
+
+          menu = "wofi --style=${CD}/wofi.css --show run";
+          modifier = "Mod1";
+          terminal = "${pkgs.alacritty}/bin/alacritty";
+        };
+
+        enable = true;
+
+        extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'\n      ";
       };
     };
 
