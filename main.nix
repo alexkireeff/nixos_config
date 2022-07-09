@@ -286,6 +286,9 @@ in {
 
             # remove pocket
             "extensions.pocket.enabled" = false;
+
+            # don't automatically hide toolbar when fullscreen
+            "browser.fullscreen.autohide" = false;
           };
           userChrome = builtins.readFile "${CD}/firefox.css";
         };

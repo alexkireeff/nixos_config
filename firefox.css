@@ -9,6 +9,7 @@
 
 /* hide everything */
 
+.titlebar-buttonbox-container,
 #alltabs-button,
 toolbarbutton#scrollbutton-up,
 toolbarbutton#scrollbutton-down,
@@ -100,4 +101,9 @@ tab[selected="true"] .tab-background {
 #urlbar-background {
   background: rgba(var(--dark-color), 1) !important;
 }
+
+/* make alt bar dark theme */
+#toolbar-menubar, #menubar-items, #main-menubar {
+  color: rgba(var(--light-color), 1) !important;
+} 
 
