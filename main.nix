@@ -4,10 +4,6 @@
   lib,
   ...
 }: let
-  computerName = "laptop";
-  # TODO split laptopt specific stuff into seperate file
-  sshServer = false;
-
   CD = builtins.toString ./.;
   home-manager =
     builtins.fetchTarball
@@ -86,9 +82,6 @@ in {
         dtach # for keeping ssh open
         tree # see whats in a dir
         unzip # open .zip files
-
-        # other
-        speedcrunch # calculator
       ];
 
       programs.home-manager.enable = true;

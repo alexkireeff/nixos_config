@@ -3,8 +3,13 @@
   pkgs,
   lib,
   ...
-}: {
-  environment.loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
+}: let
+  config = {
+    computerName = "laptop";
+  };
+  CD = builtins.toString ./.;
+in {
+  imports = ["${CD}/gui.nix"];
 
   services.logind.extraConfig = ''
     HandlLidSwitch=suspend-then-hibernate

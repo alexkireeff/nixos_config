@@ -6,9 +6,23 @@
 }: let
   CD = builtins.toString ./.;
 in {
-  environment.systemPackages = with pkgs; [
-    pulseaudio
-  ];
+  imports = ["${CD}/main.nix"];
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
+
+  environment = {
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
+    systemPackages = with pkgs; [
+      pulseaudio
+    ];
+  };
+
+  # alacritty requires opengl
+  hardware.opengl.enable = true;
 
   home-manager = {
     users.user = {pkgs, ...}: {
@@ -42,12 +56,6 @@ in {
           {
             event = "before-sleep";
             command = "${pkgs.swaylock}/bin/swaylock";
-          }
-        ];
-        timeouts = [
-          {
-            timeout = 60 * 4;
-            command = "[[ $(cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && systemctl suspend-then-hibernate";
           }
         ];
       };
