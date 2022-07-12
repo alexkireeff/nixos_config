@@ -159,7 +159,6 @@ in {
 
   networking = {
     firewall.enable = true;
-    hostName = config.computerName;
     networkmanager = {
       enable = true;
       insertNameservers = ["1.1.1.1" "1.0.0.1"];

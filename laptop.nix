@@ -4,12 +4,11 @@
   lib,
   ...
 }: let
-  config = {
-    computerName = "laptop";
-  };
   CD = builtins.toString ./.;
 in {
   imports = ["${CD}/gui.nix"];
+
+  networking.hostName = "laptop";
 
   services.logind.extraConfig = ''
     HandlLidSwitch=suspend-then-hibernate
