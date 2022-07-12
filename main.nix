@@ -75,6 +75,7 @@ in {
         (nerdfonts.override {fonts = ["RobotoMono"];})
 
         # command line utilities
+        rsync # remote sync
         dtach # for keeping ssh open
         tree # see whats in a dir
         unzip # open .zip files
