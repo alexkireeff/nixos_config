@@ -25,8 +25,7 @@ in {
   hardware.opengl.enable = true;
 
   home-manager = {
-    # TODO need pkgs?
-    users.user = {pkgs, ...}: {
+    users.user = {
       home.packages = with pkgs; [
         # sway
         grim # screenshot
@@ -263,7 +262,10 @@ in {
         disable-caps-lock-text = true;
       };
 
-      wayland.windowManager.sway = {
+      wayland.windowManager.sway = let
+        mod = "Mod1";
+        term = "${pkgs.alacritty}/bin/alacritty";
+      in {
         config = {
           bars = [
             {
@@ -275,17 +277,15 @@ in {
           focus.forceWrapping = false;
           focus.followMouse = true;
 
-          keybindings = let
-            cfg = config.home-manager.users.user.wayland.windowManager.sway.config;
-          in
+          keybindings =
             # TODO no worko
             lib.mkOptionDefault {
-              "${cfg.modifier}+t" = "${cfg.terminal}";
+              "${mod}+t" = "${term}";
             };
 
           menu = "wofi --style=${CD}/wofi.css --show run";
-          modifier = "Mod1";
-          terminal = "${pkgs.alacritty}/bin/alacritty";
+          modifier = mod;
+          terminal = term;
         };
 
         enable = true;
