@@ -33,7 +33,7 @@ in {
         swaylock # lock screen
         wl-clipboard # clipboard
         wofi # menu
-        i3status # status for bar
+        i3status-rust # status for bar
 
         # gui programs
         speedcrunch # calculator
@@ -269,7 +269,7 @@ in {
         config = {
           bars = [
             {
-              statusCommand = "i3status -c ${CD}/i3status.config";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/i3status-rust.config";
               command = "${pkgs.sway}/bin/swaybar";
             }
           ];
