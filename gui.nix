@@ -278,9 +278,10 @@ in {
           focus.followMouse = true;
 
           keybindings =
-            # TODO no worko
             lib.mkOptionDefault {
-              "${mod}+t" = "${term}";
+              "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
+              "${mod}+s" = "exec ${term}";
+              "${mod}+d" = "exec ${pkgs.firefox}/bin/firefox";
             };
 
           menu = "wofi --style=${CD}/wofi.css --show run";
@@ -290,7 +291,7 @@ in {
 
         enable = true;
 
-        extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'\n      ";
+        extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
       };
     };
   };
