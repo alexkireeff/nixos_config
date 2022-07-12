@@ -8,7 +8,7 @@
 in {
   imports = ["${CD}/gui.nix"];
 
-  homemanager.users.user.services.swayidle = {
+  home-manager.users.user.services.swayidle = {
     timeouts = [
       {
         timeout = 60 * 4;
