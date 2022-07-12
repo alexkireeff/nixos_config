@@ -10,11 +10,7 @@
     "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in {
   imports = ["${home-manager}/nixos"];
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
-  };
+
   # TODO FUTURE use btrfs if stable (or zfs if it gets a more permissive license)
   # TODO https://nixos.wiki/wiki/Remote_LUKS_Unlocking
 
@@ -163,7 +159,7 @@ in {
 
   networking = {
     firewall.enable = true;
-    hostName = "computer";
+    hostName = config.computerName;
     networkmanager = {
       enable = true;
       insertNameservers = ["1.1.1.1" "1.0.0.1"];
@@ -206,7 +202,7 @@ in {
   swapDevices = [
     {
       device = "/swapfile";
-      # RAM size + 1 GB
+      # NOTE RAM size + 1 GB
       size = (8 + 1) * 1024;
     }
   ];
@@ -226,7 +222,7 @@ in {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
       # permissions on below file should be 600
-      # TODO FUTURE change password file to be secret when if that becomes a thing
+      # TODO FUTURE change password file and add ssh keys secret when/if that becomes a thing
       passwordFile = "/etc/nixos/user_pass_hash";
       shell = pkgs.zsh;
     };
