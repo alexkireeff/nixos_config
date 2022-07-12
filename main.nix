@@ -198,7 +198,6 @@ in {
     '';
   };
 
-  # make swap device
   swapDevices = [
     {
       device = "/swapfile";
@@ -221,8 +220,8 @@ in {
     users.user = {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
-      # permissions on below file should be 600
       # TODO FUTURE change password file and add ssh keys secret when/if that becomes a thing
+      # NOTE permissions on below file should be 600
       passwordFile = "/etc/nixos/user_pass_hash";
       shell = pkgs.zsh;
     };
