@@ -198,14 +198,6 @@ in {
     '';
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      # NOTE RAM size + 1 GB
-      size = (8 + 1) * 1024;
-    }
-  ];
-
   # Don't change
   system.stateVersion = "21.11";
 

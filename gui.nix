@@ -16,12 +16,16 @@ in {
 
   environment = {
     loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
+    systemPackages = with pkgs; [
+      pulseaudio
+    ];
   };
 
   # alacritty requires opengl
   hardware.opengl.enable = true;
 
   home-manager = {
+    # TODO need pkgs?
     users.user = {pkgs, ...}: {
       home.packages = with pkgs; [
         # sway
@@ -274,6 +278,7 @@ in {
           keybindings = let
             cfg = config.home-manager.users.user.wayland.windowManager.sway.config;
           in
+            # TODO no worko
             lib.mkOptionDefault {
               "${cfg.modifier}+t" = "${cfg.terminal}";
             };
