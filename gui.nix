@@ -277,12 +277,11 @@ in {
           focus.forceWrapping = false;
           focus.followMouse = true;
 
-          keybindings =
-            lib.mkOptionDefault {
-              "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
-              "${mod}+s" = "exec ${term}";
-              "${mod}+d" = "exec ${pkgs.firefox}/bin/firefox";
-            };
+          keybindings = lib.mkOptionDefault {
+            "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
+            "${mod}+s" = "exec ${term}";
+            "${mod}+d" = "exec ${pkgs.firefox}/bin/firefox";
+          };
 
           menu = "wofi --style=${CD}/wofi.css --show run";
           modifier = mod;

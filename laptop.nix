@@ -9,14 +9,12 @@ in {
   imports = ["${CD}/gui.nix"];
 
   # TODO no work?
-  home-manager.users.user.services.swayidle = {
-    timeouts = [
-      {
-        timeout = 60 * 4;
-        command = "[[ $(cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && systemctl suspend-then-hibernate";
-      }
-    ];
-  };
+  home-manager.users.user.services.swayidle.timeouts = [
+    {
+      timeout = 60 * 4;
+      command = "[[ $(cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && ${pkgs.systemctl}/bin/systemctl suspend-then-hibernate";
+    }
+  ];
 
   networking.hostName = "laptop";
 
