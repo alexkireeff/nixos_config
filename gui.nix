@@ -126,7 +126,7 @@ in {
             };
             "google scholar" = {
               keyword = "!s";
-              url = "https://scholar.google.com/scholar?q=as";
+              url = "https://scholar.google.com/scholar?q=%s";
             };
             "wikipedia" = {
               keyword = "!w";
