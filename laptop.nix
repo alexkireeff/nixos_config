@@ -12,7 +12,7 @@ in {
   home-manager.users.user.services.swayidle.timeouts = [
     {
       timeout = 60 * 4;
-      command = "[[ $(cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && ${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
+      command = "[[ $(${pkgs.coreutils}/bin/cat /sys/class/power_supply/ACAD/online) -eq 0]] && ${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
     }
   ];
 
