@@ -15,7 +15,7 @@
       devShell = pkgs.mkShell {buildInputs = with pkgs; [
         black
         python3
-        python3.pytorch
+        python3.torch
       ];};
     });
 }
