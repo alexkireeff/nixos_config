@@ -15,24 +15,28 @@ in {
     }
   ];
 
-  networking.hostName = "laptop";
+  networking = {
+    firewall.allowedTCPPorts = [22];
+    hostName = "desktop";
+  };
 
-  nix.extraOptions = ''
-      experimental-features = nix-command flake
-   '';
-
-  services.logind.extraConfig = ''
-    HandlLidSwitch=suspend-then-hibernate
-    HandlePowerKey=suspend-then-hibernate
-    HandleSuspendKey=ignore
-    HandleHibernateKey=ignore
-  '';
+  services = {
+    fail2ban.enable = true;
+    logind.extraConfig = ''
+      HandlePowerKey=suspend-then-hibernate
+      HandleSuspendKey=ignore
+      HandleHibernateKey=ignore
+    '';
+    sshd.enable = true;
+  };
 
   swapDevices = [
     {
       device = "/swapfile";
       # NOTE RAM size + 1 GB
-      size = (8 + 1) * 1024;
+      size = (32 + 1) * 1024;
     }
   ];
+
+
 }

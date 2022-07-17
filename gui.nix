@@ -6,7 +6,7 @@
 }: let
   CD = builtins.toString ./.;
 in {
-  imports = ["${CD}/main.nix"];
+  imports = ["${CD}/base.nix"];
 
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
