@@ -18,7 +18,7 @@ in {
   networking.hostName = "laptop";
 
   nix.extraOptions = ''
-      experimental-features = nix-command flake
+      experimental-features = nix-command flakes
    '';
 
   services.logind.extraConfig = ''
