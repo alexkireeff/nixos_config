@@ -93,7 +93,7 @@ in {
 
       programs.neovim = {
         enable = true;
-        extraConfig = builtins.readFile "${CD}/nvim.config";
+        extraConfig = builtins.readFile "${CD}/configs/nvim.config";
         plugins = with pkgs.vimPlugins; [
           airline # make vim bottom bar pretty
           python-syntax # python syntax
@@ -103,7 +103,7 @@ in {
 
       programs.ssh = {
         enable = true;
-        extraConfig = builtins.readFile "${CD}/ssh.config";
+        extraConfig = builtins.readFile "${CD}/configs/ssh.config";
       };
 
       programs.zsh = let
@@ -111,7 +111,7 @@ in {
       in {
         enable = true;
         dotDir = dotDirectory;
-        initExtra = builtins.readFile "${CD}/zsh.config";
+        initExtra = builtins.readFile "${CD}/configs/zsh.config";
         initExtraFirst = ''
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         '';
@@ -126,7 +126,7 @@ in {
           }
           {
             name = "powerlevel10k-config";
-            src = lib.cleanSource (builtins.toPath "${CD}/powerlevel10k-config");
+            src = lib.cleanSource (builtins.toPath "${CD}/configs/powerlevel10k-config");
             file = "p10k.config";
           }
           {

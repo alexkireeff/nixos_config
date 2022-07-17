@@ -213,7 +213,7 @@ in {
             # don't automatically hide toolbar when fullscreen
             "browser.fullscreen.autohide" = false;
           };
-          userChrome = builtins.readFile "${CD}/firefox.css";
+          userChrome = builtins.readFile "${CD}/configs/firefox.css";
         };
       };
 
@@ -269,7 +269,7 @@ in {
         config = {
           bars = [
             {
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/i3status-rust.config";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust.config";
               command = "${pkgs.sway}/bin/swaybar";
             }
           ];
