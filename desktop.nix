@@ -5,6 +5,8 @@
   ...
 }: let
   CD = builtins.toString ./.;
+  pub_ssh_key = "";
+  pub_git_key = "";
 in {
   imports = ["${CD}/gui.nix"];
 
@@ -15,10 +17,7 @@ in {
     }
   ];
 
-  networking = {
-    firewall.allowedTCPPorts = [22];
-    hostName = "desktop";
-  };
+  networking.hostName = "desktop";
 
   services = {
     fail2ban.enable = true;
@@ -27,7 +26,13 @@ in {
       HandleSuspendKey=ignore
       HandleHibernateKey=ignore
     '';
-    sshd.enable = true;
+    openssh = {
+      enable = true;
+      allowSFTP = true; # sshfs
+      forwardX11 = true;
+      passwordAuthentication = false;
+      permitRootLogin = "no";
+    };
   };
 
   swapDevices = [
@@ -38,11 +43,17 @@ in {
     }
   ];
 
-  users.users.git = {
-    isNormalUser = true;
-    description = "git user";
-    createHome = true;
-    shell = "${pkgs.git}/bin/git-shell";
-    openssh.authorizedKeys.keys = []; # TODO public git key goes here
+  users.users = {
+    git = {
+      createHome = true;
+      hashedPassword = ".";
+      home = "/git";
+      isSystemUser = true;
+      openssh.authorizedKeys.keys = [ pub_git_key ];
+      shell = "${pkgs.git}/bin/git-shell";
+    };
+
+    user.openssh.authorizedKeys.keys = [ pub_ssh_key ];
   };
+
 }
