@@ -38,5 +38,11 @@ in {
     }
   ];
 
-
+  users.users.git = {
+    isNormalUser = true;
+    description = "git user";
+    createHome = true;
+    shell = "${pkgs.git}/bin/git-shell";
+    openssh.authorizedKeys.keys = []; # TODO public git key goes here
+  };
 }

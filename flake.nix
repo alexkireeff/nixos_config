@@ -12,10 +12,12 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      devShell = pkgs.mkShell {buildInputs = with pkgs; [
-        black
-        python3
-        python3Packages.pytorch
-      ];};
+      devShell = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          black
+          python3
+          python3Packages.pytorch
+        ];
+      };
     });
 }

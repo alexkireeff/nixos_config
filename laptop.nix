@@ -18,8 +18,8 @@ in {
   networking.hostName = "laptop";
 
   nix.extraOptions = ''
-      experimental-features = nix-command flakes
-   '';
+    experimental-features = nix-command flakes
+  '';
 
   services.logind.extraConfig = ''
     HandlLidSwitch=suspend-then-hibernate
