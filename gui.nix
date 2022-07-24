@@ -125,7 +125,7 @@ in {
               url = "https://www.google.com/search?q=%s";
             };
             "google scholar" = {
-              keyword = "!gs";
+              keyword = "!s";
               url = "https://scholar.google.com/scholar?q=%s";
             };
             "wikipedia" = {
@@ -135,6 +135,10 @@ in {
             "youtube" = {
               keyword = "!y";
               url = "https://www.youtube.com/results?search_query=%s";
+            };
+            "desmos" = {
+              keyword = "!d";
+              url = "https://www.desmos.com/calculator";
             };
           };
           settings = {
