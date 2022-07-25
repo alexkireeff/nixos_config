@@ -18,7 +18,7 @@
         };
       };
     in {
-      devShell = pkgs.mkShell {
+      mkShell = pkgs.mkShell {
         buildInputs = with pkgs; [
           black
           python3
