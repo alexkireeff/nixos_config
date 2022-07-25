@@ -1,5 +1,5 @@
-{pkgs ? import <nixpkgs> {}}: {
-  devShells.${system}.cudaPython = pkgs.mkShell {
+{pkgs, system }: {
+  ${system}.cudaPython = pkgs.mkShell {
     buildInputs = with pkgs; [
       black
       python3
