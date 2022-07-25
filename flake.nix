@@ -27,5 +27,5 @@
 
         shellHook = "{pkgs.zsh}/bin/zsh"; # TODO is there a way to only run the current shell?
       };
-    });
+    };
 }
