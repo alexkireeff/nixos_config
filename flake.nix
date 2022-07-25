@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
@@ -9,8 +8,15 @@
     nixpkgs,
     flake-utils,
   }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          cudaSupport = true;
+        };
+      };
     in {
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
@@ -18,6 +24,8 @@
           python3
           python3Packages.pytorch
         ];
+
+        shellHook = "{pkgs.zsh}/bin/zsh"; # TODO is there a way to only run the current shell?
       };
     });
 }
