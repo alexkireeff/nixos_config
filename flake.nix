@@ -42,6 +42,20 @@
           nur.nixosModules.nur
         ];
       };
+
+      desktop = {
+        inherit system;
+
+        specialArgs = {
+          home-manager = home-manager;
+        };
+
+        modules = [
+          (import /etc/nixos/configuration.nix)
+          (import ./system/desktop.nix)
+          nur.nixosModules.nur
+        ];
+      };
     };
 
     devShells.${system}.cudaPython = pkgs.mkShell {
