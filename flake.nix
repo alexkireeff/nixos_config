@@ -1,6 +1,11 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nur = {
       url = "github:nix-community/NUR";
@@ -11,6 +16,7 @@
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     nur,
   }: let
     system = "x86_64-linux";
@@ -24,9 +30,15 @@
   in {
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
       inherit system;
+      
+      specialArgs = {
+        home-manager = home-manager;
+      };
+
       modules = [
-        (import ../configuration.nix)
+        (import /etc/nixos/configuration.nix)
         (import ./system/laptop.nix)
+        nur.nixosModules.nur
       ];
     };
     devShells.${system}.cudaPython = pkgs.mkShell {

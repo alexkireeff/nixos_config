@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  home-manager,
   ...
 }: let
   CD = builtins.toString ./.;

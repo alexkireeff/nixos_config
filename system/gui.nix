@@ -2,17 +2,12 @@
   config,
   pkgs,
   lib,
+  home-manager,
   ...
 }: let
   CD = builtins.toString ./.;
 in {
   imports = ["${CD}/base.nix"];
-
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
-  };
 
   environment = {
     loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
@@ -94,7 +89,7 @@ in {
 
       programs.firefox = {
         enable = true;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions = with config.nur.repos.rycee.firefox-addons; [
           # privacy
           privacy-badger
           ublock-origin
