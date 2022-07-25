@@ -28,19 +28,22 @@
       };
     };
   in {
-    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      inherit system;
-      
-      specialArgs = {
-        home-manager = home-manager;
-      };
+    nixosConfigurations = nixpkgs.lib.nixosSystem {
+      laptop = {
+        inherit system;
 
-      modules = [
-        (import /etc/nixos/configuration.nix)
-        (import ./system/laptop.nix)
-        nur.nixosModules.nur
-      ];
+        specialArgs = {
+          home-manager = home-manager;
+        };
+
+        modules = [
+          (import /etc/nixos/configuration.nix)
+          (import ./system/laptop.nix)
+          nur.nixosModules.nur
+        ];
+      };
     };
+
     devShells.${system}.cudaPython = pkgs.mkShell {
       buildInputs = with pkgs; [
         black
