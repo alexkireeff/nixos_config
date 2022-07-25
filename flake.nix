@@ -6,7 +6,6 @@
   outputs = {
     self,
     nixpkgs,
-    flake-utils,
   }:
     let
       system = "x86_64-linux";
@@ -18,7 +17,7 @@
         };
       };
     in {
-      mkShell = pkgs.mkShell {
+      devShells.system.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           black
           python3
