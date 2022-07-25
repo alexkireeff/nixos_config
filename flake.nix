@@ -28,8 +28,8 @@
       };
     };
   in {
-    nixosConfigurations = nixpkgs.lib.nixosSystem {
-      laptop = {
+    nixosConfigurations =  {
+      laptop = nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
@@ -43,7 +43,7 @@
         ];
       };
 
-      desktop = {
+      desktop = nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
