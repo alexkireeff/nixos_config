@@ -28,7 +28,7 @@
       };
     };
   in {
-    nixosConfigurations =  {
+    nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         inherit system;
 
@@ -37,8 +37,8 @@
         };
 
         modules = [
-          (import /etc/nixos/configuration.nix)
-          (import ./system/laptop.nix)
+          /etc/nixos/configuration.nix
+          ./system/laptop.nix
           nur.nixosModules.nur
         ];
       };
@@ -51,21 +51,13 @@
         };
 
         modules = [
-          (import /etc/nixos/configuration.nix)
-          (import ./system/desktop.nix)
+          /etc/nixos/configuration.nix
+          ./system/desktop.nix
           nur.nixosModules.nur
         ];
       };
     };
 
-    devShells.${system}.cudaPython = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        black
-        python3
-        python3Packages.pytorch-bin # get the bin
-      ];
-
-      shellHook = "${pkgs.zsh}/bin/zsh; exit";
-    };
+    imports = [./system/shells.nix];
   };
 }
