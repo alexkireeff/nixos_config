@@ -3,7 +3,7 @@
     buildInputs = with pkgs; [
       black
       python3
-      python3Packages.pytorch-bin # get the bin
+      python3Packages.pytorch-bin # don't compile cuda from scratch
     ];
 
     shellHook = "${pkgs.zsh}/bin/zsh; exit";
