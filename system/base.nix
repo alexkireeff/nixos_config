@@ -6,6 +6,8 @@
   ...
 }: let
   CD = builtins.toString ./.;
+  password_file_path = /. + "/etc/nixos/user_pass_hash";
+  Hunter2 = "$6$T8NExTDPVbbGqIub$2swJHH6ra8Iwkhv7N5jBTo2DiK//5hBekp8E2wL4HyjkwA83JUgLctmMwakfNNQFzXZNkdVB9NYh8EJc6yQz3/";
 in {
   imports = ["${home-manager}/nixos"];
 
@@ -212,7 +214,10 @@ in {
       isNormalUser = true;
       # TODO FUTURE change password file and add ssh keys secret when/if that becomes a thing
       # NOTE permissions on below file should be 600
-      passwordFile = "/etc/nixos/user_pass_hash";
+      hashedPassword =
+        if (builtins.pathExists password_file_path)
+        then (builtins.readFile password_file_path)
+        else Hunter2;
       shell = pkgs.zsh;
     };
   };
