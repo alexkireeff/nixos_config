@@ -172,7 +172,7 @@ in {
     options = "--delete-older-than 7d";
   };
 
-  nix.allowedUsers = ["root" "user"];
+  nix.settings.allowed-users = ["root" "user"];
 
   # Control brightness
   programs.light.enable = true;

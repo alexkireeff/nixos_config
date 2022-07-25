@@ -17,14 +17,23 @@
         };
       };
     in {
-      devShells.system.default = pkgs.mkShell {
+      nixosConfigurations = {
+        laptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            /etc/nixos/configuration.nix
+            /etc/nixos/nix_config/system/laptop.nix
+          ];
+        };
+      };
+      devShells.${system}.cudaPython = pkgs.mkShell {
         buildInputs = with pkgs; [
           black
           python3
-          python3Packages.pytorch
+          python3Packages.pytorch-bin # get the bin
         ];
 
-        shellHook = "{pkgs.zsh}/bin/zsh"; # TODO is there a way to only run the current shell?
+        shellHook = "${pkgs.zsh}/bin/zsh; exit";
       };
     };
 }
