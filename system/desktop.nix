@@ -49,11 +49,10 @@ in {
       hashedPassword = ".";
       home = "/git";
       isSystemUser = true;
-      openssh.authorizedKeys.keys = [ pub_git_key ];
+      openssh.authorizedKeys.keys = [pub_git_key];
       shell = "${pkgs.git}/bin/git-shell";
     };
 
-    user.openssh.authorizedKeys.keys = [ pub_ssh_key ];
+    user.openssh.authorizedKeys.keys = [pub_ssh_key];
   };
-
 }
