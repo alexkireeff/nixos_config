@@ -216,7 +216,7 @@ in {
       # NOTE permissions on below file should be 600
       hashedPassword =
         if (builtins.pathExists password_file_path)
-        then (builtins.readFile password_file_path)
+        then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
         else Hunter2;
       shell = pkgs.zsh;
     };
