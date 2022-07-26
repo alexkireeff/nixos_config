@@ -9,4 +9,13 @@
     shellHook = "${pkgs.zsh}/bin/zsh; exit";
   };
 
+  ${system}.testPython = pkgs.mkShell {
+    buildInputs = with pkgs; [
+      python3
+    ];
+
+    shellHook = "${pkgs.zsh}/bin/zsh; exit";
+  };
+
+
 }

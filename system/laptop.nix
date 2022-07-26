@@ -9,6 +9,8 @@
 in {
   imports = ["${CD}/gui.nix"];
 
+  environment.systemPackages = [pkgs.remmina];
+
   home-manager.users.user.services.swayidle.timeouts = [
     {
       timeout = 60 * 4;
