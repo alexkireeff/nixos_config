@@ -58,6 +58,9 @@
       };
     };
 
-    devShells = import ./system/shells.nix {pkgs = pkgs; system = system;};
+    devShells = import ./system/shells.nix {
+      pkgs = pkgs;
+      system = system;
+    };
   };
 }

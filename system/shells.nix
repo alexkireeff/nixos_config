@@ -1,4 +1,7 @@
-{pkgs, system }: {
+{
+  pkgs,
+  system,
+}: {
   ${system} = {
     cudaPython = pkgs.mkShell {
       buildInputs = with pkgs; [
@@ -17,6 +20,5 @@
 
       shellHook = "${pkgs.zsh}/bin/zsh; exit";
     };
-
   };
 }
