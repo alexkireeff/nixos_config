@@ -13,7 +13,6 @@ in {
     loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
     systemPackages = with pkgs; [
       pulseaudio
-      wget
     ];
   };
 
