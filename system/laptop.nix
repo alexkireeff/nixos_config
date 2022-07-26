@@ -17,6 +17,7 @@ in {
   ];
 
   networking.hostName = "laptop";
+  networking.hostName = "testtop";
 
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
