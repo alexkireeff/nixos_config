@@ -5,6 +5,7 @@
   ${system} = {
     cudaPython = pkgs.mkShell {
       buildInputs = with pkgs; [
+        mypy
         black
         python3
         python3Packages.pytorch-bin # don't compile cuda from scratch
