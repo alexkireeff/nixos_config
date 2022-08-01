@@ -30,8 +30,6 @@
   in {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-
         specialArgs = {
           home-manager = home-manager;
         };
@@ -44,8 +42,6 @@
       };
 
       desktop = nixpkgs.lib.nixosSystem {
-        inherit system;
-
         specialArgs = {
           home-manager = home-manager;
         };
@@ -59,8 +55,7 @@
     };
 
     devShells = import ./system/shells.nix {
-      pkgs = pkgs;
-      system = system;
+      inherit pkgs system;
     };
   };
 }
