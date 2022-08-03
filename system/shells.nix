@@ -3,7 +3,15 @@
   system,
 }: {
   ${system} = {
-    cudaPython = pkgs.mkShell {
+    testPython = pkgs.mkShell {
+      buildInputs = with pkgs; [
+        python3
+      ];
+
+      shellHook = "${pkgs.zsh}/bin/zsh; exit";
+    };
+
+    mlPython = pkgs.mkShell {
       buildInputs = with pkgs; [
         mypy
         black
@@ -14,16 +22,11 @@
       shellHook = "${pkgs.zsh}/bin/zsh; exit";
     };
 
-    testPython = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        python3
-      ];
-
-      shellHook = "${pkgs.zsh}/bin/zsh; exit";
-    };
-
     bin = pkgs.mkShell {
       buildInputs = with pkgs; [
+        # compiler
+        gcc
+
         # debuggers
         rr
         gef
@@ -36,7 +39,22 @@
       ];
 
       # https://www.reddit.com/r/suckless/comments/m0hke6/ghidra_is_not_displayed_in_dwm/
-      shellHook = "export _JAVA_AWT_WM_NONREPARENTING=1; ${pkgs.zsh}/bin/zsh; exit";
+      shellHook = ''
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        echo "disable ASLR:";
+        echo "sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'";
+        echo "disable buffer overflow protection";
+        echo "-D_FORTIFY_SOURCE=0";
+        echo "disable executable stack:";
+        echo "-z execstack";
+        echo "disable stack canaries:";
+        echo "-fno-stack-protector";
+        echo "disable Position Independent Executables:";
+        echo "-no-pie";
+        echo "compile 32 bit:";
+        echo "-m32";
+        ${pkgs.zsh}/bin/zsh
+        exit'';
     };
   };
 }
