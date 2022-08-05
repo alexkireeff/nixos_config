@@ -20,7 +20,6 @@ in {
 
   networking.hostName = "desktop";
 
-  # TODO Move to remote.nix? but then what about git?
   services = {
     fail2ban.enable = true;
     logind.extraConfig = ''
