@@ -255,7 +255,9 @@ in {
         text-wrong-color = "000000";
 
         indicator-radius = 10;
-        indicator-idle-visible = true;
+        # TODO FUTURE fix when not broken
+        # https://github.com/swaywm/swaylock/issues/223
+        # indicator-idle-visible = true;
         indicator-caps-lock = false;
 
         disable-caps-lock-text = true;
