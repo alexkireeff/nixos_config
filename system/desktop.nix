@@ -44,15 +44,19 @@ in {
     }
   ];
 
-  users.users = {
-    git = {
-      createHome = true;
-      group = "git";
-      hashedPassword = ".";
-      home = "/git";
-      isSystemUser = true;
-      openssh.authorizedKeys.keys = [pub_git_key];
-      shell = "${pkgs.git}/bin/git-shell";
+  users = {
+    groups.git = {};
+
+    users = {
+      git = {
+        createHome = true;
+        extraGroups = ["git"];
+        hashedPassword = ".";
+        home = "/git";
+        isSystemUser = true;
+        openssh.authorizedKeys.keys = [pub_git_key];
+        shell = "${pkgs.git}/bin/git-shell";
+      };
     };
 
     user.openssh.authorizedKeys.keys = [pub_ssh_key];

@@ -13,8 +13,8 @@ in {
   boot.initrd.network.ssh = {
     enable = true;
     port = 22;
-    authorizedKeys = [ "ssh-rsa AAAAyourpublic-key-here...." ];
-    hostKeys = [ "/etc/secrets/initrd/ssh_host_rsa_key" "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+    authorizedKeys = ["ssh-rsa AAAAyourpublic-key-here...."];
+    hostKeys = ["/etc/secrets/initrd/ssh_host_rsa_key" "/etc/secrets/initrd/ssh_host_ed25519_key"];
   };
 
   # copy your onion folder
@@ -29,13 +29,13 @@ in {
 
   # start tor during boot process
   boot.initrd.network.postCommands = let
-    torRc = (pkgs.writeText "tor.rc" ''
+    torRc = pkgs.writeText "tor.rc" ''
       DataDirectory /etc/tor
       SOCKSPort 127.0.0.1:9050 IsolateDestAddr
       SOCKSPort 127.0.0.1:9063
       HiddenServiceDir /etc/tor/onion/bootup
       HiddenServicePort 22 127.0.0.1:22
-    '');
+    '';
   in ''
     echo "tor: preparing onion folder"
     # have to do this otherwise tor does not want to start
