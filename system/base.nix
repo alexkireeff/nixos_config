@@ -12,7 +12,6 @@ in {
   imports = ["${home-manager}/nixos"];
 
   # TODO FUTURE use btrfs if stable (or zfs if it gets a more permissive license)
-  # TODO https://nixos.wiki/wiki/Remote_LUKS_Unlocking
 
   boot = {
     kernelPackages = pkgs.linuxPackages_hardened;
@@ -166,13 +165,21 @@ in {
     };
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "Monday 01:00 UTC";
-    options = "--delete-older-than 7d";
-  };
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "Monday 01:00 UTC";
+      options = "--delete-older-than 7d";
+    };
 
-  nix.settings.allowed-users = ["root" "user"];
+    # TODO FUTURE remove this when flakes is "fully supported"
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+
+    settings.allowed-users = ["root" "user"];
+  };
 
   # Control brightness
   programs.light.enable = true;

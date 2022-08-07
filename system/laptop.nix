@@ -20,12 +20,6 @@ in {
 
   networking.hostName = "laptop";
 
-  # TODO FUTURE remove this when flakes is "fully supported"
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
   services.logind.extraConfig = ''
     HandlLidSwitch=suspend-then-hibernate
     HandlePowerKey=suspend-then-hibernate
