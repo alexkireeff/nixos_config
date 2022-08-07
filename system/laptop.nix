@@ -20,6 +20,7 @@ in {
 
   networking.hostName = "laptop";
 
+  # TODO FUTURE remove this when flakes is "fully supported"
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
     experimental-features = nix-command flakes

@@ -47,6 +47,7 @@ in {
   users.users = {
     git = {
       createHome = true;
+      group = "git";
       hashedPassword = ".";
       home = "/git";
       isSystemUser = true;
