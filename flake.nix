@@ -30,6 +30,7 @@
   in {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
+        inherit pkgs;
         specialArgs = {
           home-manager = home-manager;
         };
@@ -42,6 +43,7 @@
       };
 
       desktop = nixpkgs.lib.nixosSystem {
+        inherit pkgs;
         specialArgs = {
           home-manager = home-manager;
         };
