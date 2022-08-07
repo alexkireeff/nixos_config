@@ -50,7 +50,7 @@ in {
     users = {
       git = {
         createHome = true;
-        extraGroups = ["git"];
+        group = "git";
         hashedPassword = ".";
         home = "/git";
         isSystemUser = true;
