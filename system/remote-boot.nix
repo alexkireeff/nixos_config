@@ -7,6 +7,7 @@
   CD = builtins.toString ./.;
 in {
   # TODO make this cleaner
+  # https://nixos.wiki/wiki/Remote_LUKS_Unlocking
 
   # ssh setup
   boot.initrd.network.enable = true;
