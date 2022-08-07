@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}: let
-  CD = builtins.toString ./.;
-in {
+}: {
   # TODO make this cleaner
   # https://nixos.wiki/wiki/Remote_LUKS_Unlocking
 
@@ -14,13 +12,13 @@ in {
   boot.initrd.network.ssh = {
     enable = true;
     port = 22;
-    authorizedKeys = ["ssh-rsa AAAAyourpublic-key-here...."];
+    authorizedKeys = ["ssh-rsa AAAAyourpublic-key-here...."]; # TODO pub_ssh_key
     hostKeys = ["/etc/secrets/initrd/ssh_host_rsa_key" "/etc/secrets/initrd/ssh_host_ed25519_key"];
   };
 
   # copy your onion folder
   boot.initrd.secrets = {
-    "/etc/tor/onion/bootup" = /home/tony/tor/onion; # TODO find a better spot to store this.
+    "/etc/tor/onion/bootup" = /home/tony/tor/onion; # TODO find a better spot to store this. ?
   };
 
   # copy tor to you initrd
@@ -30,7 +28,7 @@ in {
 
   # start tor during boot process
   boot.initrd.network.postCommands = let
-    torRc = pkgs.writeText "tor.rc" ''
+    torrc = pkgs.writeText "tor.rc" ''
       DataDirectory /etc/tor
       SOCKSPort 127.0.0.1:9050 IsolateDestAddr
       SOCKSPort 127.0.0.1:9063
@@ -47,7 +45,7 @@ in {
     ip link set lo up
 
     echo "tor: starting tor"
-    tor -f ${torRc} --verify-config
-    tor -f ${torRc} &
+    tor -f ${torrc} --verify-config
+    tor -f ${torrc} &
   '';
 }

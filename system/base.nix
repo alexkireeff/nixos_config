@@ -7,11 +7,11 @@
 }: let
   CD = builtins.toString ./.;
   password_file_path = /. + "/etc/nixos/user_pass_hash";
-  Hunter2 = "$6$T8NExTDPVbbGqIub$2swJHH6ra8Iwkhv7N5jBTo2DiK//5hBekp8E2wL4HyjkwA83JUgLctmMwakfNNQFzXZNkdVB9NYh8EJc6yQz3/";
+  default_password = "$6$T8NExTDPVbbGqIub$2swJHH6ra8Iwkhv7N5jBTo2DiK//5hBekp8E2wL4HyjkwA83JUgLctmMwakfNNQFzXZNkdVB9NYh8EJc6yQz3/";
 in {
   imports = ["${home-manager}/nixos"];
 
-  # TODO FUTURE use btrfs if stable (or zfs if it gets a more permissive license)
+  # TODO FUTURE use btrfs when stable (or zfs if it gets a more permissive license)
 
   boot = {
     kernelPackages = pkgs.linuxPackages_hardened;
@@ -172,7 +172,7 @@ in {
       options = "--delete-older-than 7d";
     };
 
-    # TODO FUTURE remove this when flakes is "fully supported"
+    # TODO FUTURE remove flake experimental when not experimental anymore
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -219,13 +219,13 @@ in {
     users.user = {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
-      # TODO FUTURE change password file and add ssh keys secret when/if that becomes a thing
-      # NOTE permissions on below file should be 600
+      # TODO FUTURE when secrets become a thing, change this & add ssh keys
+      # NOTE permissions on password_file_path file should be 600
       # NOTE linux uses sha-512: mkpasswd -m sha-512
       hashedPassword =
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
-        else Hunter2;
+        else default_password;
       shell = pkgs.zsh;
     };
   };

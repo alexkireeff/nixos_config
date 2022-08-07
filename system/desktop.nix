@@ -6,10 +6,13 @@
   ...
 }: let
   CD = builtins.toString ./.;
+  # TODO builtins.readFile
   pub_ssh_key = "";
   pub_git_key = "";
 in {
   imports = ["${CD}/gui.nix"];
+
+  # TODO install cuda + cudnn ? so i think cudatoolkit
 
   networking.hostName = "desktop";
 
@@ -45,7 +48,7 @@ in {
         createHome = true;
         group = "git";
         hashedPassword = ".";
-        home = "/git";
+        home = "/var/git";
         isSystemUser = true;
         openssh.authorizedKeys.keys = [pub_git_key];
         shell = "${pkgs.git}/bin/git-shell";
