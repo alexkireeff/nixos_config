@@ -13,6 +13,10 @@ in {
   imports = ["${CD}/gui.nix"];
 
   # TODO install cuda + cudnn ? so i think cudatoolkit
+  environment.systemPackages = with pkgs; [
+    cudatoolkit
+    cudnn_toolkit
+  ];
 
   networking.hostName = "desktop";
 
