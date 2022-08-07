@@ -214,6 +214,7 @@ in {
       isNormalUser = true;
       # TODO FUTURE change password file and add ssh keys secret when/if that becomes a thing
       # NOTE permissions on below file should be 600
+      # NOTE linux uses sha-512: mkpasswd -m sha-512
       hashedPassword =
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
