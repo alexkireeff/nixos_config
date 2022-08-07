@@ -11,14 +11,6 @@
 in {
   imports = ["${CD}/gui.nix"];
 
-  # TODO no timeouts?
-  home-manager.users.user.services.swayidle.timeouts = [
-    {
-      timeout = 60 * 4;
-      command = "[[ $(${pkgs.coreutils}/bin/cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && ${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
-    }
-  ];
-
   networking.hostName = "desktop";
 
   services = {
