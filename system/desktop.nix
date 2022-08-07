@@ -14,8 +14,8 @@ in {
 
   # TODO install cuda + cudnn ? so i think cudatoolkit
   environment.systemPackages = with pkgs; [
-    cudatoolkit
-    cudnn_toolkit
+    cudaPackages.cudatoolkit
+    cudaPackages.cudnn
   ];
 
   networking.hostName = "desktop";
