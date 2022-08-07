@@ -87,8 +87,8 @@ in {
 
       programs.git = {
         enable = true;
-        userEmail = "user@computer";
-        userName = "user";
+        userEmail = "alexkireeff@gmail.com";
+        userName = "Alex Kireeff";
       };
 
       programs.neovim = {

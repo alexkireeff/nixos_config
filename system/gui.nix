@@ -270,6 +270,7 @@ in {
         config = {
           bars = [
             {
+              # TODO make seperate i3status for server and modify this to use hostname or something
               statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust.config";
               command = "${pkgs.sway}/bin/swaybar";
             }
