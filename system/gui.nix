@@ -87,7 +87,7 @@ in {
         };
       };
 
-      programs.firefox = {
+      programs.firefox-bin = {
         enable = true;
         extensions = with config.nur.repos.rycee.firefox-addons; [
           # privacy
