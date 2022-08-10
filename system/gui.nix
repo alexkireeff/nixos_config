@@ -6,8 +6,7 @@
   ...
 }: let
   CD = builtins.toString ./.;
-  # firefox-bin - use precompiled
-  # firefox - compile by hand
+  # use precompiled firefox
   FIREFOX = pkgs.firefox-bin;
 in {
   imports = ["${CD}/base.nix"];
