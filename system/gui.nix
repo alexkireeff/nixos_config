@@ -8,7 +8,7 @@
   CD = builtins.toString ./.;
   # firefox-bin - use precompiled
   # firefox - compile by hand
-  FIREFOX = firefox-bin;
+  FIREFOX = pkgs.firefox-bin;
 in {
   imports = ["${CD}/base.nix"];
 
@@ -36,8 +36,7 @@ in {
         # gui programs
         speedcrunch # calculator
 
-        FIREFOX
-      ];
+      ] // [ FIREFOX ];
 
       # blue light filter
       services.gammastep = {
@@ -284,7 +283,7 @@ in {
           keybindings = lib.mkOptionDefault {
             "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
             "${mod}+s" = "exec ${term}";
-            "${mod}+d" = "exec ${pkgs.FIREFOX}/bin/firefox";
+            "${mod}+d" = "exec ${FIREFOX}/bin/firefox";
           };
 
           menu = "wofi --style=${CD}/wofi.css --show run";
