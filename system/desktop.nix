@@ -12,10 +12,11 @@
 in {
   imports = ["${CD}/gui.nix"];
 
-  # dual boot
+  # dual boot # TODO doesn't work
   boot.loader.grub.useOSProber = true;
 
   # TODO install cuda + cudnn ? so i think cudatoolkit
+  # TODO use cachix?
   environment.systemPackages = with pkgs; [
     #cudaPackages.cudatoolkit
     #cudaPackages.cudnn
