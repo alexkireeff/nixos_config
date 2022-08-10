@@ -282,7 +282,7 @@ in {
           keybindings = lib.mkOptionDefault {
             "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
             "${mod}+s" = "exec ${term}";
-            "${mod}+d" = "exec ${pkgs.firefox}/bin/firefox";
+            "${mod}+d" = "exec ${pkgs.firefox-bin}/bin/firefox";
           };
 
           menu = "wofi --style=${CD}/wofi.css --show run";
