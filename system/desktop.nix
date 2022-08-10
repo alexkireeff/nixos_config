@@ -13,7 +13,6 @@ in {
   imports = ["${CD}/gui.nix"];
 
   # dual boot # TODO doesn't work
-  boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
