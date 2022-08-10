@@ -36,7 +36,7 @@ in {
         # gui programs
         speedcrunch # calculator
 
-      ] // [ FIREFOX ];
+      ] ++ [ FIREFOX ];
 
       # blue light filter
       services.gammastep = {
