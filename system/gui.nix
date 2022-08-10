@@ -32,6 +32,9 @@ in {
 
         # gui programs
         speedcrunch # calculator
+
+        # install firefox from mozilla's binary (so we don't compile every time)
+        firefox-bin
       ];
 
       # blue light filter
@@ -87,8 +90,7 @@ in {
         };
       };
 
-      programs.firefox-bin = {
-        enable = true;
+      programs.firefox = {
         extensions = with config.nur.repos.rycee.firefox-addons; [
           # privacy
           privacy-badger
