@@ -87,7 +87,7 @@
         exit'';
       };
 
-    testPython = pkgs.mkShell {
+    testCuda = pkgs.mkShell {
       buildInputs = with pkgs; [
         cudatoolkit
         linuxPackages.nvidia_x11
