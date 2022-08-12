@@ -85,6 +85,16 @@
         echo "-m32";
         ${pkgs.zsh}/bin/zsh
         exit'';
+      };
+
+    testPython = pkgs.mkShell {
+      buildInputs = with pkgs; [
+        cudatoolkit
+        linuxPackages.nvidia_x11
+      ];
+
+      shellHook = "export CUDA_PATH=${pkgs.cudatoolkit}; ${pkgs.zsh}/bin/zsh; exit";
     };
+
   };
 }
