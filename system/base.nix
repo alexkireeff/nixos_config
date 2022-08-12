@@ -110,7 +110,7 @@ in {
       in {
         enable = true;
         dotDir = dotDirectory;
-        initExtra = builtins.readFile "${CD}/configs/zsh.config";
+        initExtra = builtins.readFile "${CD}/configs/zsh/${config.networking.hostName}.config";
         initExtraFirst = ''
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         '';
