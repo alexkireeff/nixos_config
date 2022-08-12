@@ -14,10 +14,7 @@ in {
 
   # TODO install cuda + cudnn ? so i think cudatoolkit
   # TODO use cachix?
-  environment.systemPackages = with pkgs; [
-    cudaPackages.cudnn
-    linuxPackages.nvidia_x11
-  ];
+  environment.systemPackages = with pkgs; [];
 
   networking.hostName = "desktop";
 
