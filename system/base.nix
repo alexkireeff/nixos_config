@@ -110,7 +110,10 @@ in {
       in {
         enable = true;
         dotDir = dotDirectory;
-        initExtra = builtins.readFile "${CD}/configs/zsh/${config.networking.hostName}.config";
+        initExtra = builtins.readFile
+          if "laptop" == config.networking.hostName
+          then "${CD}/configs/zsh/laptop.config";
+          else "${CD}/configs/zsh/remote-compute.config";
         initExtraFirst = ''
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         '';
