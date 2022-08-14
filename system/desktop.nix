@@ -14,7 +14,14 @@ in {
 
   # TODO install cuda + cudnn ? so i think cudatoolkit
   # TODO use cachix?
-  environment.systemPackages = with pkgs; [];
+  # how to get ml working:
+  # 1.) get driver installed
+  # 2.) get driver running
+  # 3.) get library installed (cuda/cudnn/etc.)
+  # 4.) verify working with pytorch
+  environment.systemPackages = with pkgs; [
+    linuxPackages.nvidia_x11 # make this start?
+    ];
 
   networking.hostName = "desktop";
 

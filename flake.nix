@@ -24,7 +24,7 @@
       inherit system;
       config = {
         allowUnfree = true;
-        cudaSupport = true;
+        # cudaSupport = true; # TODO still no idea what this does
       };
     };
   in {
