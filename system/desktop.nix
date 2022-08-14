@@ -11,8 +11,7 @@
   pub_git_key = "";
 in {
   imports = ["${CD}/base.nix"];
-  # TODO want to be able to recover from bad config, do that by making a service run during initrd that pulls from git repo and runs update #${hostname}
-  # would need to make it the exact same as update since update is encrypted during initrd
+  # TODO want to be able to recover from bad config, do that by making a service run during initrd that pulls from git repo and runs update
 
   # nvidia driver
   services.xserver.videoDrivers = ["nvidia"];
