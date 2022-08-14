@@ -113,9 +113,9 @@ in {
         initExtra =
           if builtins.elem config.networking.hostName ["laptop"] 
             builtins.readFile "${CD}/configs/zsh/laptop.config"
-          elif builtins.elem config.networking.hostName ["desktop"]
+          else if builtins.elem config.networking.hostName ["desktop"]
             builtins.readFile "${CD}/configs/zsh/remote-big.config"
-          elif builtins.elem config.networking.hostName []
+          else if builtins.elem config.networking.hostName []
             builtins.readFile "${CD}/configs/zsh/remote-small.config"
           else throw "bad hostname"
         initExtraFirst = ''
