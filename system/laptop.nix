@@ -9,6 +9,7 @@
 in {
   imports = ["${CD}/gui.nix"];
 
+  # TODO remove remmina when done using it
   environment.systemPackages = [pkgs.remmina];
 
   home-manager.users.user.services.swayidle.timeouts = [
