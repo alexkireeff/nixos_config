@@ -10,19 +10,12 @@
   pub_ssh_key = "";
   pub_git_key = "";
 in {
-  imports = ["${CD}/gui.nix"];
+  imports = ["${CD}/base.nix"];
+  # TODO want to be able to recover from bad config, do that by making a service run during initrd that pulls from git repo and runs update #${hostname}
+  # would need to make it the exact same as update since update is encrypted during initrd
 
-  # TODO install cuda + cudnn ? so i think cudatoolkit
-  # TODO use cachix?
-  # how to get ml working:
-  # 1.) get driver installed
-  # 2.) get driver running
-  # 3.) get library installed (cuda/cudnn/etc.)
-  # 4.) verify working with pytorch
+  # nvidia driver
   services.xserver.videoDrivers = [ "nvidia" ];
-  #environment.systemPackages = with pkgs; [
-  #  linuxPackages.nvidia_x11 # make this start?
-  #  ];
 
   networking.hostName = "desktop";
 

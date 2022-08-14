@@ -25,11 +25,9 @@ in {
     users.user = {
       home.packages = with pkgs; [
         # sway
-        grim # screenshot
         swayidle # idle controller
         swaylock # lock screen
         wl-clipboard # clipboard
-        wofi # menu
         i3status-rust # status for bar
 
         # gui programs
@@ -102,7 +100,7 @@ in {
           # paywalls
           bypass-paywalls-clean
 
-          # NOTE CookieManager - Cookie Editor
+          # TODO FUTURE CookieManager - Cookie Editor
 
           # navigation (test vimium)
           tridactyl
@@ -143,7 +141,7 @@ in {
             # Go through about:preferences, changing what you want and compare that to about:config
             # General
             "layout.css.prefers-color-scheme.content-override" = 0;
-            # NOTE this is dependent on installed font
+            # TODO this is dependent on installed font
             "font.name.serif.x-western" = "RobotoMono Nerd Font";
             "browser.display.background_color" = "#000000";
             "browser.download.viewableInternally.typeWasRegistered.avif" = true;
@@ -170,7 +168,7 @@ in {
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
             # Search
-            # NOTE have to manually:
+            # TODO have to manually:
             # delete unwanted search engines
             # change search engine
             # enable installed extensions
@@ -272,7 +270,7 @@ in {
         config = {
           bars = [
             {
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust-config/${config.networking.hostName}.config";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust.config";
               command = "${pkgs.sway}/bin/swaybar";
             }
           ];
