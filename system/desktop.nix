@@ -19,9 +19,10 @@ in {
   # 2.) get driver running
   # 3.) get library installed (cuda/cudnn/etc.)
   # 4.) verify working with pytorch
-  environment.systemPackages = with pkgs; [
-    linuxPackages.nvidia_x11 # make this start?
-    ];
+  services.xserver.videoDrivers = [ "nvidia" ];
+  #environment.systemPackages = with pkgs; [
+  #  linuxPackages.nvidia_x11 # make this start?
+  #  ];
 
   networking.hostName = "desktop";
 
