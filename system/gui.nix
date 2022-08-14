@@ -141,8 +141,6 @@ in {
             # Go through about:preferences, changing what you want and compare that to about:config
             # General
             "layout.css.prefers-color-scheme.content-override" = 0;
-            # TODO this is dependent on installed font
-            "font.name.serif.x-western" = "RobotoMono Nerd Font";
             "browser.display.background_color" = "#000000";
             "browser.download.viewableInternally.typeWasRegistered.avif" = true;
             "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.avif" = true;
@@ -168,7 +166,8 @@ in {
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
             # Search
-            # TODO have to manually:
+            # TODO FUTURE or maybe never? (in which case we change this to NOTE)
+            # have to manually:
             # delete unwanted search engines
             # change search engine
             # enable installed extensions
@@ -256,8 +255,7 @@ in {
         text-wrong-color = "000000";
 
         indicator-radius = 10;
-        # TODO FUTURE when fixed uncomment https://github.com/swaywm/swaylock/issues/223
-        # indicator-idle-visible = true;
+        indicator-idle-visible = true;
         indicator-caps-lock = false;
 
         disable-caps-lock-text = true;
