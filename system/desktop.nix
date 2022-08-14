@@ -15,7 +15,7 @@ in {
   # would need to make it the exact same as update since update is encrypted during initrd
 
   # nvidia driver
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   networking.hostName = "desktop";
 

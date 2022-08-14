@@ -85,7 +85,7 @@
         echo "-m32";
         ${pkgs.zsh}/bin/zsh
         exit'';
-      };
+    };
 
     testCuda = pkgs.mkShell {
       buildInputs = with pkgs; [
@@ -95,6 +95,5 @@
 
       shellHook = "export CUDA_PATH=${pkgs.cudatoolkit}; ${pkgs.zsh}/bin/zsh; exit";
     };
-
   };
 }
