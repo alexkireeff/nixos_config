@@ -11,6 +11,7 @@
       shellHook = "${pkgs.zsh}/bin/zsh; exit";
     };
 
+    # TODO I believe these shells will need to be put in their own directories for their relevant projects
     mlPython = pkgs.mkShell {
       buildInputs = with pkgs; [
         mypy
