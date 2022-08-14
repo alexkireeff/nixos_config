@@ -112,12 +112,13 @@ in {
         dotDir = dotDirectory;
         initExtra =
           if builtins.elem config.networking.hostName ["laptop"] 
-            builtins.readFile "${CD}/configs/zsh/laptop.config"
+            then builtins.readFile "${CD}/configs/zsh/laptop.config"
           else if builtins.elem config.networking.hostName ["desktop"]
-            builtins.readFile "${CD}/configs/zsh/remote-big.config"
+            then builtins.readFile "${CD}/configs/zsh/remote-big.config"
           else if builtins.elem config.networking.hostName []
-            builtins.readFile "${CD}/configs/zsh/remote-small.config"
-          else throw "bad hostname"
+            then builtins.readFile "${CD}/configs/zsh/remote-small.config"
+          else
+            throw "bad hostname"
         initExtraFirst = ''
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         '';
