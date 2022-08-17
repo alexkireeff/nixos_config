@@ -15,7 +15,6 @@
       if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
       then ["/etc/sshd/initrd_ssh_host_key"]
       else throw "no initrd ssh file";
-    ;
   };
 
   # initrd copy secrets
