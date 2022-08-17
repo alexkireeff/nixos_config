@@ -14,7 +14,7 @@ in {
   # TODO want to be able to recover from bad config, do that by being able to change version from initrd; see if can do before/after unecnrypt disk
 
   # enable network card for remote-boot.nix
-  # boot.initrd.availableKernelModules = ["r8169"];
+  boot.initrd.availableKernelModules = ["r8169"];
 
   environment.systemPackages = [];
 
