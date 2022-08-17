@@ -11,7 +11,11 @@
     port = 22;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
     # TODO PasswordAuthentication no; Protocol 2; X11Forwarding no; PubkeyAuthentication yes
-    hostKeys = ["/etc/sshd/initrd_ssh_host_key"];
+    hostKeys = 
+      if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
+      then ["/etc/sshd/initrd_ssh_host_key"]
+      else throw "no initrd ssh file";
+    ;
   };
 
   # initrd copy secrets
@@ -21,9 +25,6 @@
       then /home/user/tor/onion
       else throw "no initrd onion file";
     "/etc/sshd/initrd_ssh_host_key" =
-      if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
-      then /home/user/.ssh/initrd_ssh_host_key
-      else throw "no initrd ssh file";
   };
 
   # initrd copy tor, haveged, ntpupdate
