@@ -73,8 +73,7 @@ in {
         (nerdfonts.override {fonts = ["RobotoMono"];})
 
         # nvim shared copy paste
-        wl-copy
-        wl-paste
+        wl-clipboard
 
         # command line utilities
         rsync # remote sync
