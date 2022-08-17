@@ -13,7 +13,7 @@ in {
   imports = ["${CD}/base.nix"];
   # TODO want to be able to recover from bad config, do that by making a service run during initrd that pulls from git repo and runs update
 
-  environment.systemPackages = with pkgs; [pciutils];
+  environment.systemPackages = [];
 
   # nvidia driver
   services.xserver.videoDrivers = ["nvidia"];

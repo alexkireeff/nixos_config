@@ -7,7 +7,6 @@
 }: let
   CD = builtins.toString ./.;
   password_file_path = /. + "/etc/nixos/user_pass_hash";
-  default_password = "$6$T8NExTDPVbbGqIub$2swJHH6ra8Iwkhv7N5jBTo2DiK//5hBekp8E2wL4HyjkwA83JUgLctmMwakfNNQFzXZNkdVB9NYh8EJc6yQz3/";
 in {
   imports = ["${home-manager}/nixos"];
 
@@ -232,7 +231,7 @@ in {
       hashedPassword =
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
-        else default_password;
+        else throw "no user password file";
       shell = pkgs.zsh;
     };
   };

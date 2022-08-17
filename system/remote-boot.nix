@@ -4,29 +4,40 @@
   lib,
   ...
 }: {
-  # TODO make this cleaner
-  # https://nixos.wiki/wiki/Remote_LUKS_Unlocking
-
-  # ssh setup
+  # initrd ssh setup
+  boot.initrd.availableKernelModules = [ "r8169" ]; # TODO move to desktop
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
     enable = true;
     port = 22;
-    authorizedKeys = ["ssh-rsa AAAAyourpublic-key-here...."]; # TODO pub_ssh_key
-    hostKeys = ["/etc/secrets/initrd/ssh_host_rsa_key" "/etc/secrets/initrd/ssh_host_ed25519_key"];
+    authorizedKeys = config.user.openssh.authorizedKeys.keys;
+    # TODO settings?
+    hostKeys = ["/etc/secrets/initrd/ssh_host_ed25519_key"];
   };
 
-  # copy your onion folder
+  # initrd copy secrets
   boot.initrd.secrets = {
-    "/etc/tor/onion/bootup" = /home/tony/tor/onion; # TODO find a better spot to store this. ?
+
+    "/etc/tor/onion/bootup" =
+      if (builtins.pathExists /home/user/tor/onion)
+      then /home/user/tor/onion
+      else throw "no initrd onion file";
+    "/etc/secrets/initrd/ssh_host_ed25519_key" = ; # TODO make sure exists
+      if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_ed25519_key)
+      then /home/user/.ssh/initrd_ssh_host_ed25519_key
+      else throw "no initrd ssh file";
   };
 
-  # copy tor to you initrd
+  # initrd copy tor, haveged, ntpupdate
   boot.initrd.extraUtilsCommands = ''
     copy_bin_and_libs ${pkgs.tor}/bin/tor
+    copy_bin_and_libs ${pkgs.haveged}/bin/haveged
+    copy_bin_and_libs ${pkgs.ntp}/bin/ntpdate
   '';
 
-  # start tor during boot process
+
+  # run tor during boot process
+  # TODO does this keep on running tor? idk
   boot.initrd.network.postCommands = let
     torrc = pkgs.writeText "tor.rc" ''
       DataDirectory /etc/tor
@@ -36,16 +47,24 @@
       HiddenServicePort 22 127.0.0.1:22
     '';
   in ''
-    echo "tor: preparing onion folder"
-    # have to do this otherwise tor does not want to start
+    # tor needs 700 on folder
     chmod -R 700 /etc/tor
 
-    echo "make sure localhost is up"
+    # TODO necessary?
     ip a a 127.0.0.1/8 dev lo
     ip link set lo up
 
-    echo "tor: starting tor"
+    ntpupdate 0.north-america.pool.ntp.org
+
+    haveged -F &
+
     tor -f ${torrc} --verify-config
     tor -f ${torrc} &
   '';
+
+  # TODO necessary?
+  #environment.systemPackages = with pkgs; [
+  #  tor
+  #];
+
 }
