@@ -11,7 +11,7 @@
   pub_git_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOt307aOiM2fsBlTPIpfvTDZWjA7v+7nN60f7IuCWNm1 user";
 in {
   imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
-  # TODO want to be able to recover from bad config, do that by making a service run during initrd that pulls from git repo and runs update
+  # TODO want to be able to recover from bad config, do that by being able to change version from initrd; see if can do before/after unecnrypt disk
 
   # enable network card for remote-boot.nix
   boot.initrd.availableKernelModules = ["r8169"];
