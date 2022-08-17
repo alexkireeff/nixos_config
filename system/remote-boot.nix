@@ -9,7 +9,7 @@
   boot.initrd.network.ssh = {
     enable = true;
     port = 22;
-    authorizedKeys = config.users.user.openssh.authorizedKeys.keys;
+    authorizedKeys = config.user.users.user.openssh.authorizedKeys.keys;
     # TODO settings?
     hostKeys = ["/etc/secrets/initrd/ssh_host_key"];
   };
