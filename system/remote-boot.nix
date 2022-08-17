@@ -4,6 +4,8 @@
   lib,
   ...
 }: {
+  # TODO make variables for the file paths
+
   # initrd ssh setup
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
@@ -11,7 +13,7 @@
     port = 22;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
     # TODO settings?
-    hostKeys = ["/etc/secrets/initrd/initrd_ssh_host_key"];
+    hostKeys = ["/etc/tor/initrd/initrd_ssh_host_key"];
   };
 
   # initrd copy secrets
@@ -20,7 +22,7 @@
       if (builtins.pathExists /home/user/tor/onion)
       then /home/user/tor/onion
       else throw "no initrd onion file";
-    "/etc/secrets/initrd/initrd_ssh_host_key" =
+    "/etc/tor/initrd/initrd_ssh_host_key" =
       if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
       then /home/user/.ssh/initrd_ssh_host_key
       else throw "no initrd ssh file";
@@ -59,8 +61,4 @@
     tor -f ${torrc} &
   '';
 
-  # TODO necessary?
-  #environment.systemPackages = with pkgs; [
-  #  tor
-  #];
 }
