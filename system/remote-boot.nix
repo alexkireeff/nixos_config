@@ -13,7 +13,7 @@
     # TODO PasswordAuthentication no; Protocol 2; X11Forwarding no; PubkeyAuthentication yes
     hostKeys = 
       if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
-      then ["/etc/sshd/initrd_ssh_host_key"]
+      then ["/home/user/.ssh/initrd_ssh_host_key"]
       else throw "no initrd ssh file";
   };
 
