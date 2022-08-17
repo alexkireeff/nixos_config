@@ -23,7 +23,6 @@
       if (builtins.pathExists /home/user/tor/onion)
       then /home/user/tor/onion
       else throw "no initrd onion file";
-    "/etc/sshd/initrd_ssh_host_key" =
   };
 
   # initrd copy tor, haveged, ntpupdate
