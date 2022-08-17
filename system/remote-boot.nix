@@ -4,6 +4,11 @@
   lib,
   ...
 }: {
+  # TODO want to be able to recover from bad config
+  # do that with "macros" that are in initrd
+  # macro 1: rollback
+  # macro 2: input password
+
   # initrd ssh setup
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {

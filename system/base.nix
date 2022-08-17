@@ -72,6 +72,10 @@ in {
         # font
         (nerdfonts.override {fonts = ["RobotoMono"];})
 
+        # nvim shared copy paste
+        wl-copy
+        wl-paste
+
         # command line utilities
         rsync # remote sync
         dtach # for keeping ssh open
