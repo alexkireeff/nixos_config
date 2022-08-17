@@ -13,7 +13,11 @@
     port = 22;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
     # TODO settings?
-    hostKeys = ["/etc/tor/initrd/initrd_ssh_host_key"];
+    hostKeys = [
+      if (builtins.pathExists /etc/secrets/initrd/initrd_ssh_host_key)
+      then /etc/secrets/initrd/initrd_ssh_host_key
+      else throw "no initrd ssh file";
+      ];
   };
 
   # initrd copy secrets
@@ -23,9 +27,6 @@
       then /home/user/tor/onion
       else throw "no initrd onion file";
     "/etc/tor/initrd/initrd_ssh_host_key" =
-      if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
-      then /home/user/.ssh/initrd_ssh_host_key
-      else throw "no initrd ssh file";
   };
 
   # initrd copy tor, haveged, ntpupdate
