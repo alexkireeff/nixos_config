@@ -5,26 +5,24 @@
   ...
 }: {
   # initrd ssh setup
-  boot.initrd.availableKernelModules = [ "r8169" ]; # TODO move to desktop
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
     enable = true;
     port = 22;
     authorizedKeys = config.user.openssh.authorizedKeys.keys;
     # TODO settings?
-    hostKeys = ["/etc/secrets/initrd/ssh_host_ed25519_key"];
+    hostKeys = ["/etc/secrets/initrd/ssh_host_key"];
   };
 
   # initrd copy secrets
   boot.initrd.secrets = {
-
     "/etc/tor/onion/bootup" =
       if (builtins.pathExists /home/user/tor/onion)
       then /home/user/tor/onion
       else throw "no initrd onion file";
-    "/etc/secrets/initrd/ssh_host_ed25519_key" = ; # TODO make sure exists
-      if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_ed25519_key)
-      then /home/user/.ssh/initrd_ssh_host_ed25519_key
+    "/etc/secrets/initrd/ssh_host_key" =
+      if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
+      then /home/user/.ssh/ssh_host_key
       else throw "no initrd ssh file";
   };
 
@@ -34,7 +32,6 @@
     copy_bin_and_libs ${pkgs.haveged}/bin/haveged
     copy_bin_and_libs ${pkgs.ntp}/bin/ntpdate
   '';
-
 
   # run tor during boot process
   # TODO does this keep on running tor? idk
@@ -66,5 +63,4 @@
   #environment.systemPackages = with pkgs; [
   #  tor
   #];
-
 }

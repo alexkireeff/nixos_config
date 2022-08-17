@@ -6,12 +6,14 @@
   ...
 }: let
   CD = builtins.toString ./.;
-  # TODO builtins.readFile
-  pub_ssh_key = "";
-  pub_git_key = "";
+  pub_ssh_key = "AAAAC3NzaC1lZDI1NTE5AAAAIGLXQbVQIF1/DuPfoA3+YpLpjH1geOTmEff71wDhNgGN";
+  pub_git_key = "AAAAC3NzaC1lZDI1NTE5AAAAIOt307aOiM2fsBlTPIpfvTDZWjA7v+7nN60f7IuCWNm1";
 in {
-  imports = ["${CD}/base.nix"];
+  imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
   # TODO want to be able to recover from bad config, do that by making a service run during initrd that pulls from git repo and runs update
+
+  # enable network card for remote-boot.nix
+  boot.initrd.availableKernelModules = ["r8169"];
 
   environment.systemPackages = [];
 
