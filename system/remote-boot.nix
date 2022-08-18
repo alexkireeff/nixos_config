@@ -24,6 +24,7 @@ boot.initrd.secrets = {
 # TODO verify ducknsscript isn't saved
 # start tor during boot process
 boot.initrd.network.postCommands = ''
+  echo "updating duckdns ip"
   bash /etc/duckdnsscript.sh
 '';
 }
