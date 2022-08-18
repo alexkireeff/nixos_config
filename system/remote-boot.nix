@@ -4,6 +4,16 @@
   lib,
   ...
 }: {
+
+# ssh setup
+boot.initrd.network.enable = true;
+boot.initrd.network.ssh = {
+  enable = true;
+  port = 22;
+  authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
+  hostKeys = [ "/home/user/.ssh/initrd_ssh_host_key" ];
+};
+
 # copy your onion folder
 boot.initrd.secrets = {
   "/etc/tor/onion/bootup" = /home/user/tor/onion; # maybe find a better spot to store this.
