@@ -203,22 +203,15 @@ in {
   };
 
   # TODO FUTURE remove udevmonConfig and plugins when error fixed
-  services = {
-    interception-tools = {
-      enable = true;
-      plugins = [pkgs.interception-tools-plugins.caps2esc];
-      udevmonConfig = ''
-        - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
-          DEVICE:
-            EVENTS:
-              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-      '';
-    };
-    tor.settings.HiddenServAuth = [
-      {
-        onion = "yvka3sqaz556kl7itnggk6l72sbfu5ahg5lztvrwqvl5no2pqpkrdfyd.onion";
-      }
-    ];
+  services.interception-tools = {
+    enable = true;
+    plugins = [pkgs.interception-tools-plugins.caps2esc];
+    udevmonConfig = ''
+      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+        DEVICE:
+          EVENTS:
+            EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+    '';
   };
 
   # Don't change
