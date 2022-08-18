@@ -15,9 +15,6 @@ in {
   # enable network card for remote-boot.nix
   boot.initrd.availableKernelModules = ["r8169"];
 
-  # TODO verify, allow tor hidden service connections after initrd
-  networking.firewall.allowedTCPPorts = [9063];
-
   environment.systemPackages = [];
 
   # nvidia driver
