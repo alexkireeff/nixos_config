@@ -16,7 +16,7 @@
     port = 22;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
     # TODO PasswordAuthentication no; Protocol 2; X11Forwarding no; PubkeyAuthentication yes
-    hostKeys = 
+    hostKeys =
       if (builtins.pathExists /home/user/.ssh/initrd_ssh_host_key)
       then ["/home/user/.ssh/initrd_ssh_host_key"]
       else throw "no initrd ssh file";
