@@ -24,7 +24,7 @@ boot.initrd.secrets = {
 # copy tor to you initrd
 boot.initrd.extraUtilsCommands = ''
   copy_bin_and_libs ${pkgs.bash}/bin/bash
-  copy_bin_and_libs ${pkgs.bind-host}/bin/host
+  copy_bin_and_libs ${pkgs.host}/bin/host
   copy_bin_and_libs ${pkgs.curl}/bin/curl
 '';
 
