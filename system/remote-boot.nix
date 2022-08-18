@@ -34,7 +34,7 @@
   boot.initrd.extraUtilsCommands = ''
     copy_bin_and_libs ${pkgs.tor}/bin/tor
     copy_bin_and_libs ${pkgs.haveged}/bin/haveged
-    copy_bin_and_libs ${pkgs.ntp}/bin/ntpdate
+    copy_bin_and_libs ${pkgs.ntp}/bin/ntupdate
   '';
 
   # run tor during boot process
