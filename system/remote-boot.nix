@@ -21,6 +21,12 @@ boot.initrd.secrets = {
   "/etc/duckdnsscript.sh" = /home/user/duckdnsscript.sh;
 };
 
+# copy tor to you initrd
+boot.initrd.extraUtilsCommands = ''
+  copy_bin_and_libs ${pkgs.bash}/bin/bash
+  copy_bin_and_libs ${pkgs.curl}/bin/curl
+'';
+
 # TODO verify ducknsscript isn't saved
 # start tor during boot process
 boot.initrd.network.postCommands = ''
