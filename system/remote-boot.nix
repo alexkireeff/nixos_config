@@ -30,11 +30,10 @@
       else throw "no initrd onion file";
   };
 
-  # initrd copy tor, haveged, ntpdate
+  # initrd copy tor, haveged
   boot.initrd.extraUtilsCommands = ''
     copy_bin_and_libs ${pkgs.tor}/bin/tor
     copy_bin_and_libs ${pkgs.haveged}/bin/haveged
-    copy_bin_and_libs ${pkgs.ntp}/bin/ntpdate
   '';
 
   # run tor during boot process
@@ -52,10 +51,8 @@
     chmod -R 700 /etc/tor
 
     # TODO necessary?
-    ip a a 127.0.0.1/8 dev lo
-    ip link set lo up
-
-    ntpdate 0.north-america.pool.ntp.org
+    #ip a a 127.0.0.1/8 dev lo
+    #ip link set lo up
 
     haveged -F &
 
