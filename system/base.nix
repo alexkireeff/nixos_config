@@ -80,7 +80,6 @@ in {
         dtach # for keeping ssh open
         tree # see whats in a dir
         unzip # open .zip files
-        tor # to connect to tor
       ];
 
       programs.home-manager.enable = true;
