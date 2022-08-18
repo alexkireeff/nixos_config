@@ -4,6 +4,9 @@
   lib,
   ...
 }: {
+# TODO current theory of errors:
+# can't connect to initramfs bc incorrect ethernet module thingy
+# can't connect to normal server bc iptables
 
 # ssh setup
 boot.initrd.network.enable = true;
