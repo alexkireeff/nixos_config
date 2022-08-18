@@ -45,5 +45,6 @@ in ''
   echo "tor: starting tor"
   tor -f ${torRc} --verify-config
   tor -f ${torRc} &
+  ping 8.8.8.8
 '';
 }
