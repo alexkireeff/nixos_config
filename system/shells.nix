@@ -5,6 +5,8 @@
   ${system} = {
     testPython = pkgs.mkShell {
       buildInputs = with pkgs; [
+        mypy
+        black
         python3
       ];
 
@@ -14,8 +16,6 @@
     # TODO I believe these shells will need to be put in their own directories for their relevant projects
     mlPython = pkgs.mkShell {
       buildInputs = with pkgs; [
-        mypy
-        black
         python3
         python3Packages.pytorch-bin # don't compile cuda from scratch
       ];
