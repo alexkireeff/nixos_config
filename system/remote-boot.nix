@@ -4,9 +4,6 @@
   lib,
   ...
 }: {
-# TODO current theory of errors:
-# can't connect to initramfs bc incorrect ethernet module thingy
-
 # ssh setup
 boot.initrd.network.enable = true;
 boot.initrd.network.ssh = {
@@ -19,16 +16,15 @@ boot.initrd.network.ssh = {
 # copy your onion folder
 boot.initrd.secrets = {
   "/etc/duckdnsscript.sh" = /home/user/duckdnsscript.sh;
+  "/etc/ssl/certs/ca-certificates.crt" = null;
 };
 
 # copy tor to you initrd
 boot.initrd.extraUtilsCommands = ''
   copy_bin_and_libs ${pkgs.bash}/bin/bash
-  copy_bin_and_libs ${pkgs.host}/bin/host
-  copy_bin_and_libs ${pkgs.curl}/bin/curl
+  copy_bin_and_libs ${pkgs.pkgsStatic.curl}/bin/curl
 '';
 
-# TODO verify ducknsscript isn't saved
 # start tor during boot process
 boot.initrd.network.postCommands = ''
   echo "updating duckdns ip"
