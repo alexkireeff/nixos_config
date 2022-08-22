@@ -5,6 +5,8 @@
   ${system} = {
     testPython = pkgs.mkShell {
       buildInputs = with pkgs; [
+        python3Packages.pandas
+        python3Packages.setuptools
         mypy
         black
         python3
@@ -30,6 +32,9 @@
         # libraries for patching
         glibc
         openssl
+
+        # view system calls
+        strace
 
         # compiler
         gcc
