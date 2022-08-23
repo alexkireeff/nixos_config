@@ -32,15 +32,12 @@
   '';
 
   systemd.services = {
-    dynamic-dns-updater = {
-      path = [
-        pkgs.bash
-        pkgs.pkgsStatic.curl
+    ddns-updater= {
+      path = with pkgs; [
+        bash
+        pkgsStatic.curl
       ];
       script = "bash /etc/nixos/duckdnsscript.sh";
-      serviceConfig = {
-        User = config.users.users.default.name;
-      };
       startAt = "hourly";
     };
   };
