@@ -10,10 +10,10 @@
   pub_ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGLXQbVQIF1/DuPfoA3+YpLpjH1geOTmEff71wDhNgGN user";
   pub_git_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOt307aOiM2fsBlTPIpfvTDZWjA7v+7nN60f7IuCWNm1 user";
 in {
-  imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
+  imports = ["${CD}/base.nix"];# "${CD}/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  boot.initrd.availableKernelModules = ["r8169"];
+  #boot.initrd.availableKernelModules = ["r8169"];
 
   environment.systemPackages = [];
 
