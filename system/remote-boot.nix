@@ -38,7 +38,7 @@
         pkgsStatic.curl
       ];
       script = "bash /etc/nixos/duckdnsscript.sh";
-      startAt = "hourly";
+      startAt = "minutely";
     };
   };
 }
