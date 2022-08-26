@@ -15,7 +15,7 @@ in {
   # enable network card for remote-boot.nix
   boot.initrd.availableKernelModules = ["r8169"];
 
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [pciutils];
 
   # nvidia driver
   services.xserver.videoDrivers = ["nvidia"];
