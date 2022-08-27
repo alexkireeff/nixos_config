@@ -15,6 +15,7 @@ in {
   # enable network card for remote-boot.nix
   # TODO everything points to this being the issue
   # boot.initrd.availableKernelModules = ["r8169"];
+  networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [];
 
