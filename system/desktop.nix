@@ -13,7 +13,8 @@ in {
   imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  boot.initrd.availableKernelModules = ["r8169"];
+  # TODO everything points to this being the issue
+  # boot.initrd.availableKernelModules = ["r8169"];
 
   environment.systemPackages = with pkgs; [];
 
