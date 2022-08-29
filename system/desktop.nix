@@ -13,8 +13,10 @@ in {
   imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  # TODO everything points to this being the issue
   boot.initrd.availableKernelModules = ["r8169"];
+
+  # TODO future remove this it sets up the ethernet interface
+  # https://github.com/NixOS/nixpkgs/issues/157034
   networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [];
