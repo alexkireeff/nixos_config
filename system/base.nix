@@ -145,7 +145,7 @@ in {
           {
             name = "zsh-system-clipboard";
             src = pkgs.zsh-system-clipboard;
-            file = "share/zsh-system-clipboard/zsh-system-clipboard.plugin.zsh";
+            file = "share/zsh/zsh-system-clipboard/zsh-system-clipboard.plugin.zsh";
           }
         ];
       };
