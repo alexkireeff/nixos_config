@@ -142,6 +142,11 @@ in {
             src = pkgs.zsh-vi-mode;
             file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
           }
+          {
+            name = "zsh-system-clipboard";
+            src = pkgs.zsh-system-clipboard;
+            file = "share/zsh-system-clipboard/zsh-system-clipboard.plugin.zsh";
+          }
         ];
       };
 
