@@ -28,7 +28,11 @@
   # run during boot process
   boot.initrd.network.postCommands = ''
     echo "updating duckdns ip"
-    bash /etc/nixos/duckdnsscript.sh
+    while true
+    do
+        bash /etc/nixos/duckdnsscript.sh
+        sleep 60
+    done
   '';
 
   systemd.services = {
