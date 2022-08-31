@@ -13,7 +13,7 @@
     src = pkgs.fetchFromGitHub {
       owner = "kutsan";
       repo = "zsh-system-clipboard";
-      rev = "v${version}";
+      rev = "v0.8.0";
       sha256 = "08ndsqgkz397d9zaa3in40rp9y3y6jd7x55kq16hk5cxdcjc8r2m";
     };
   });
