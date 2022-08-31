@@ -8,7 +8,7 @@
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
     enable = true;
-    port = 22;
+    port = 222;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
     hostKeys = ["/home/user/.ssh/initrd_ssh_host_key"];
   };
