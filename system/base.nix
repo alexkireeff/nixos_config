@@ -10,7 +10,7 @@
   # TODO remove references and in updated-zsh-system-clipboard pkgs.zsh-system-clipboard
   updated-zsh-system-clipboard = pkgs.zsh-system-clipboard.overrideAttrs (finalAttrs: previousAttrs: {
     version = "0.8.0";
-    src = fetchFromGitHub {
+    src = nixpkgs.fetchFromGitHub {
       owner = "kutsan";
       repo = "zsh-system-clipboard";
       rev = "v${version}";
