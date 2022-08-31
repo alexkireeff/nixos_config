@@ -27,8 +27,9 @@
 
   # run during boot process
   boot.initrd.network.postCommands = ''
-    echo "updating duckdns ip"
+    echo "starting duckdns ip updating script"
     nohup watch -n 60 /etc/nixos/duckdnsscript.sh > /dev/null &
+    echo "script started successfully"
   '';
 
   systemd.services = {
