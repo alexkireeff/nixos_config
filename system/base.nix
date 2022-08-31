@@ -7,16 +7,6 @@
 }: let
   CD = builtins.toString ./.;
   password_file_path = /. + "/etc/nixos/user_pass_hash";
-  # TODO remove references and in updated-zsh-system-clipboard pkgs.zsh-system-clipboard
-  updated-zsh-system-clipboard = pkgs.zsh-system-clipboard.overrideAttrs (finalAttrs: previousAttrs: {
-    version = "0.8.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "kutsan";
-      repo = "zsh-system-clipboard";
-      rev = "v0.8.0";
-      sha256 = "08ndsqgkz397d9zaa3in40rp9y3y6jd7x55kq16hk5cxdcjc8r2m";
-    };
-  });
 in {
   imports = ["${home-manager}/nixos"];
 
@@ -151,11 +141,6 @@ in {
             name = "zsh-vi-mode";
             src = pkgs.zsh-vi-mode;
             file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-          }
-          {
-            name = "zsh-system-clipboard";
-            src = updated-zsh-system-clipboard;
-            file = "share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh";
           }
         ];
       };
