@@ -15,7 +15,7 @@
 
   # copy files to initrd
   boot.initrd.secrets = {
-    "/etc/nixos/duckdnsscript.sh" = null;
+    "/etc/nixos/duckdnsurl" = null;
     "/etc/ssl/certs/ca-certificates.crt" = null;
   };
 
@@ -28,8 +28,7 @@
   # run during boot process
   boot.initrd.network.postCommands = ''
     echo "starting duckdns ip updating script"
-    chmod +x /etc/nixos/duckdnsscript.sh
-    nohup watch -n 60 /etc/nixos/duckdnsscript.sh > /dev/null &
+    nohup watch -n 60 curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat /etc/nixos/duckdnsurl)" > /dev/null &
     echo "script started successfully"
   '';
 
@@ -39,7 +38,7 @@
         bash
         pkgsStatic.curl
       ];
-      script = "bash /etc/nixos/duckdnsscript.sh";
+      script = "curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat /etc/nixos/duckdnsurl)\" > /dev/null";
       startAt = "minutely";
     };
   };
