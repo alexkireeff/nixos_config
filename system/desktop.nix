@@ -35,6 +35,7 @@ in {
     openssh = {
       enable = true;
       allowSFTP = true; # sshfs
+      forwardX11 = true; # gui applications
       passwordAuthentication = false;
       permitRootLogin = "no";
     };
