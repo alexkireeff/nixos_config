@@ -182,7 +182,6 @@ in {
     };
 
     # TODO FUTURE remove flake experimental when not experimental anymore
-    # package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
