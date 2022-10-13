@@ -3,10 +3,8 @@
   system,
 }: {
   ${system} = {
-    testPython = pkgs.mkShell {
+    python = pkgs.mkShell {
       buildInputs = with pkgs; [
-        python3Packages.pandas
-        python3Packages.setuptools
         mypy
         black
         python3
