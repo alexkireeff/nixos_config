@@ -102,11 +102,6 @@ in {
 
           # TODO FUTURE CookieManager - Cookie Editor
 
-          # navigation (test vimium)
-          tridactyl
-          # looks like tridactyl has its own user config
-          # maybe use that
-
           # control video speed
           videospeed
         ];
