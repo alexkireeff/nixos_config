@@ -53,6 +53,7 @@ in {
     groups.git = {};
 
     users = {
+      user.extraGroups = [ "git" ];
       git = {
         createHome = true;
         group = "git";
