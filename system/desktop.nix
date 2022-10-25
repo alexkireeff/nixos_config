@@ -59,7 +59,7 @@ in {
         group = "git";
         hashedPassword = ".";
         home = "/var/git";
-        homeMode = "770":
+        homeMode = "770";
         isSystemUser = true;
         openssh.authorizedKeys.keys = [pub_git_key];
         shell = "${pkgs.git}/bin/git-shell";
