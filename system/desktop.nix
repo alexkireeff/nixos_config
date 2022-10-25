@@ -53,10 +53,6 @@ in {
     groups.git = {};
 
     users = {
-      user = {
-        # want user to be able to make new git directories
-        group = "git";
-      };
       git = {
         createHome = true;
         group = "git";
