@@ -14,15 +14,6 @@
     };
 
     # TODO I believe these shells will need to be put in their own directories for their relevant projects
-    mlPython = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        python3
-        python3Packages.pytorch-bin # don't compile cuda from scratch
-      ];
-
-      shellHook = "${pkgs.zsh}/bin/zsh; exit";
-    };
-
     bin = pkgs.mkShell {
       buildInputs = with pkgs; [
         # bin for patching
