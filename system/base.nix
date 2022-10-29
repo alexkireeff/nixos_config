@@ -13,6 +13,16 @@ in {
   # TODO FUTURE use btrfs when stable (or zfs if it gets a more permissive license)
 
   boot = {
+    # bootloader
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    loader.efi.efiSysMountPoint = "/boot/efi";
+
+    # boot setup keyfile
+    initrd.secrets = {
+      "/crypto_keyfile.bin" = null;
+    };
+
     kernelPackages = pkgs.linuxPackages_hardened;
 
     kernelModules = ["tcp_bbr"];

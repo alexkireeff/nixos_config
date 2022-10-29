@@ -35,7 +35,7 @@
         };
 
         modules = [
-          /etc/nixos/configuration.nix
+          /etc/nixos/hardware-configuration.nix
           ./system/laptop.nix
           nur.nixosModules.nur
         ];
@@ -48,7 +48,7 @@
         };
 
         modules = [
-          /etc/nixos/configuration.nix
+          /etc/nixos/hardware-configuration.nix
           ./system/desktop.nix
           nur.nixosModules.nur
         ];
