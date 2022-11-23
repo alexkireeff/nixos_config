@@ -269,7 +269,7 @@ in {
           ];
 
           focus.forceWrapping = false;
-          focus.followMouse = true;
+          focus.followMouse = false;
 
           keybindings = lib.mkOptionDefault {
             "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
