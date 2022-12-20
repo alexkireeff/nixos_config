@@ -25,10 +25,6 @@ in {
 
   networking.hostName = "laptop";
 
-  hardware.opengl.extraPackages = with pkgs; [
-    # mesa.drivers
-  ];
-
   services = {
     fwupd.enable = true;
     logind.extraConfig = ''
