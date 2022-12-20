@@ -17,7 +17,7 @@ in {
   environment.systemPackages = [];
 
   hardware.opengl.extraPackages = with pkgs; [
-    #intel-media-driver
+    intel-media-driver # for firefox hardware acceleration
   ];
 
   home-manager.users.user.services.swayidle.timeouts = [
