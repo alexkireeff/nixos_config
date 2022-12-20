@@ -20,7 +20,7 @@ in {
     intel-media-driver
     libvdpau-va-gl
     vaapiIntel
-    mesa.drivers
+    #mesa.drivers
   ];
 
   home-manager.users.user.services.swayidle.timeouts = [
