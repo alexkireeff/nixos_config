@@ -14,7 +14,9 @@ in {
     "nvme.noacpi=1"
   ];
 
-  environment.systemPackages = [];
+  environment.systemPackages = [
+    libva-utils
+  ];
 
   home-manager.users.user.services.swayidle.timeouts = [
     {
