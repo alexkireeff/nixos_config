@@ -9,6 +9,11 @@
 in {
   imports = ["${CD}/gui.nix"];
 
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+    "nvme.noacpi=1"
+  ];
+
   environment.systemPackages = [];
 
   home-manager.users.user.services.swayidle.timeouts = [
