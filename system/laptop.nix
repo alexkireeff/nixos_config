@@ -14,7 +14,7 @@ in {
     "nvme.noacpi=1"
   ];
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     libva-utils
     glxtest # TODO remove me?
   ];
