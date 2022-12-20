@@ -14,10 +14,7 @@ in {
     "nvme.noacpi=1"
   ];
 
-  environment.systemPackages = with pkgs; [
-    libva-utils
-    glxinfo # TODO remove me?
-  ];
+  environment.systemPackages = [];
 
   home-manager.users.user.services.swayidle.timeouts = [
     {
@@ -28,8 +25,11 @@ in {
 
   networking.hostName = "laptop";
 
-  hardware.opengl.extraPackages = [
-    pkgs.mesa.drivers
+  hardware.opengl.extraPackages = with pkgs; [
+    mesa.drivers
+    intel-media-driver
+    libvdpau-va-gl
+    vaapiIntel
   ];
 
   services = {
