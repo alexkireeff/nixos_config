@@ -25,12 +25,19 @@ in {
 
   networking.hostName = "laptop";
 
-  services.logind.extraConfig = ''
-    HandlLidSwitch=suspend-then-hibernate
-    HandlePowerKey=suspend-then-hibernate
-    HandleSuspendKey=ignore
-    HandleHibernateKey=ignore
-  '';
+  hardware.opengl.extraPackages = [
+    pkgs.mesa.drivers
+  ];
+
+  services = {
+    fwupd.enable = true;
+    logind.extraConfig = ''
+      HandlLidSwitch=suspend-then-hibernate
+      HandlePowerKey=suspend-then-hibernate
+      HandleSuspendKey=ignore
+      HandleHibernateKey=ignore
+    '';
+  };
 
   swapDevices = [
     {
