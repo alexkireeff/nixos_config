@@ -135,20 +135,19 @@ in {
           settings = {
             # Go through about:preferences, changing what you want and compare that to about:config
             # General
-            "layout.css.prefers-color-scheme.content-override" = 0;
             "browser.display.background_color" = "#000000";
-            "browser.download.viewableInternally.typeWasRegistered.avif" = true;
-            "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.avif" = true;
-            "browser.download.viewableInternally.typeWasRegistered.webp" = true;
-            "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.webp" = true;
             "browser.download.always_ask_before_handling_new_types" = true;
+            "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.avif" = true;
+            "browser.download.viewableInternally.previousHandler.alwaysAskBeforeHandling.webp" = true;
+            "browser.download.viewableInternally.typeWasRegistered.avif" = true;
+            "browser.download.viewableInternally.typeWasRegistered.webp" = true;
+            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
+            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
+            "layout.css.prefers-color-scheme.content-override" = 0;
             "media.eme.enabled" = true;
             "widget.gtk.overlay-scrollbars.enabled" = true;
-            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
-            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
 
             # Home
-            "browser.startup.homepage" = "duckduckgo.com";
             "browser.newtabpage.enabled" = false;
             "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
             "browser.newtabpage.activity-stream.feeds.topsites" = false;
@@ -159,6 +158,7 @@ in {
             "browser.newtabpage.activity-stream.showSearch" = false;
             "browser.newtabpage.activity-stream.showSponsored" = false;
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+            "browser.startup.homepage" = "duckduckgo.com";
 
             # Search
             # TODO FUTURE or maybe never? (in which case we change this to NOTE)
@@ -168,32 +168,56 @@ in {
             # enable installed extensions
             # clear toolbar extensions and slots
             "browser.search.suggest.enabled" = false;
-            "browser.urlbar.showSearchSuggestionsFirst" = false;
-            "browser.urlbar.suggest.searches" = false;
             "browser.urlbar.shortcuts.bookmarks" = false;
             "browser.urlbar.shortcuts.history" = false;
             "browser.urlbar.shortcuts.tabs" = false;
+            "browser.urlbar.showSearchSuggestionsFirst" = false;
+            "browser.urlbar.suggest.searches" = false;
 
             # Privacy
-            "privacy.donottrackheader.enabled" = true;
-            "signon.rememberSignons" = false;
-            "extensions.formautofill.addresses.enabled" = false;
-            "extensions.formautofill.creditCards.enabled" = false;
+            "app.shield.optoutstudies.enabled" = false;
+            "browser.discovery.enabled" = false;
             "browser.formfill.enable" = false;
-            "places.history.enabled" = false;
-            "privacy.history.custom" = true;
+            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+            "browser.newtabpage.activity-stream.telemetry" = false;
+            "browser.ping-centre.telemetry" = false;
             "browser.urlbar.suggest.bookmark" = false;
             "browser.urlbar.suggest.engines" = false;
             "browser.urlbar.suggest.history" = false;
             "browser.urlbar.suggest.openpage" = false;
-            "browser.urlbar.suggest.topsites" = false;
             "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
             "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+            "browser.urlbar.suggest.topsites" = false;
             "datareporting.healthreport.uploadEnabled" = false;
-            "browser.discovery.enabled" = false;
-            "app.shield.optoutstudies.enabled" = false;
+            "datareporting.policy.dataSubmissionEnabled" = false;
             "dom.security.https_only_mode" = true;
             "dom.security.https_only_mode_ever_enabled" = true;
+            "places.history.enabled" = false;
+            "privacy.donottrackheader.enabled" = true;
+            "privacy.history.custom" = true;
+            "signon.autofillForms" = false;
+            "signon.generation.enabled" = false;
+            "signon.management.page.breach-alerts.enabled" = false;
+            "signon.rememberSignons" = false;
+            "extensions.formautofill.addresses.enabled" = false;
+            "extensions.formautofill.creditCards.enabled" = false;
+            "security.protectionspopup.recordEventTelemetry" = false;
+            "security.identitypopup.recordEventTelemetry" = false;
+            "security.certerrors.recordEventTelemetry" = false;
+            "security.app_menu.recordEventTelemetry" = false;
+            "toolkit.telemetry.archive.enabled" = false;
+            "toolkit.telemetry.bhrPing.enabled" = false;
+            "toolkit.telemetry.firstShutdownPing.enabled" = false;
+            "toolkit.telemetry.newProfilePing.enabled" = false;
+            "toolkit.telemetry.pioneer-new-studies-available" = false;
+            "toolkit.telemetry.reportingpolicy.firstRun" = false;
+            "toolkit.telemetry.shutdownPingSender.enabled" = false;
+            "toolkit.telemetry.unified" = false;
+            "toolkit.telemetry.updatePing.enabled" = false;
+
+            # DOM Privacy
+            "dom.event.clipboardevents.enabled" = false;
+            "dom.battery.enabled" = false;
 
             # reading PDFs
             "pdfjs.defaultZoomValue" = "page-width";
@@ -206,6 +230,11 @@ in {
 
             # don't automatically hide toolbar when fullscreen
             "browser.fullscreen.autohide" = false;
+
+            # warn when closing multiple
+            "browser.tabs.warnOnClose" = true;
+            "browser.tabs.warnOnCloseOtherTabs" = true;
+            "browser.warnOnQuit" = true;
           };
           userChrome = builtins.readFile "${CD}/configs/firefox.css";
         };
