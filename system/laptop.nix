@@ -17,6 +17,9 @@ in {
   environment.systemPackages = [];
 
   hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver
+    libvdpau-va-gl
+    vaapiIntel
     mesa.drivers
   ];
 
