@@ -16,6 +16,10 @@ in {
 
   environment.systemPackages = [];
 
+  hardware.opengl.extraPackages = with pkgs; [
+    mesa.drivers
+  ];
+
   home-manager.users.user.services.swayidle.timeouts = [
     {
       timeout = 60 * 4;
