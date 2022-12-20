@@ -122,7 +122,8 @@ in {
       in {
         enable = true;
         dotDir = dotDirectory;
-        initExtra =
+        # common configuration + device specific overrides
+        initExtra = builtins.readFile "${CD}/configs/zsh/common.config" +
           if builtins.elem config.networking.hostName ["laptop"]
           then builtins.readFile "${CD}/configs/zsh/laptop.config"
           else if builtins.elem config.networking.hostName ["desktop"]
