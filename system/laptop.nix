@@ -16,7 +16,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     libva-utils
-    glxtest # TODO remove me?
+    glxinfo # TODO remove me?
   ];
 
   home-manager.users.user.services.swayidle.timeouts = [
