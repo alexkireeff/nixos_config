@@ -26,10 +26,7 @@ in {
   networking.hostName = "laptop";
 
   hardware.opengl.extraPackages = with pkgs; [
-    mesa.drivers
-    intel-media-driver
-    libvdpau-va-gl
-    vaapiIntel
+    # mesa.drivers
   ];
 
   services = {
