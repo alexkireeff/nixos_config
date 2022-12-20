@@ -33,7 +33,7 @@
   '';
 
   systemd.services = {
-    ddns-updater= {
+    ddns-updater = {
       path = with pkgs; [
         bash
         pkgsStatic.curl
