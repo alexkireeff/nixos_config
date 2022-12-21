@@ -6,18 +6,18 @@
 }: {
   # ssh setup
   boot.initrd.network.enable = true;
-  boot.initrd.network.ssh = {
-    enable = true;
-    port = 22;
-    authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
-    hostKeys = ["/home/user/.ssh/initrd_ssh_host_key"];
-  };
+#  boot.initrd.network.ssh = {
+#    enable = true;
+#    port = 22;
+#    authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
+#    hostKeys = ["/home/user/.ssh/initrd_ssh_host_key"];
+#  };
 
   # copy files to initrd
-  boot.initrd.secrets = {
-    "/etc/nixos/duckdnsurl" = "/etc/nixos/duckdnsurl";
-    "/etc/ssl/certs/ca-certificates.crt" = "/etc/ssl/certs/ca-certificates.crt";
-  };
+#  boot.initrd.secrets = {
+#    "/etc/nixos/duckdnsurl" = null;
+#    "/etc/ssl/certs/ca-certificates.crt" = null;
+#  };
 
   # copy programs to initrd
   boot.initrd.extraUtilsCommands = ''
