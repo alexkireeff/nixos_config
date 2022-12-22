@@ -12,7 +12,7 @@ in {
   imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  boot.initrd.availableKernelModules = ["r8169"];
+#  boot.initrd.availableKernelModules = ["r8169"];
 
   # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
