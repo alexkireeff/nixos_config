@@ -19,9 +19,9 @@ in {
     loader.efi.efiSysMountPoint = "/boot/efi";
 
     # boot setup keyfile
-    initrd.secrets = {
-      "/crypto_keyfile.bin" = null;
-    };
+#    initrd.secrets = {
+#      "/crypto_keyfile.bin" = null;
+#    };
 
     kernelPackages = pkgs.linuxPackages_hardened;
 
