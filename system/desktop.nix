@@ -14,6 +14,10 @@ in {
   # enable network card for remote-boot.nix
   boot.initrd.availableKernelModules = ["r8169"]; # do we actually need this because at one point in time it worked without this but that could also be a symptom of the bug we've been fighting for months...
 
+  # just using this to force reset initrd
+  # ala https://github.com/NixOS/nixpkgs/issues/114594#issuecomment-1336514410
+  boot.initrd.luks.mitigateDMAAttacks = false;
+
   # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
   networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
