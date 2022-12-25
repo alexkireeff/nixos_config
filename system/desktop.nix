@@ -16,7 +16,7 @@ in {
 
   # just using this to force reset initrd
   # ala https://github.com/NixOS/nixpkgs/issues/114594#issuecomment-1336514410
-  boot.initrd.luks.mitigateDMAAttacks = false;
+  # boot.initrd.luks.mitigateDMAAttacks = false;
 
   # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
