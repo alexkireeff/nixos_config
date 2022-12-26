@@ -9,10 +9,10 @@
   pub_ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGLXQbVQIF1/DuPfoA3+YpLpjH1geOTmEff71wDhNgGN user";
   pub_git_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOt307aOiM2fsBlTPIpfvTDZWjA7v+7nN60f7IuCWNm1 user";
 in {
-  imports = ["${CD}/base.nix"];# "${CD}/remote-boot.nix"];
+  imports = ["${CD}/base.nix" "${CD}/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  #boot.initrd.availableKernelModules = ["r8169"]; # do we actually need this because at one point in time it worked without this but that could also be a symptom of the bug we've been fighting for months...
+  boot.initrd.availableKernelModules = ["r8169"]; # do we actually need this because at one point in time it worked without this but that could also be a symptom of the bug we've been fighting for months...
 
   # just using this to force reset initrd
   # ala https://github.com/NixOS/nixpkgs/issues/114594#issuecomment-1336514410
