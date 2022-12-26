@@ -16,7 +16,10 @@
   # copy files to initrd
   boot.initrd.secrets = {
     "/etc/nixos/duckdnsurl" = null;
-    "/etc/testing" = /etc/ssl/certs/ca-certificates.crt;
+    "/etc/ssl/certs/ca-certificates.crt" = /nix/store/w22mgz86w3nqjc91xmcpngssnb0pj0k8-nss-cacert-3.86/etc/ssl/certs/ca-bundle.crt;
+    # TODO file a bug report with initrd being unable to copy linked files
+    # can view for debugging purposes in /.initrd-secrets/ during phase 1 boot
+    # "/etc/ssl/certs/ca-certificates.crt" = null;
   };
 
   # copy programs to initrd
