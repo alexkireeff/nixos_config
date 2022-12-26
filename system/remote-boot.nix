@@ -10,7 +10,7 @@
     enable = true;
     port = 22;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
-    # hostKeys = ["/home/user/.ssh/initrd_ssh_host_key"];
+    hostKeys = ["/etc/nixos/initrd_ssh_host_key"];
   };
 
   # copy files to initrd
