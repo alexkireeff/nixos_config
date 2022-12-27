@@ -30,9 +30,7 @@
 
   # run during boot process
   boot.initrd.network.postCommands = ''
-    echo "starting duckdns ip updating script"
-    nohup watch -n 60 "curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat /etc/nixos/duckdnsurl)\" > /dev/null &"
-    echo "script started successfully"
+    curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat /etc/nixos/duckdnsurl)\" > /dev/null
   '';
 
   systemd.services = {
