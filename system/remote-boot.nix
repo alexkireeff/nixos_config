@@ -30,7 +30,7 @@
 
   # run during boot process
   boot.initrd.network.postCommands = ''
-    curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat /etc/nixos/duckdnsurl)\" > /dev/null
+    curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat /etc/nixos/duckdnsurl)" > /dev/null
   '';
 
   systemd.services = {
