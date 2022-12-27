@@ -30,6 +30,7 @@
 
   # run during boot process
   boot.initrd.network.postCommands = ''
+    # https://www.duckdns.org/install.jsp
     curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat /etc/nixos/duckdnsurl)" > /dev/null
   '';
 
