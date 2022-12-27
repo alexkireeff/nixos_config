@@ -242,12 +242,10 @@ in {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
       # TODO FUTURE when secrets become a thing, change this & add ssh keys
-      # NOTE permissions on password_file_path file should be 600
-      # NOTE linux uses sha-512: mkpasswd -m sha-512
       hashedPassword =
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
-        else throw "no user password file";
+        else throw "use \"sudo mkpasswd -m sha-512\" to make a password file";
       shell = pkgs.zsh;
     };
   };
