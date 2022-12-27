@@ -10,6 +10,7 @@
     enable = true;
     port = 22;
     authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
+    # sudo ssh-keygen -t ed25519 -N "" -f /etc/nixos/initrd_ssh_host_key
     hostKeys = ["/etc/nixos/initrd_ssh_host_key"];
   };
 
