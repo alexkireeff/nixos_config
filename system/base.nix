@@ -242,10 +242,11 @@ in {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
       # TODO FUTURE when secrets become a thing, change this & add ssh keys
+      # sudo mkpasswd -m sha-512
       hashedPassword =
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
-        else throw "use \"sudo mkpasswd -m sha-512\" to make a password file";
+        else throw "missing a password file";
       shell = pkgs.zsh;
     };
   };
