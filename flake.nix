@@ -21,9 +21,7 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-      };
+      config.allowUnfree = true;
     };
   in {
     nixosConfigurations = {
@@ -51,10 +49,6 @@
           nur.nixosModules.nur
         ];
       };
-    };
-
-    devShells = import ./system/shells.nix {
-      inherit pkgs system;
     };
   };
 }

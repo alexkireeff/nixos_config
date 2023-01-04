@@ -240,12 +240,6 @@ in {
         };
       };
 
-      # notifications daemon
-      programs.mako = {
-        enable = true;
-        defaultTimeout = 10000;
-      };
-
       programs.swaylock.settings = {
         show-failed-attempts = false;
 
@@ -306,7 +300,6 @@ in {
             "${mod}+d" = "exec ${FIREFOX}/bin/firefox";
           };
 
-          menu = "wofi --style=${CD}/wofi.css --show run";
           modifier = mod;
           terminal = term;
         };

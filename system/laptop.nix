@@ -14,8 +14,6 @@ in {
     "nvme.noacpi=1"
   ];
 
-  environment.systemPackages = [];
-
   hardware.opengl.extraPackages = with pkgs; [
     intel-media-driver # for firefox hardware acceleration
   ];
