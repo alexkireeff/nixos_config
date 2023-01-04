@@ -44,7 +44,6 @@
         };
 
         modules = [
-          /etc/nixos/hardware-configuration.nix
           ./system/desktop.nix
           nur.nixosModules.nur
         ];
