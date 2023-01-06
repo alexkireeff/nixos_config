@@ -306,10 +306,23 @@ in {
 
         enable = true;
 
-        extraConfig = "# Brightness\nbindsym XF86MonBrightnessDown exec light -U 1\nbindsym XF86MonBrightnessUp exec light -A 1\n\n# Volume\nbindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'\nbindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'\nbindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
+        extraConfig = ''
+          # Brightness
+          bindsym XF86MonBrightnessDown exec light -U 1
+          bindsym XF86MonBrightnessUp exec light -A 1
+
+          # Volume
+          bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+          bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+          bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+        '';
       };
     };
   };
+
+  # Control brightness
+  programs.light.enable = true;
+
   security.pam.services.swaylock.text = "auth include login";
 
   services.pipewire = {

@@ -203,9 +203,6 @@ in {
     settings.allowed-users = ["root" "user"];
   };
 
-  # Control brightness
-  programs.light.enable = true;
-
   security = {
     # save all run programs to logs
     audit.enable = true;
