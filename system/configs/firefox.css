@@ -33,7 +33,7 @@ toolbarbutton#scrollbutton-down,
 }
 
 
-/*navigator bar dimensions*/
+/* navigator bar dimensions */
 
 #TabsToolbar {
   margin-left : var(--navbarWidth) !important;
