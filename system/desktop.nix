@@ -21,7 +21,6 @@ in {
   environment.systemPackages = with pkgs; [];
 
   # nvidia driver
-  hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
 
   networking.hostName = "desktop";
