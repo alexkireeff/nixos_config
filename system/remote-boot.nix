@@ -17,7 +17,7 @@
   # copy files to initrd
   boot.initrd.secrets = {
     "/etc/nixos/duckdnsurl" = null;
-    "/etc/ssl/certs/ca-certificates.crt" = /. + "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    "/etc/ssl/certs/ca-certificates.crt" = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt;
   };
 
   # copy programs to initrd
