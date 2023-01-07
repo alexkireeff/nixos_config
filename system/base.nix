@@ -6,7 +6,6 @@
   ...
 }: let
   CD = builtins.toString ./.;
-  password_file_path = /. + "/etc/nixos/user_pass_hash";
 in {
   imports = ["${home-manager}/nixos"];
 
@@ -235,7 +234,9 @@ in {
     # password is disabled
     users.root.hashedPassword = ".";
 
-    users.user = {
+    users.user = let
+      password_file_path = builtins.toPath "/etc/nixos/user_pass_hash";
+    in {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
       # TODO FUTURE when secrets become a thing, change this & add ssh keys
