@@ -30,8 +30,8 @@ in {
   services = {
     fwupd.enable = true;
     logind.extraConfig = ''
-      HandlLidSwitch=suspend-then-hibernate
-      HandlePowerKey=suspend-then-hibernate
+      HandlLidSwitch=hibernate
+      HandlePowerKey=hibernate
       HandleSuspendKey=ignore
       HandleHibernateKey=ignore
     '';
