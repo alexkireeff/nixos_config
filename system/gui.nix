@@ -324,7 +324,8 @@ in {
   programs.light.enable = true;
 
   # Allow swaylock to unlock computer after sleeping
-  #security.pam.services.swaylock.text = "auth include login";
+  # If not the screen freezes
+  security.pam.services.swaylock.text = "auth include login";
 
   services.pipewire = {
     enable = true;
