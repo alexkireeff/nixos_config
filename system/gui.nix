@@ -323,7 +323,8 @@ in {
   # Control brightness
   programs.light.enable = true;
 
-  security.pam.services.swaylock.text = "auth include login";
+  # Allow swaylock to unlock computer after sleeping
+  #security.pam.services.swaylock.text = "auth include login";
 
   services.pipewire = {
     enable = true;
