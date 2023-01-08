@@ -7,7 +7,7 @@
 }: let
   CD = builtins.toString ./.;
 in {
-  imports = ["${CD}/gui.nix" "${CD}/laptop-hardware.nix"];
+  imports = ["${CD}/../components/gui.nix" "${CD}/hardware/laptop-hardware.nix"];
 
   boot.kernelParams = [
     "mem_sleep_default=deep"
