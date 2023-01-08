@@ -32,7 +32,7 @@
         };
 
         modules = [
-          ./system/laptop.nix
+          ./systems/laptop.nix
           nur.nixosModules.nur
         ];
       };
@@ -44,7 +44,7 @@
         };
 
         modules = [
-          ./system/desktop.nix
+          ./systems/desktop.nix
           nur.nixosModules.nur
         ];
       };
