@@ -89,24 +89,24 @@ in {
 
       programs.firefox = {
         enable = true;
-        extensions = with config.nur.repos.rycee.firefox-addons; [
-          # privacy
-          privacy-badger
-          ublock-origin
-
-          # dark mode
-          darkreader
-
-          # paywalls
-          bypass-paywalls-clean
-
-          # TODO FUTURE CookieManager - Cookie Editor
-
-          # control video speed
-          videospeed
-        ];
         package = FIREFOX;
         profiles.default = {
+          extensions = with config.nur.repos.rycee.firefox-addons; [
+            # privacy
+            privacy-badger
+            ublock-origin
+
+            # dark mode
+            darkreader
+
+            # paywalls
+            bypass-paywalls-clean
+
+            # TODO FUTURE CookieManager - Cookie Editor
+
+            # control video speed
+            videospeed
+          ];
           id = 0;
           name = "default";
           isDefault = true;
