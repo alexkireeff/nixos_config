@@ -235,6 +235,9 @@ in {
             "browser.tabs.warnOnClose" = true;
             "browser.tabs.warnOnCloseOtherTabs" = true;
             "browser.warnOnQuit" = true;
+
+            # allow pasting in google docs
+            "dom.event.clipboardevents.enabled" = true;
           };
           userChrome = builtins.readFile "${CD}/configs/firefox.css";
         };
