@@ -216,7 +216,6 @@ in {
             "toolkit.telemetry.updatePing.enabled" = false;
 
             # DOM Privacy
-            "dom.event.clipboardevents.enabled" = false;
             "dom.battery.enabled" = false;
 
             # reading PDFs
