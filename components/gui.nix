@@ -100,7 +100,7 @@ in {
             darkreader
 
             # paywalls
-            bypass-paywalls-clean
+            #bypass-paywalls-clean # TODO this broke
 
             # TODO FUTURE CookieManager - Cookie Editor
 
