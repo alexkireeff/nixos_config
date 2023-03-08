@@ -25,6 +25,10 @@ in {
     }
   ];
 
+  environment.systemPackages = with pkgs; [
+    minecraft
+  ];
+
   networking.hostName = "laptop";
 
   services = {
