@@ -38,9 +38,9 @@ in {
       allowSFTP = true; # sshfs
 
       settings = {
-        forwardX11 = true; # gui applications
-        passwordAuthentication = false;
-        permitRootLogin = "no";
+        X11Forwarding = true; # gui applications
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
       };
     };
   };
