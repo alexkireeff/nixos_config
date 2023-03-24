@@ -69,7 +69,6 @@ in {
     defaultPackages = lib.mkForce [];
     systemPackages = with pkgs; [
       home-manager
-      zsh
     ];
   };
 
@@ -202,6 +201,8 @@ in {
 
     settings.allowed-users = ["root" "user"];
   };
+
+  programs.zsh.enable = true;
 
   security = {
     # save all run programs to logs
