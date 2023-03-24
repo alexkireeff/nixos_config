@@ -245,7 +245,7 @@ in {
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
         else throw "missing a password file";
-      shell = pkgs.zsh;
+      shell = pkgs.homemanager.programs.zsh;
     };
   };
 }
