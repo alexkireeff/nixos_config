@@ -69,6 +69,7 @@ in {
     defaultPackages = lib.mkForce [];
     systemPackages = with pkgs; [
       home-manager
+      zsh
     ];
   };
 
@@ -245,7 +246,7 @@ in {
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
         else throw "missing a password file";
-      shell = pkgs.home-manager.zsh;
+      shell = pkgs.zsh;
     };
   };
 }
