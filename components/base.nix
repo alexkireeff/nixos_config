@@ -66,6 +66,7 @@ in {
   console.keyMap = "us";
 
   environment = {
+    shellAliases = {};
     defaultPackages = lib.mkForce [];
     systemPackages = with pkgs; [
       home-manager
