@@ -56,10 +56,20 @@
       };
     };
 
-    deploy.nodes.laptop.profiles.system = {
+    deploy.nodes = {
+      laptop.profiles.system = {
+        sshUser = "user";
         user = "root";
         path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.laptop;
+      };
+      desktop.profiles.system = {
+        sshUser = "user";
+        user = "root";
+        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
+      };
     };
+
+    remoteBuild = true;
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };

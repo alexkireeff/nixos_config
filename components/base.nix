@@ -67,7 +67,11 @@ in {
 
   environment = {
     # TODO I don't want to have to have this setting here
-    shellAliases = {ls = null; ll = null; l = null;};
+    shellAliases = {
+      ls = null;
+      ll = null;
+      l = null;
+    };
     defaultPackages = lib.mkForce [];
     systemPackages = with pkgs; [
       home-manager
