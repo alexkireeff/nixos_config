@@ -57,15 +57,21 @@
     };
 
     deploy.nodes = {
-      laptop.profiles.system = {
-        sshUser = "user";
-        user = "root";
-        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.laptop;
+      laptop = {
+        hostname = "localhost";
+        profiles.system = {
+          sshUser = "user";
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.laptop;
+        };
       };
-      desktop.profiles.system = {
-        sshUser = "user";
-        user = "root";
-        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
+      desktop = {
+        hostname = "desktop";
+        profiles.system = {
+          sshUser = "user";
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
+        };
       };
     };
 
