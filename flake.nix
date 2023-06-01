@@ -10,11 +10,6 @@
     nur = {
       url = "github:nix-community/NUR";
     };
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -22,7 +17,6 @@
     nixpkgs,
     home-manager,
     nur,
-    deploy-rs,
   }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -55,28 +49,5 @@
         ];
       };
     };
-
-    deploy.nodes = {
-      laptop = {
-        hostname = "localhost";
-        profiles.system = {
-          sshUser = "user";
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.laptop;
-        };
-      };
-      desktop = {
-        hostname = "desktop";
-        profiles.system = {
-          sshUser = "user";
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.desktop;
-        };
-      };
-    };
-
-    remoteBuild = true;
-
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
