@@ -30,7 +30,7 @@ in {
   nix = {
     buildMachines = [
       {
-        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/home/user/.ssh/ssh_key";
+        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/home/user/.ssh/ssh_key"; # TODO clean this up and put this in server?
         systems = ["x86_64-linux"];
         maxJobs = 1;
         speedFactor = 2;
