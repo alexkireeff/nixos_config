@@ -205,7 +205,7 @@ in {
       experimental-features = nix-command flakes ca-derivations
     '';
 
-    settings.trusted-users= ["root" "user"]; # TODO go back to allowed-users when CA is enabled
+    settings.allowed-users= ["root" "user"];
   };
 
   programs.zsh.enable = true;
