@@ -200,7 +200,7 @@ in {
       options = "--delete-older-than 7d";
     };
 
-    # TODO FUTURE remove flake experimental when not experimental anymore
+    # TODO FUTURE remove when not experimental anymore
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
     '';

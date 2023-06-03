@@ -56,7 +56,6 @@ in {
       };
 
       programs.alacritty = {
-        # make it not mess with the text when resizing window?
         enable = true;
         settings = {
           key_bindings = [
@@ -100,9 +99,7 @@ in {
             darkreader
 
             # paywalls
-            #bypass-paywalls-clean # TODO this broke
-
-            # TODO FUTURE CookieManager - Cookie Editor
+            bypass-paywalls-clean
 
             # control video speed
             videospeed
@@ -161,8 +158,7 @@ in {
             "browser.startup.homepage" = "duckduckgo.com";
 
             # Search
-            # TODO FUTURE or maybe never? (in which case we change this to NOTE)
-            # have to manually:
+            # NOTE have to manually:
             # delete unwanted search engines
             # change search engine
             # enable installed extensions
