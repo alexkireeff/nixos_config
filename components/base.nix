@@ -202,7 +202,7 @@ in {
 
     # TODO FUTURE remove flake experimental when not experimental anymore
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes ca-derivations
     '';
 
     settings.allowed-users = ["root" "user"];

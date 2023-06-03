@@ -30,11 +30,11 @@ in {
   nix = {
     buildMachines = [
       {
-        hostName = "desktop";
+        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/home/user/.ssh/ssh_key";
         systems = ["x86_64-linux"];
         maxJobs = 1;
         speedFactor = 2;
-        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+        supportedFeatures = ["benchmark" "big-parallel" "ca-derivations" "kvm" "nixos-test"];
         mandatoryFeatures = [];
       }
     ];
