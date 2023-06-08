@@ -14,8 +14,7 @@ in {
   # enable network card for remote-boot.nix
   boot.initrd.availableKernelModules = ["r8169"];
 
-  # TODO SHOULD BE ABLE TO REMOVE NOW
-  # remove this it sets up the ethernet interface
+  # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
   networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
