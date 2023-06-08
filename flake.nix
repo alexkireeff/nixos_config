@@ -22,7 +22,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      config.contentAddressedByDefault = true; # TODO
+      #config.contentAddressedByDefault = true; # TODO
     };
   in {
     nixosConfigurations = {
