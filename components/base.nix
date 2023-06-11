@@ -164,9 +164,6 @@ in {
         ];
       };
 
-      # for copy paste
-      wayland.windowManager.sway.enable = true;
-
       xdg.userDirs = {
         enable = true;
         createDirectories = true;
