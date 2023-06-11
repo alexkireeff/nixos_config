@@ -15,7 +15,7 @@ in {
   boot.initrd.availableKernelModules = ["r8169"];
 
   # local network takes a while to connect to
-  boot.initrd.network.udhcpc.extraArgs = "--retries 10";
+  boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 
   # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
