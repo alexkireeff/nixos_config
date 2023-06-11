@@ -164,6 +164,9 @@ in {
         ];
       };
 
+      # for copy paste
+      wayland.windowManager.sway.enable = true;
+
       xdg.userDirs = {
         enable = true;
         createDirectories = true;
@@ -205,7 +208,7 @@ in {
       experimental-features = nix-command flakes ca-derivations
     '';
 
-    settings.allowed-users= ["root" "user"];
+    settings.allowed-users = ["root" "user"];
   };
 
   programs.zsh.enable = true;
