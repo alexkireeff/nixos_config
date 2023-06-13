@@ -28,21 +28,22 @@ in {
   networking.hostName = "laptop";
 
   nix = {
-    buildMachines = [
-      {
-        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/home/user/.ssh/ssh_key"; # TODO clean this up and put this in server?
-        systems = ["x86_64-linux"];
-        maxJobs = 12;
-        speedFactor = 2;
-        supportedFeatures = ["benchmark" "big-parallel" "ca-derivations" "kvm" "nixos-test"];
-        mandatoryFeatures = [];
-      }
-    ];
-    distributedBuilds = true;
+    # TODO FUTURE clean up an do CA derivations fixed
+    #buildMachines = [
+    #  {
+    #    hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/home/user/.ssh/ssh_key";
+    #    systems = ["x86_64-linux"];
+    #    maxJobs = 12;
+    #    speedFactor = 2;
+    #    supportedFeatures = ["benchmark" "big-parallel" "ca-derivations" "kvm" "nixos-test"];
+    #    mandatoryFeatures = [];
+    #  }
+    #];
+    #distributedBuilds = true;
 
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
+    #extraOptions = ''
+    #  builders-use-substitutes = true
+    #'';
   };
 
   services = {

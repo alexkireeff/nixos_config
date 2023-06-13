@@ -21,7 +21,9 @@
     pkgs = import nixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
-      config.contentAddressedByDefault = true; # TODO CA derivatiosn currently broken: https://github.com/NixOS/nixpkgs/pull/214044
+      # TODO FUTURE CA derivations currently broken
+      # https://github.com/NixOS/nixpkgs/pull/214044
+      #config.contentAddressedByDefault = true;
     };
   in {
     nixosConfigurations = {

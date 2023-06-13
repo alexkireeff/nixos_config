@@ -66,7 +66,8 @@ in {
   console.keyMap = "us";
 
   environment = {
-    # TODO I don't want to have to have this setting here
+    # TODO FUTURE ideally don't want this setting
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/config/shells-environment.nix#L176
     shellAliases = {
       ls = null;
       ll = null;
@@ -200,7 +201,7 @@ in {
       options = "--delete-older-than 7d";
     };
 
-    # TODO FUTURE remove when not experimental anymore
+    # TODO FUTURE remove experimental-features when they are no longer experimental
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
     '';
@@ -219,7 +220,8 @@ in {
     sudo.execWheelOnly = true;
   };
 
-  # TODO FUTURE remove udevmonConfig and plugins when error fixed
+  # TODO FUTURE remove udevmonConfig and plugins
+  # https://github.com/NixOS/nixpkgs/issues/126681
   services.interception-tools = {
     enable = true;
     plugins = [pkgs.interception-tools-plugins.caps2esc];
@@ -247,7 +249,8 @@ in {
     in {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
-      # TODO FUTURE when secrets become a thing, change this & add ssh keys
+      # TODO FUTURE use secrets
+      # https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes
       # sudo mkpasswd -m sha-512
       hashedPassword =
         if (builtins.pathExists password_file_path)
