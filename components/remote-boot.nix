@@ -22,8 +22,7 @@ in {
           missing ssh host key file
           Do:
             sudo ssh-keygen -t ed25519 -a 100 -N "" -C "initrd_ssh_host_key" -f ${initrd_ssh_host_key_file_path}
-            sudo chown user:users ${initrd_ssh_host_key_file_path}
-            sudo chown user:users ${initrd_ssh_host_key_file_path}.pub
+            sudo chown user:users ${initrd_ssh_host_key_file_path} ${initrd_ssh_host_key_file_path}.pub
             chmod 600 ${initrd_ssh_host_key_file_path}
             chmod 644 ${initrd_ssh_host_key_file_path}.pub
         '';

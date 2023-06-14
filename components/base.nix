@@ -134,8 +134,7 @@ in {
                 missing git key file
                 Do:
                   sudo ssh-keygen -t ed25519 -N "" -C "git_key" -f ${git_key}
-                  sudo chown user:users ${git_key}
-                  sudo chown user:users ${git_key}.pub
+                  sudo chown user:users ${git_key} ${git_key}.pub
                   chmod 400 ${git_key}
                   chmod 444 ${git_key}.pub
               ''
@@ -144,8 +143,7 @@ in {
               missing ssh key file
               Do:
                 sudo ssh-keygen -t ed25519 -N "" -C "ssh_key" -f ${ssh_key}
-                sudo chown user:users ${ssh_key}
-                sudo chown user:users ${ssh_key}.pub
+                sudo chown user:users ${ssh_key} ${ssh_key}.pub
                 chmod 400 ${ssh_key}
                 chmod 444 ${ssh_key}.pub
             '';
