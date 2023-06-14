@@ -118,9 +118,37 @@ in {
         ];
       };
 
-      programs.ssh = {
+      programs.ssh = let
+        ssh_key = "/etc/nixos/git_key";
+        git_key = "/etc/nixos/git_key";
+      in {
+        # TODO make git_key actually work
         enable = true;
-        extraConfig = builtins.readFile "${CD}/configs/ssh.config";
+        extraConfig =
+          if (builtins.pathExists ssh_key)
+          then
+            if (builtins.pathExists git_key)
+            then builtins.replaceStrings ["ssh_key" "git_key"] [ssh_key git_key] (builtins.readFile "${CD}/configs/ssh.config")
+            else
+              throw ''
+                missing git key file
+                Do:
+                  sudo ssh-keygen -t ed25519 -N "" -C "git_key" -f ${git_key}
+                  sudo chown user:users ${git_key}
+                  sudo chown user:users ${git_key}.pub
+                  chmod 400 ${git_key}
+                  chmod 444 ${git_key}.pub
+              ''
+          else
+            throw ''
+              missing ssh key file
+              Do:
+                sudo ssh-keygen -t ed25519 -N "" -C "ssh_key" -f ${ssh_key}
+                sudo chown user:users ${ssh_key}
+                sudo chown user:users ${ssh_key}.pub
+                chmod 400 ${ssh_key}
+                chmod 444 ${ssh_key}.pub
+            '';
       };
 
       programs.zsh = let
@@ -138,7 +166,7 @@ in {
             then builtins.readFile "${CD}/configs/zsh/remote-big.config"
             else if builtins.elem config.networking.hostName []
             then builtins.readFile "${CD}/configs/zsh/remote-small.config"
-            else throw "bad hostname"
+            else throw "unknown hostname"
           );
         initExtraFirst = ''
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
@@ -251,11 +279,16 @@ in {
       isNormalUser = true;
       # TODO FUTURE use secrets
       # https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes
-      # sudo mkpasswd -m sha-512
       hashedPassword =
         if (builtins.pathExists password_file_path)
         then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
-        else throw "missing a password file";
+        else
+          throw ''
+            missing password file
+            Do:
+              sudo mkpasswd --method=scrypt > ${password_file_path}
+              sudo chmod 400 ${password_file_path}
+          '';
       shell = pkgs.zsh;
     };
   };

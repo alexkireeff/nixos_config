@@ -6,8 +6,9 @@
   ...
 }: let
   CD = builtins.toString ./.;
-  pub_ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGLXQbVQIF1/DuPfoA3+YpLpjH1geOTmEff71wDhNgGN user";
-  pub_git_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOt307aOiM2fsBlTPIpfvTDZWjA7v+7nN60f7IuCWNm1 user";
+  # TODO define ssh key locations in 1 place rather than 2 and define this in just one place (flake?)
+  pub_ssh_key_file_path = "/etc/nixos/ssh_key";
+  pub_git_key_file_path = "/etc/nixos/git_key";
 in {
   imports = ["${CD}/../components/base.nix" "${CD}/hardware/desktop-hardware.nix" "${CD}/../components/remote-boot.nix"];
 
@@ -68,10 +69,10 @@ in {
         home = "/var/git";
         homeMode = "770";
         isSystemUser = true;
-        openssh.authorizedKeys.keys = [pub_git_key];
+        openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile pub_git_key_file_path))];
         shell = "${pkgs.git}/bin/git-shell";
       };
-      user.openssh.authorizedKeys.keys = [pub_ssh_key];
+      user.openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile pub_ssh_key_file_path))];
     };
   };
 }
