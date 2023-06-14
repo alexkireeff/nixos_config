@@ -119,33 +119,32 @@ in {
       };
 
       programs.ssh = let
-        ssh_key = "/etc/nixos/git_key";
-        git_key = "/etc/nixos/git_key";
+        ssh_key_file_path = "/etc/nixos/ssh_key";
+        git_key_file_path = "/etc/nixos/git_key";
       in {
-        # TODO make git_key actually work
         enable = true;
         extraConfig =
-          if (builtins.pathExists ssh_key)
+          if (builtins.pathExists ssh_key_file_path)
           then
-            if (builtins.pathExists git_key)
-            then builtins.replaceStrings ["ssh_key" "git_key"] [ssh_key git_key] (builtins.readFile "${CD}/configs/ssh.config")
+            if (builtins.pathExists git_key_file_path)
+            then builtins.replaceStrings ["ssh_key" "git_key"] [ssh_key_file_path git_key_file_path] (builtins.readFile "${CD}/configs/ssh.config")
             else
               throw ''
                 missing git key file
                 Do:
-                  sudo ssh-keygen -t ed25519 -N "" -C "git_key" -f ${git_key}
-                  sudo chown user:users ${git_key} ${git_key}.pub
-                  chmod 400 ${git_key}
-                  chmod 444 ${git_key}.pub
+                  sudo ssh-keygen -t ed25519 -N "" -C "git_key" -f ${git_key_file_path}
+                  sudo chown user:users ${git_key_file_path} ${git_key_file_path}.pub
+                  chmod 400 ${git_key_file_path}
+                  chmod 444 ${git_key_file_path}.pub
               ''
           else
             throw ''
               missing ssh key file
               Do:
-                sudo ssh-keygen -t ed25519 -N "" -C "ssh_key" -f ${ssh_key}
-                sudo chown user:users ${ssh_key} ${ssh_key}.pub
-                chmod 400 ${ssh_key}
-                chmod 444 ${ssh_key}.pub
+                sudo ssh-keygen -t ed25519 -N "" -C "ssh_key" -f ${ssh_key_file_path}
+                sudo chown user:users ${ssh_key_file_path} ${ssh_key_file_path}.pub
+                chmod 400 ${ssh_key_file_path}
+                chmod 444 ${ssh_key_file_path}.pub
             '';
       };
 

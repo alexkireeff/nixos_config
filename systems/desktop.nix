@@ -7,13 +7,13 @@
 }: let
   CD = builtins.toString ./.;
   # TODO define ssh key locations in 1 place rather than 2 and define this in just one place (flake?)
-  pub_ssh_key_file_path = "/etc/nixos/ssh_key";
-  pub_git_key_file_path = "/etc/nixos/git_key";
+  ssh_key_file_path = "/etc/nixos/ssh_key";
+  git_key_file_path = "/etc/nixos/git_key";
 in {
   imports = ["${CD}/../components/base.nix" "${CD}/hardware/desktop-hardware.nix" "${CD}/../components/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  boot.initrd.availableKernelModules = ["r8169"];
+  #boot.initrd.availableKernelModules = ["r8169"];
 
   # local network takes a while to connect to
   boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
@@ -69,10 +69,10 @@ in {
         home = "/var/git";
         homeMode = "770";
         isSystemUser = true;
-        openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile pub_git_key_file_path))];
+        openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile (git_key_file_path + ".pub")))];
         shell = "${pkgs.git}/bin/git-shell";
       };
-      user.openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile pub_ssh_key_file_path))];
+      user.openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile (ssh_key_file_path + ".pub")))];
     };
   };
 }
