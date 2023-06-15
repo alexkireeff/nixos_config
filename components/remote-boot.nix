@@ -30,9 +30,9 @@ in {
 
   # copy files to initrd
   boot.initrd.secrets = {
-    "duckdns_url" =
+    "/etc/nixos/duckdns_url" =
       if (builtins.pathExists duckdns_url_file_path)
-      then null
+      then duckdns_url_file_path
       else
         throw ''
           missing duckdns url file
@@ -55,7 +55,7 @@ in {
   # run during boot process
   # https://www.duckdns.org/install.jsp
   boot.initrd.network.postCommands = ''
-    curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat ${duckdns_url_file_path})" > /dev/null
+    curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat /etc/nixos/duckdns_url)" > /dev/null
   '';
 
   systemd.services = {
@@ -64,7 +64,7 @@ in {
         bash
         pkgsStatic.curl
       ];
-      script = "curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat ${duckdns_url_file_path})\" > /dev/null";
+      script = "curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat /etc/nixos/duckdns_url)\" > /dev/null";
       startAt = "minutely";
     };
   };
