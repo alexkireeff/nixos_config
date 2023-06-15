@@ -15,7 +15,7 @@ in {
     # bootloader
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    loader.efi.efiSysMountPoint = "/boot/efi";
+    loader.efi.efiSysMountPoint = "/boot";
 
     # boot setup keyfile
     initrd.secrets = {
