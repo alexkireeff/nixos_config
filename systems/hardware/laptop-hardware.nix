@@ -12,19 +12,19 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "uas" "sd_mod"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c227fe02-5c72-4526-b700-7c37779b341d";
+    device = "/dev/disk/by-uuid/ab78eda2-2153-4d8e-8eb0-103feabad3fd";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-811b7142-106e-4dd2-b133-75f4f295dc2f".device = "/dev/disk/by-uuid/811b7142-106e-4dd2-b133-75f4f295dc2f";
+  boot.initrd.luks.devices."luks-42a7034c-777b-433e-81dd-cbb549d5f0af".device = "/dev/disk/by-uuid/42a7034c-777b-433e-81dd-cbb549d5f0af";
 
-  fileSystems."/boot/efi" = {
+  fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/0D7D-4AFA";
     fsType = "vfat";
   };
@@ -41,6 +41,4 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  # high-resolution display
-  # hardware.video.hidpi.enable = lib.mkDefault true;
 }
