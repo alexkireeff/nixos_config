@@ -19,7 +19,7 @@ in {
       then [(builtins.toPath initrd_ssh_host_key_file_path)]
       else
         throw ''
-          missing ssh host key file
+          missing initrd ssh host key file
           Do:
             sudo ssh-keygen -t ed25519 -a 100 -N "" -C "initrd_ssh_host_key" -f ${initrd_ssh_host_key_file_path}
             sudo chown user:users ${initrd_ssh_host_key_file_path} ${initrd_ssh_host_key_file_path}.pub
