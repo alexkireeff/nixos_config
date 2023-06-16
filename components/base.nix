@@ -283,7 +283,7 @@ in {
           throw ''
             missing password file
             Do:
-              sudo mkpasswd --method=scrypt > ${password_file_path}
+              mkpasswd --method=scrypt | sudo tee ${password_file_path}
               sudo chmod 400 ${password_file_path}
           '';
       shell = pkgs.zsh;
