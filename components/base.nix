@@ -9,6 +9,9 @@
 in {
   imports = ["${home-manager}/nixos"];
 
+  # TODO remove when fixed https://github.com/NixOS/nix/issues/8502
+  services.logrotate.checkConfig = false;
+
   # TODO FUTURE use btrfs when stable (or zfs if it gets a more permissive license)
 
   boot = {
