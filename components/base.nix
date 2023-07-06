@@ -126,6 +126,7 @@ in {
         git_key_file_path = "/etc/nixos/git_key";
       in {
         enable = true;
+        setXAuthLocation = true;
         extraConfig =
           if (builtins.pathExists ssh_key_file_path)
           then
