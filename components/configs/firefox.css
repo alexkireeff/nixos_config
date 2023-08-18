@@ -86,7 +86,7 @@ tab[selected="true"] .tab-background {
   background: rgba(var(--light-color), 1) !important;
 }
 
-/* make non selected tab dark theme */
+/* make non selected tab light theme */
 .tabbrowser-tab:not([visuallyselected="true"]),
 .tabbrowser-tab:-moz-lwtheme {
   color: rgba(var(--light-color), 1) !important;
