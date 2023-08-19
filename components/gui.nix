@@ -233,6 +233,12 @@ in {
 
             # allow pasting in google docs
             "dom.event.clipboardevents.enabled" = true;
+
+            # remove firefox view from toolbar
+            "browser.tabs.firefox-view" = false;
+
+            # remove picture in picture
+            "media.videocontrols.picture-in-picture.enabled" = false;
           };
           userChrome = builtins.readFile "${CD}/configs/firefox.css";
         };
