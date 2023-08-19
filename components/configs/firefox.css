@@ -52,32 +52,37 @@ toolbarbutton#scrollbutton-down,
   height      : 44px !important;
 }
 
+/* tab dimensions */
+#tabbrowser-tabs {
+  width: calc(100vw - var(--navbarWidth)) !important;
+}
+
 
 /* colorscheme */
 
-/* title bar color */
+/* title bar theme */
 .titlebar-color{
 color: rgba(var(--dark-color), 1) !important;
 background-color: rgba(var(--dark-color), 1) !important;
 }
 
-/* title bar background and tab bar background */
+/* title bar background and tab bar background theme */
 #titlebar,
 #TabsToolbar {
   background: rgba(var(--dark-color), 1) !important;
 }
 
-/* make background of url bar dark */
+/* make background of url bar themed */
 toolbar#nav-bar {
   background: rgba(var(--dark-color), 1) !important;
 }
 
-/* make sidebars dark theme */
+/* make sidebars themed */
 #sidebar-box{ background-color: rgba(var(--dark-color), 1) !important; }
 #sidebar-box,
 .sidebar-panel{ color: rgba(var(--light-color), 1) !important; }
 
-/* make selected tab dark theme */
+/* make selected tab themed */
 tab[selected="true"] .tab-content {
   color: rgba(var(--dark-color), 1) !important;
   box-shadow: none !important;
@@ -86,7 +91,7 @@ tab[selected="true"] .tab-background {
   background: rgba(var(--light-color), 1) !important;
 }
 
-/* make non selected tab light theme */
+/* make non selected tab themed */
 .tabbrowser-tab:not([visuallyselected="true"]),
 .tabbrowser-tab:-moz-lwtheme {
   color: rgba(var(--light-color), 1) !important;
@@ -94,7 +99,7 @@ tab[selected="true"] .tab-background {
   box-shadow: none !important;
 }
 
-/* make url bar dark theme */
+/* make url bar themed */
 #urlbar {
   color: rgba(var(--light-color), 1) !important;
 }
@@ -102,8 +107,8 @@ tab[selected="true"] .tab-background {
   background: rgba(var(--dark-color), 1) !important;
 }
 
-/* make alt bar dark theme */
+/* make alt bar themed */
 #toolbar-menubar, #menubar-items, #main-menubar {
   color: rgba(var(--light-color), 1) !important;
-} 
+}
 
