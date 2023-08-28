@@ -99,6 +99,7 @@ in {
         dtach # for keeping ssh open
         tree # see whats in a dir
         unzip # open .zip files
+        zip # make .zip files
       ];
 
       programs.home-manager.enable = true;
