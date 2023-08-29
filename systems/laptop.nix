@@ -64,5 +64,7 @@ in {
     }
   ];
 
-  virtualisation.virtualbox.host.enable = true; # TODO remove when done with 15482
+  # TODO remove when done with 15482
+  virtualisation.virtualbox.host.enable = true;
+  users.users.user.extraGroups = [ "vboxusers" ];
 }
