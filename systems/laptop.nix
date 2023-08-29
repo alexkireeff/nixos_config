@@ -63,4 +63,6 @@ in {
       size = (8 + 1) * 1024;
     }
   ];
+
+  virtualisation.virtualbox.host.enable = true; # TODO remove when done with 15482
 }
