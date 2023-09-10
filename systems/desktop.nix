@@ -23,7 +23,7 @@ in {
 
   # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
-  networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
+  config.networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
   config.environment.systemPackages = with pkgs; [];
 
