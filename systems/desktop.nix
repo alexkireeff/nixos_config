@@ -19,7 +19,7 @@ in {
   boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 
   # CA Derivations
-  config.contentAddressedByDefault = true
+  config.contentAddressedByDefault = true;
 
   # TODO FUTURE remove this it sets up the ethernet interface
   # https://github.com/NixOS/nixpkgs/issues/157034
