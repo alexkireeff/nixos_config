@@ -18,9 +18,6 @@ in {
     # local network takes a while to connect to
     boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 
-    # CA Derivations
-    contentAddressedByDefault = true;
-
     # TODO FUTURE remove this it sets up the ethernet interface
     # https://github.com/NixOS/nixpkgs/issues/157034
     networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;

@@ -29,17 +29,17 @@ in {
 
   nix = {
     # TODO FUTURE clean up an do CA derivations fixed
-    #buildMachines = [
-    #  {
-    #    hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/home/user/.ssh/ssh_key";
-    #    systems = ["x86_64-linux"];
-    #    maxJobs = 12;
-    #    speedFactor = 2;
-    #    supportedFeatures = ["benchmark" "big-parallel" "ca-derivations" "kvm" "nixos-test"];
-    #    mandatoryFeatures = [];
-    #  }
-    #];
-    #distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/etc/nixos/ssh_key";
+        systems = ["x86_64-linux"];
+        maxJobs = 12;
+        speedFactor = 2;
+        supportedFeatures = ["benchmark" "big-parallel" "ca-derivations" "kvm" "nixos-test"];
+        mandatoryFeatures = [];
+      }
+    ];
+    distributedBuilds = true;
 
     #extraOptions = ''
     #  builders-use-substitutes = true
