@@ -13,10 +13,10 @@ in {
   imports = ["${CD}/../components/base.nix" "${CD}/hardware/desktop-hardware.nix" "${CD}/../components/remote-boot.nix"];
 
   # enable network card for remote-boot.nix
-  boot.initrd.availableKernelModules = ["r8169"];
+  config.boot.initrd.availableKernelModules = ["r8169"];
 
   # local network takes a while to connect to
-  boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
+  config.boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 
   # CA Derivations
   config.contentAddressedByDefault = true;
