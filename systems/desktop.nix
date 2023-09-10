@@ -29,11 +29,11 @@ in {
 
   # nvidia driver
   config.hardware.opengl.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  config.services.xserver.videoDrivers = ["nvidia"];
 
   config.networking.hostName = "desktop";
 
-  services = {
+  config.services = {
     fail2ban.enable = true;
     logind.extraConfig = ''
       HandlePowerKey=suspend-then-hibernate
