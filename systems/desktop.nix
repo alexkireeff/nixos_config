@@ -25,7 +25,7 @@ in {
   # https://github.com/NixOS/nixpkgs/issues/157034
   networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
-  environment.systemPackages = with pkgs; [];
+  config.environment.systemPackages = with pkgs; [];
 
   # nvidia driver
   hardware.opengl.enable = true;
