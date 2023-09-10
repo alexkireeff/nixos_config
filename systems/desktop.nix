@@ -31,7 +31,7 @@ in {
   config.hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
 
-  networking.hostName = "desktop";
+  config.networking.hostName = "desktop";
 
   services = {
     fail2ban.enable = true;
