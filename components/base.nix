@@ -119,6 +119,7 @@ in {
           airline # make vim bottom bar pretty
           python-syntax # python syntax
           vim-nix # nix syntax
+          lean-nvim # lean syntax + infoview
         ];
       };
 
