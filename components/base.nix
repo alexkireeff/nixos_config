@@ -108,8 +108,8 @@ in {
 
       programs.git = {
         enable = true;
-        userEmail = "alexkireeff@gmail.com";
-        userName = "Alex Kireeff";
+        userEmail = "alexkireeff@gmail.com"; # TODO change?
+        userName = "Alex Kireeff"; # TODO change?
       };
 
       programs.neovim = {
@@ -188,7 +188,7 @@ in {
             file = "p10k.config";
           }
           {
-            name = "zsh-vi-mode";
+            name = "zsh-vi-mode"; # TODO consider looking at other shells?
             src = pkgs.zsh-vi-mode;
             file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
           }
