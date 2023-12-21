@@ -64,8 +64,4 @@ in {
       size = (8 + 1) * 1024;
     }
   ];
-
-  # TODO remove when done with 15482
-  virtualisation.virtualbox.host.enable = true;
-  users.users.user.extraGroups = [ "vboxusers" ];
 }
