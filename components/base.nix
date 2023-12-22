@@ -12,7 +12,7 @@ in {
   # TODO remove when fixed https://github.com/NixOS/nix/issues/8502
   services.logrotate.checkConfig = false;
 
-  # TODO FUTURE use btrfs when stable (or zfs if it gets a more permissive license)
+  # TODO FUTURE use next gen filesystem eventually
 
   boot = {
     # bootloader
