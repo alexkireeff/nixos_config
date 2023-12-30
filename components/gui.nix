@@ -244,6 +244,56 @@ in {
         };
       };
 
+      programs.i3status-rust = {
+        enable = true;
+        bars.blocks = [
+          {
+            block = "battery";
+            format = "BAT $percentage {$time|}";
+            full_format = "BAT $percentage {$time|}";
+            empty_format = "BAT $percentage {$time|}";
+            not_charging_format = "BAT $percentage {$time|}";
+            interval = 60;
+          }
+          {
+            block = "cpu";
+            interval = 1;
+            format = "CPU $utilization";
+          }
+          {
+            block = "disk_space";
+            path = "/";
+            format = "DISK $used/$total";
+            info_type = "available";
+            interval = 60;
+          }
+          {
+            block = "memory";
+            format = "MEM $mem_used/$mem_total";
+            format_alt = "SWP $swap_used/$swap_total";
+            interval = 5;
+          }
+          {
+            block = "net"; # TODO modify left click functionality
+            format = "{AP $ssid|LAN} {$ip|$ipv6}{ $signal_strength|}";
+          }
+          {
+            block = "sound";
+          }
+          {
+            block = "backlight";
+            cycle = [1 100];
+            device = "intel_backlight";
+          }
+          {
+            block = "time";
+            format = " $timestamp.datetime(f:'%Y/%m/%d %H:%M:%S') ";
+            timezone = "America/New_York";
+            interval = 1;
+          }
+        ];
+      };
+
       programs.swaylock.settings = {
         show-failed-attempts = false;
 
@@ -290,8 +340,8 @@ in {
         config = {
           bars = [
             {
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust.config";
-              command = "${pkgs.sway}/bin/swaybar";
+              #statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust.config"; # TODO rm?
+              #command = "${pkgs.sway}/bin/swaybar"; # TODO rm also?
             }
           ];
 
@@ -310,6 +360,7 @@ in {
 
         enable = true;
 
+        # TODO can remove this stuff? make it increase and decrease by 1% and click disables it?
         extraConfig = ''
           # Brightness
           bindsym XF86MonBrightnessDown exec light -U 1
