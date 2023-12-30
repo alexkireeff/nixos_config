@@ -246,6 +246,7 @@ in {
 
       programs.i3status-rust = {
         enable = true;
+        """
         bars.bottom.blocks = [
           {
             block = "battery";
@@ -292,6 +293,7 @@ in {
             interval = 1;
           }
         ];
+        """
       };
 
       programs.swaylock.settings = {
