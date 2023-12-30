@@ -18,10 +18,6 @@ in {
     # local network takes a while to connect to
     boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 
-    # TODO FUTURE remove this it sets up the ethernet interface
-    # https://github.com/NixOS/nixpkgs/issues/157034
-    networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
-
     environment.systemPackages = with pkgs; [];
 
     # nvidia driver
