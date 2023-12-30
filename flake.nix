@@ -23,7 +23,7 @@
       config.allowUnfree = true;
       # TODO FUTURE CA derivations currently broken
       # https://github.com/NixOS/nixpkgs/pull/214044
-      #config.contentAddressedByDefault = true;
+      config.contentAddressedByDefault = true;
     };
   in {
     nixosConfigurations = {

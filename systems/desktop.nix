@@ -18,8 +18,6 @@ in {
     # local network takes a while to connect to
     boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 
-    config.contentAddressedByDefault = true; # TODO trying CA derivations again
-
     environment.systemPackages = with pkgs; [];
 
     # nvidia driver
