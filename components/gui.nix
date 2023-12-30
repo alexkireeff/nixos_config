@@ -246,7 +246,7 @@ in {
 
       programs.i3status-rust = {
         enable = true;
-        bars.blocks = [
+        bars.bottom.blocks = [
           {
             block = "battery";
             format = "BAT $percentage {$time|}";
