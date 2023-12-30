@@ -6,6 +6,7 @@
   ...
 }: let
   CD = builtins.toString ./.;
+  # TODO define ssh key locations in 1 place rather than 2 and define this in just one place (flake?)
   ssh_key_file_path = "/etc/nixos/ssh_key";
   git_key_file_path = "/etc/nixos/git_key";
 in {
