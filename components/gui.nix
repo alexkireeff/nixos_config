@@ -244,6 +244,69 @@ in {
         };
       };
 
+      programs.i3status-rust = {
+        bars.bottom = {
+          blocks = [
+            {
+              block = "battery";
+              empty_format = " BAT $percentage {$time|} ";
+              format = " BAT $percentage {$time|} ";
+              full_format = " BAT $percentage {$time|} ";
+              interval = 60;
+              not_charging_format = " BAT $percentage {$time|} ";
+            }
+            {
+              block = "cpu";
+              format = " CPU $utilization ";
+              interval = 1;
+            }
+            {
+              block = "disk_space";
+              format = " DISK $used/$total ";
+              path = "/";
+            }
+            {
+              block = "memory";
+              format = " MEM $mem_used/$mem_total ";
+              format_alt = " SWP $swap_used/$swap_total ";
+              interval = 5;
+            }
+            {
+              block = "net";
+              format = " {AP $ssid|LAN} {$ip|$ipv6}{ $signal_strength|} ";
+              click = [{
+                button = "left";
+                cmd = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+              }];
+            }
+            {
+              block = "sound";
+              max_vol = 100;
+              show_volume_when_muted = true;
+              step_width = 1;
+            }
+            {
+              block = "backlight";
+              cycle = [1 100];
+              device = "intel_backlight";
+              maximum = 100;
+              minimum = 1;
+              step_width = 1;
+            }
+            {
+              block = "time";
+              format = " $timestamp.datetime(f:'%Y/%m/%d %H:%M:%S') ";
+              interval = 1;
+              timezone = "America/New_York";
+            }
+          ];
+
+          settings.theme.theme = "plain";
+        };
+
+        enable = true;
+      };
+
       programs.swaylock.settings = {
         show-failed-attempts = false;
 
@@ -288,11 +351,9 @@ in {
         term = "${pkgs.alacritty}/bin/alacritty";
       in {
         config = {
-          bars = [
-            {
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${CD}/configs/i3status-rust.config";
-            }
-          ];
+          bars = [{
+            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml";
+          }];
 
           focus.forceWrapping = false;
           focus.followMouse = false;
