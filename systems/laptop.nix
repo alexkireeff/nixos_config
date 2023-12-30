@@ -14,13 +14,14 @@ in {
     "nvme.noacpi=1"
   ];
 
+  # for firefox hardware acceleration
   hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver # for firefox hardware acceleration
+    intel-media-driver
   ];
 
   home-manager.users.user.services.swayidle.timeouts = [
     {
-      timeout = 60 * 4;
+      timeout = 4 * 60;
       command = "[[ $(${pkgs.coreutils}/bin/cat /sys/class/power_supply/ACAD/online) -eq 0 ]] && ${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
     }
   ];
@@ -28,7 +29,7 @@ in {
   networking.hostName = "laptop";
 
   nix = {
-    # TODO FUTURE clean up an do CA derivations fixed
+    # TODO clean up an do CA derivations fixed
     #buildMachines = [
     #  {
          # NOTE: it uses the root user's config/settings, so we have to set it up there for this to work

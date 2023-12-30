@@ -9,7 +9,7 @@
 in {
   imports = ["${home-manager}/nixos"];
 
-  # TODO remove when fixed https://github.com/NixOS/nix/issues/8502
+  # TODO FUTURE remove when fixed https://github.com/NixOS/nix/issues/8502
   services.logrotate.checkConfig = false;
 
   # TODO FUTURE use next gen filesystem eventually
@@ -85,9 +85,6 @@ in {
         # font
         (nerdfonts.override {fonts = ["RobotoMono"];})
 
-        # nvim shared copy paste
-        wl-clipboard
-
         # command line utilities
         rsync # remote sync
         dtach # for keeping ssh open
@@ -106,7 +103,7 @@ in {
         userName = "Alex Kireeff";
       };
 
-      programs.neovim = {
+      programs.neovim = { # TODO FUTURE helix?
         enable = true;
         extraConfig = builtins.readFile "${CD}/configs/nvim.config";
         plugins = with pkgs.vimPlugins; [
@@ -147,7 +144,7 @@ in {
             '';
       };
 
-      programs.zsh = let
+      programs.zsh = let # TODO FUTURE consider looking at other shells that have better "vim" support?
         dotDirectory = ".config/zsh";
       in {
         enable = true;
@@ -182,7 +179,7 @@ in {
             file = "p10k.config";
           }
           {
-            name = "zsh-vi-mode"; # TODO consider looking at other shells?
+            name = "zsh-vi-mode";
             src = pkgs.zsh-vi-mode;
             file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
           }
