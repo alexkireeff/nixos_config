@@ -69,13 +69,7 @@ in {
   console.keyMap = "us";
 
   environment = {
-    # TODO FUTURE ideally don't want this setting
-    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/config/shells-environment.nix#L176
-    shellAliases = {
-      ls = null;
-      ll = null;
-      l = null;
-    };
+    shellAliases = lib.mkForce {};
     defaultPackages = lib.mkForce [];
     systemPackages = with pkgs; [
       home-manager
