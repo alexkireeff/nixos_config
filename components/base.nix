@@ -128,31 +128,35 @@ in {
 
         matchBlocks = {
           "desktop" = {
+            extraOptions = {hostKeyAlias = "desktop";};
             hostname = "9wfscoalrb.duckdns.org";
-            user = "user";
             identityFile = ssh_key_file_path;
-            extraOptions = {hostKeyAlias = "desktop"};
+            identitiesOnly = true;
+            user = "user";
           };
 
           "fde-desktop" = {
+            extraOptions = {hostKeyAlias = "fde-desktop";};
             hostname = "9wfscoalrb.duckdns.org";
-            user = "root";
             identityFile = ssh_key_file_path;
-            extraOptions = {hostKeyAlias = "fde-desktop"};
+            identitiesOnly = true;
+            user = "root";
           };
 
           "gitserver" = {
+            extraOptions = {hostKeyAlias = "gitserver";};
             hostname = "9wfscoalrb.duckdns.org";
-            user = "git";
             identityFile = git_key_file_path;
-            extraOptions = {hostKeyAlias = "gitserver"};
+            identitiesOnly = true;
+            user = "git";
           };
 
-          "github" = {
+          "github.com" = {
+            extraOptions = {hostKeyAlias = "github";};
             hostname = "github.com";
-            user = "git";
+            identitiesOnly = true;
             identityFile = git_key_file_path;
-            extraOptions = {hostKeyAlias = "github"};
+            user = "git";
           };
         };
       };
