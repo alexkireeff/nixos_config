@@ -108,8 +108,8 @@ in {
 
       programs.git = {
         enable = true;
-        userEmail = "alexkireeff@gmail.com"; # TODO change?
-        userName = "Alex Kireeff"; # TODO change?
+        userEmail = "alexkireeff@gmail.com";
+        userName = "Alex Kireeff";
       };
 
       programs.neovim = {
@@ -250,8 +250,6 @@ in {
     sudo.execWheelOnly = true;
   };
 
-  # TODO FUTURE remove udevmonConfig and plugins
-  # https://github.com/NixOS/nixpkgs/issues/126681
   services.interception-tools = {
     enable = true;
     plugins = [pkgs.interception-tools-plugins.caps2esc];
