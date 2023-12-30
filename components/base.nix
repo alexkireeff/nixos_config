@@ -103,15 +103,21 @@ in {
         userName = "Alex Kireeff";
       };
 
-      programs.neovim = { # TODO FUTURE helix?
+      programs.helix = {
         enable = true;
-        extraConfig = builtins.readFile "${CD}/configs/nvim.config";
-        plugins = with pkgs.vimPlugins; [
-          airline # make vim bottom bar pretty
-          python-syntax # python syntax
-          vim-nix # nix syntax
-          lean-nvim # lean syntax + infoview
-        ];
+        settings = {
+          # TODO https://docs.helix-editor.com/configuration.html
+
+          editor = {
+            # auto-info = false; # TODO eventually disable
+            bufferline = "always";
+            line-number = "relative";
+            middle-click-paste = false;
+            mouse = false;
+          };
+
+          theme = "base16_terminal";
+        };
       };
 
       programs.ssh = let
@@ -144,7 +150,7 @@ in {
             '';
       };
 
-      programs.zsh = let # TODO FUTURE consider looking at other shells that have better "vim" support?
+      programs.zsh = let # TODO FUTURE consider looking at other shells that have better keybinding support?
         dotDirectory = ".config/zsh";
       in {
         enable = true;
