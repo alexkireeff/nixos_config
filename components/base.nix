@@ -121,33 +121,40 @@ in {
       };
 
       programs.ssh = let
-        ssh_key_file_path = "/etc/nixos/ssh_key";
+        ssh_key_file_path = "/etc/nixos/ssh_key"; # TODO verify existence of these and if so fail as we did before
         git_key_file_path = "/etc/nixos/git_key";
       in {
         enable = true;
-        extraConfig =
-          if (builtins.pathExists ssh_key_file_path)
-          then
-            if (builtins.pathExists git_key_file_path)
-            then builtins.replaceStrings ["ssh_key" "git_key"] [ssh_key_file_path git_key_file_path] (builtins.readFile "${CD}/configs/ssh.config")
-            else
-              throw ''
-                missing git key file
-                Do:
-                  sudo ssh-keygen -t ed25519 -N "" -C "git_key" -f ${git_key_file_path}
-                  sudo chown user:users ${git_key_file_path} ${git_key_file_path}.pub
-                  chmod 400 ${git_key_file_path}
-                  chmod 444 ${git_key_file_path}.pub
-              ''
-          else
-            throw ''
-              missing ssh key file
-              Do:
-                sudo ssh-keygen -t ed25519 -N "" -C "ssh_key" -f ${ssh_key_file_path}
-                sudo chown user:users ${ssh_key_file_path} ${ssh_key_file_path}.pub
-                chmod 400 ${ssh_key_file_path}
-                chmod 444 ${ssh_key_file_path}.pub
-            '';
+
+        matchBlocks = {
+          "desktop" = {
+            hostname = "9wfscoalrb.duckdns.org";
+            user = "user";
+            identityFile = ssh_key_file_path;
+            extraOptions = {hostKeyAlias = "desktop"};
+          };
+
+          "fde-desktop" = {
+            hostname = "9wfscoalrb.duckdns.org";
+            user = "root";
+            identityFile = ssh_key_file_path;
+            extraOptions = {hostKeyAlias = "fde-desktop"};
+          };
+
+          "gitserver" = {
+            hostname = "9wfscoalrb.duckdns.org";
+            user = "git";
+            identityFile = git_key_file_path;
+            extraOptions = {hostKeyAlias = "gitserver"};
+          };
+
+          "github" = {
+            hostname = "github.com";
+            user = "git";
+            identityFile = git_key_file_path;
+            extraOptions = {hostKeyAlias = "github"};
+          };
+        };
       };
 
       programs.zsh = let # TODO FUTURE consider looking at other shells that have better keybinding support?
