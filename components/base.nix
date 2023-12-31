@@ -160,7 +160,6 @@ in {
       };
 
       programs.zsh = let
-        # TODO FUTURE consider looking at other shells that have better keybinding support?
         dotDirectory = ".config/zsh";
       in {
         enable = true;
@@ -193,11 +192,6 @@ in {
             name = "powerlevel10k-config";
             src = lib.cleanSource (builtins.toPath "${CD}/configs/powerlevel10k-config");
             file = "p10k.config";
-          }
-          {
-            name = "zsh-vi-mode";
-            src = pkgs.zsh-vi-mode;
-            file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
           }
         ];
       };
