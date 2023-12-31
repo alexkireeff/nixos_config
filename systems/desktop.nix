@@ -3,12 +3,10 @@
   pkgs,
   lib,
   home-manager,
+  impure-info,
   ...
 }: let
   CD = builtins.toString ./.;
-  # TODO define ssh key locations in 1 place rather than 2 and define this in just one place (flake?)
-  ssh_key_file_path = "/etc/nixos/ssh_key";
-  git_key_file_path = "/etc/nixos/git_key";
 in {
   imports = ["${CD}/../components/base.nix" "${CD}/hardware/desktop-hardware.nix" "${CD}/../components/remote-boot.nix"];
   config = {
@@ -68,10 +66,10 @@ in {
           home = "/var/git";
           homeMode = "770";
           isSystemUser = true;
-          openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile (git_key_file_path + ".pub")))];
+          openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile (impure-info.git_key_path_string + ".pub")))];
           shell = "${pkgs.git}/bin/git-shell";
         };
-        user.openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile (ssh_key_file_path + ".pub")))];
+        user.openssh.authorizedKeys.keys = [(lib.removeSuffix "\n" (builtins.readFile (impure-info.ssh_key_path_string + ".pub")))];
       };
     };
   };

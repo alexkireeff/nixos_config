@@ -3,6 +3,7 @@
   pkgs,
   lib,
   home-manager,
+  impure-info,
   ...
 }: let
   CD = builtins.toString ./.;

@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  impure-info,
   ...
 }: let
   duckdns_url_file_path = "/etc/nixos/duckdns_url";
@@ -17,7 +18,7 @@ in {
       enable = true;
 
       # run during boot process
-      # https://www.duckdns.org/install.jsp # TODO throw with instructions if file doesn't exist
+      # https://www.duckdns.org/install.jsp
       postCommands = ''
         curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat /etc/nixos/duckdns_url)" > /dev/null
       '';

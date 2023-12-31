@@ -25,12 +25,17 @@
       # https://github.com/NixOS/nixpkgs/pull/214044
       # config.contentAddressedByDefault = true;
     };
+    impure-info = {
+      ssh_key_path_string = "/etc/nixos/ssh_key";
+      git_key_path_string = "/etc/nixos/git_key";
+      user_pass_hash_path_string = "/etc/nixos/user_pass_hash";
+    };
   in {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         specialArgs = {
-          home-manager = home-manager;
+          inherit home-manager impure-info;
         };
 
         modules = [
@@ -42,7 +47,7 @@
       desktop = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         specialArgs = {
-          home-manager = home-manager;
+          inherit home-manager impure-info;
         };
 
         modules = [

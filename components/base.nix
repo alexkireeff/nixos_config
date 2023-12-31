@@ -3,6 +3,7 @@
   pkgs,
   lib,
   home-manager,
+  impure-info,
   ...
 }: let
   CD = builtins.toString ./.;
@@ -12,7 +13,7 @@ in {
   # TODO FUTURE remove when fixed https://github.com/NixOS/nix/issues/8502
   services.logrotate.checkConfig = false;
 
-  # TODO FUTURE use next gen filesystem eventually
+  # TODO FUTURE use next gen filesystem
 
   boot = {
     # bootloader
@@ -120,17 +121,14 @@ in {
         };
       };
 
-      programs.ssh = let
-        ssh_key_file_path = "/etc/nixos/ssh_key"; # TODO verify existence of these and if so fail as we did before
-        git_key_file_path = "/etc/nixos/git_key";
-      in {
+      programs.ssh = {
         enable = true;
 
         matchBlocks = {
           "desktop" = {
             extraOptions = {hostKeyAlias = "desktop";};
             hostname = "9wfscoalrb.duckdns.org";
-            identityFile = ssh_key_file_path;
+            identityFile = impure-info.ssh_key_path_string;
             identitiesOnly = true;
             user = "user";
           };
@@ -138,7 +136,7 @@ in {
           "fde-desktop" = {
             extraOptions = {hostKeyAlias = "fde-desktop";};
             hostname = "9wfscoalrb.duckdns.org";
-            identityFile = ssh_key_file_path;
+            identityFile = impure-info.ssh_key_path_string;
             identitiesOnly = true;
             user = "root";
           };
@@ -146,7 +144,7 @@ in {
           "gitserver" = {
             extraOptions = {hostKeyAlias = "gitserver";};
             hostname = "9wfscoalrb.duckdns.org";
-            identityFile = git_key_file_path;
+            identityFile = impure-info.git_key_path_string;
             identitiesOnly = true;
             user = "git";
           };
@@ -155,7 +153,7 @@ in {
             extraOptions = {hostKeyAlias = "github";};
             hostname = "github.com";
             identitiesOnly = true;
-            identityFile = git_key_file_path;
+            identityFile = impure-info.git_key_path_string;
             user = "git";
           };
         };
@@ -281,22 +279,20 @@ in {
     # password is disabled
     users.root.hashedPassword = ".";
 
-    users.user = let
-      password_file_path = builtins.toPath "/etc/nixos/user_pass_hash";
-    in {
+    users.user = {
       extraGroups = ["wheel" "networkmanager" "video"];
       isNormalUser = true;
       # TODO FUTURE use secrets
       # https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes
       hashedPassword =
-        if (builtins.pathExists password_file_path)
-        then (lib.removeSuffix "\n" (builtins.readFile password_file_path))
+        if (builtins.pathExists impure-info.user_pass_hash_path_string)
+        then (lib.removeSuffix "\n" (builtins.readFile impure-info.user_pass_hash_path_string))
         else
           throw ''
             missing password file
             Do:
-              mkpasswd --method=scrypt | sudo tee ${password_file_path}
-              sudo chmod 400 ${password_file_path}
+              mkpasswd --method=scrypt | sudo tee ${impure-info.user_pass_hash_path_string}
+              sudo chmod 400 ${impure-info.user_path_hash_path_string}
           '';
       shell = pkgs.zsh;
     };

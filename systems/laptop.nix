@@ -3,6 +3,7 @@
   pkgs,
   lib,
   home-manager,
+  file-path,
   ...
 }: let
   CD = builtins.toString ./.;
@@ -29,7 +30,7 @@ in {
   networking.hostName = "laptop";
 
   nix = {
-    # TODO clean up an do CA derivations fixed
+    # TODO clean up and do CA derivations when fixed
     #buildMachines = [
     #  {
     # NOTE: it uses the root user's config/settings, so we have to set it up there for this to work
