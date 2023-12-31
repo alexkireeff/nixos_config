@@ -278,16 +278,7 @@ in {
       isNormalUser = true;
       # TODO FUTURE use secrets
       # https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes
-      hashedPassword =
-        if (builtins.pathExists impure-info.user_pass_hash_path_string)
-        then (lib.removeSuffix "\n" (builtins.readFile impure-info.user_pass_hash_path_string))
-        else
-          throw ''
-            missing password file
-            Do:
-              mkpasswd --method=scrypt | sudo tee ${impure-info.user_pass_hash_path_string}
-              sudo chmod 400 ${impure-info.user_path_hash_path_string}
-          '';
+      hashedPassword = lib.removeSuffix "\n" (builtins.readFile impure-info.user_pass_hash_path_string);
       shell = pkgs.zsh;
     };
   };
