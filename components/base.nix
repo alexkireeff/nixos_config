@@ -161,7 +161,8 @@ in {
         };
       };
 
-      programs.zsh = let # TODO FUTURE consider looking at other shells that have better keybinding support?
+      programs.zsh = let
+        # TODO FUTURE consider looking at other shells that have better keybinding support?
         dotDirectory = ".config/zsh";
       in {
         enable = true;

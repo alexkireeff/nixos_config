@@ -274,10 +274,12 @@ in {
             {
               block = "net";
               format = " {AP $ssid|LAN} {$ip|$ipv6}{ $signal_strength|} ";
-              click = [{
-                button = "left";
-                cmd = "${pkgs.alacritty}/bin/alacritty -e nmtui";
-              }];
+              click = [
+                {
+                  button = "left";
+                  cmd = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                }
+              ];
             }
             {
               block = "sound";
@@ -351,9 +353,11 @@ in {
         term = "${pkgs.alacritty}/bin/alacritty";
       in {
         config = {
-          bars = [{
-            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml";
-          }];
+          bars = [
+            {
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml";
+            }
+          ];
 
           focus.forceWrapping = false;
           focus.followMouse = false;
