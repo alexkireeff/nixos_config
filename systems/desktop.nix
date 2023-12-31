@@ -15,6 +15,9 @@ in {
     # enable network card for remote-boot.nix
     boot.initrd.availableKernelModules = ["r8169"];
 
+    # TODO FUTURE in remote-boot.nix use systemd stage 1 to automatically bring up ethernet interface etc.
+    networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
+
     # local network takes a while to connect to
     boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
 

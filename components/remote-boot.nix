@@ -60,9 +60,6 @@ in {
 
       "/etc/ssl/certs/ca-certificates.crt" = builtins.toPath "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     };
-
-    # enable systemd in initrd
-    systemd.enable = true;
   };
 
   systemd.services = {
