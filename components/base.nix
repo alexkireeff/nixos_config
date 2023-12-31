@@ -193,6 +193,11 @@ in {
             src = lib.cleanSource (builtins.toPath "${CD}/configs/powerlevel10k-config");
             file = "p10k.config";
           }
+          {
+            name = "zsh-vi-mode";
+            src = pkgs.zsh-vi-mode;
+            file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+          }
         ];
       };
 
