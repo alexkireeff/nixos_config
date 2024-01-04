@@ -25,7 +25,7 @@ in {
   home-manager = {
     users.user = {
       home.packages = with pkgs; [
-        # sway
+        # sway # TODO try river instead
         swayidle # idle controller
         swaylock # lock screen
         wl-clipboard # clipboard
