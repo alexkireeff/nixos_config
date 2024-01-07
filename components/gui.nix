@@ -362,7 +362,7 @@ in {
           focus.forceWrapping = false;
           focus.followMouse = false;
 
-          keybindings = lib.mkOptionDefault {
+          keybindings = lib.mkOptionDefault { # TODO change mod key to something else because helix uses it
             "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
             "${mod}+s" = "exec ${term}";
             "${mod}+d" = "exec ${FIREFOX}/bin/firefox";
