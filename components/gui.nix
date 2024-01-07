@@ -28,7 +28,6 @@ in {
         # sway # TODO try river instead
         swayidle # idle controller
         swaylock # lock screen
-        wl-clipboard # clipboard
         i3status-rust # status for bar
 
         # gui programs
