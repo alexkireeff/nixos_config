@@ -244,7 +244,7 @@ in {
         };
       };
 
-      programs.i3status-rust = {
+      programs.i3status-rust = { # TODO disable alt-shift-c
         bars.bottom = {
           blocks = [
             {
