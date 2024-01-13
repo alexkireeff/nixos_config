@@ -58,7 +58,7 @@ in {
       programs.alacritty = {
         enable = true;
         settings = {
-          key_bindings = [
+          key.bindings = [
             {
               key = "N";
               mods = "Control|Shift";
