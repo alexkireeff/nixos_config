@@ -24,14 +24,14 @@
       ssh = {
         enable = true;
         authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
-        hostKeys = impure-info.initrd_ssh_host_key_file_path;
+        hostKeys = [impure-info.initrd_ssh_host_key_file_path_string];
       };
     };
 
     # copy files to initrd
     secrets = {
-      "/etc/nixos/duckdns_url" = impure-info.duckdns_url_file_path;
-      "/etc/ssl/certs/ca-certificates.crt" = builtins.toPath "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+      "/etc/nixos/duckdns_url" = impure-info.duckdns_url_file_path_string;
+      "/etc/ssl/certs/ca-certificates.crt" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     };
   };
 
