@@ -17,9 +17,10 @@ in {
 
   boot = {
     # bootloader
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader.efi.canTouchEfiVariables = true; # for fde
     loader.efi.efiSysMountPoint = "/boot";
+    loader.systemd-boot.editor = false;
+    loader.systemd-boot.enable = true;
 
     # boot setup keyfile
     initrd.secrets = {
@@ -87,7 +88,6 @@ in {
         (nerdfonts.override {fonts = ["RobotoMono"];})
 
         # command line utilities
-        rsync # remote sync
         dtach # for keeping ssh open
         tree # see whats in a dir
         unzip # open .zip files
@@ -150,7 +150,6 @@ in {
           };
 
           "github.com" = {
-            extraOptions = {hostKeyAlias = "github";};
             hostname = "github.com";
             identitiesOnly = true;
             identityFile = impure-info.git_key_path_string;

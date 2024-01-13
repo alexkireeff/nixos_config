@@ -244,7 +244,8 @@ in {
         };
       };
 
-      programs.i3status-rust = { # TODO disable alt-shift-c
+      programs.i3status-rust = {
+        # TODO disable alt-shift-c
         bars.bottom = {
           blocks = [
             {
@@ -349,6 +350,7 @@ in {
       };
 
       wayland.windowManager.sway = let
+        # TODO change mod key to something else because helix uses it
         mod = "Mod1";
         term = "${pkgs.alacritty}/bin/alacritty";
       in {
@@ -362,7 +364,7 @@ in {
           focus.forceWrapping = false;
           focus.followMouse = false;
 
-          keybindings = lib.mkOptionDefault { # TODO change mod key to something else because helix uses it
+          keybindings = lib.mkOptionDefault {
             "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
             "${mod}+s" = "exec ${term}";
             "${mod}+d" = "exec ${FIREFOX}/bin/firefox";
