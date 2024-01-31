@@ -241,7 +241,10 @@ in {
       experimental-features = nix-command flakes ca-derivations
     '';
 
-    settings.allowed-users = ["root" "user"];
+    settings = {
+      allowed-users = ["root" "user"];
+      sandbox = true;
+    };
   };
 
   programs.zsh.enable = true;
