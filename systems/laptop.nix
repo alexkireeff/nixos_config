@@ -30,7 +30,7 @@ in {
   networking.hostName = "laptop";
 
   # ca derivations
-  contentAddressedByDefault = true;
+  config.contentAddressedByDefault = true;
 
   # nix = {
   #   # TODO clean up and do CA derivations when fixed
