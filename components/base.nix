@@ -10,9 +10,6 @@
 in {
   imports = ["${home-manager}/nixos"];
 
-  # TODO FUTURE remove when fixed https://github.com/NixOS/nix/issues/8502
-  # services.logrotate.checkConfig = false;
-
   # TODO FUTURE use next gen filesystem
 
   boot = {
@@ -27,7 +24,7 @@ in {
       "/crypto_keyfile.bin" = null;
     };
 
-    kernelPackages = pkgs.linuxPackages_hardened;
+    kernelPackages = pkgs.linuxPackages;
 
     kernelModules = ["tcp_bbr"];
 

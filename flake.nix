@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:alexkireeff/nixpkgs/hardened";
+    nixpkgs.url = "github:NixOS/nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
