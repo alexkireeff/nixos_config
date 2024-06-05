@@ -99,7 +99,7 @@ in {
             darkreader
 
             # paywalls
-            # bypass-paywalls-clean # TODO reenable this later
+            bypass-paywalls-clean
 
             # control video speed
             videospeed
