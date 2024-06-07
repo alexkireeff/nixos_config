@@ -37,11 +37,11 @@ in {
       # blue light filter
       services.gammastep = {
         enable = true;
-        latitude = 38.897957;
-        longitude = -77.036556;
+        dawnTime = "8:45-9:15";
+        duskTime = "20:45-21:15" ;
         temperature = {
           day = 6500;
-          night = 2000;
+          night = 1500;
         };
       };
 
