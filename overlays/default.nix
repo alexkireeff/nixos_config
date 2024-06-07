@@ -1,8 +1,11 @@
 # ./overlays/default.nix
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   nixpkgs.overlays = [
-	( final: prev: { dwl = prev.dwl.overrideAttrs { patches = [ ./dwl-patches/focusdirection.patch ]; }; })
+    (final: prev: {dwl = prev.dwl.overrideAttrs {configFile = "../components/configs/dwl.h";};})
   ];
 }

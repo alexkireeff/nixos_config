@@ -350,19 +350,19 @@ in {
 
         disable-caps-lock-text = true;
       };
-
-      # Control brightness
-      programs.light.enable = true;
-
-      # Allow swaylock to unlock computer after sleeping
-      # If not the screen freezes
-      security.pam.services.swaylock.text = "auth include login";
-
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true; # low level soundcard interface
-        pulse.enable = true; # pulseaudio interface
-      };
     };
+  };
+
+  # Control brightness
+  programs.light.enable = true;
+
+  # Allow swaylock to unlock computer after sleeping
+  # If not the screen freezes
+  security.pam.services.swaylock.text = "auth include login";
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true; # low level soundcard interface
+    pulse.enable = true; # pulseaudio interface
   };
 }
