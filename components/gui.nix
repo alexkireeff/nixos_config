@@ -7,14 +7,13 @@
   ...
 }: let
   CD = builtins.toString ./.;
-  # use precompiled firefox
-  FIREFOX = pkgs.firefox-bin;
 in {
   imports = ["${CD}/base.nix"];
 
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.sway}/bin/sway'';
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.dwl}/bin/dwl'';
     systemPackages = with pkgs; [
+      dwl
       pulseaudio
     ];
   };
@@ -25,9 +24,13 @@ in {
   home-manager = {
     users.user = {
       home.packages = with pkgs; [
-        # sway # TODO try river instead
         swayidle # idle controller
         swaylock # lock screen
+        # TODO run i3status-rust `${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml`
+        # TODO add keybindings back
+        # "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
+        # "${mod}+s" = "exec ${term}";
+        # "${mod}+d" = "exec ${pkgs.firefox-bin}/bin/firefox";
         i3status-rust # status for bar
 
         # gui programs
@@ -38,7 +41,7 @@ in {
       services.gammastep = {
         enable = true;
         dawnTime = "8:45-9:15";
-        duskTime = "20:45-21:15" ;
+        duskTime = "20:45-21:15";
         temperature = {
           day = 6500;
           night = 1500;
@@ -88,7 +91,7 @@ in {
 
       programs.firefox = {
         enable = true;
-        package = FIREFOX;
+        package = pkgs.firefox-bin;
         profiles.default = {
           extensions = with config.nur.repos.rycee.firefox-addons; [
             # privacy
@@ -245,7 +248,6 @@ in {
       };
 
       programs.i3status-rust = {
-        # TODO disable alt-shift-c
         bars.bottom = {
           blocks = [
             {
@@ -349,46 +351,18 @@ in {
         disable-caps-lock-text = true;
       };
 
-      wayland.windowManager.sway = let
-        # TODO change mod key to something else because helix uses it
-        mod = "Mod1";
-        term = "${pkgs.alacritty}/bin/alacritty";
-      in {
-        config = {
-          bars = [
-            {
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml";
-            }
-          ];
+      # Control brightness
+      programs.light.enable = true;
 
-          focus.forceWrapping = false;
-          focus.followMouse = false;
+      # Allow swaylock to unlock computer after sleeping
+      # If not the screen freezes
+      security.pam.services.swaylock.text = "auth include login";
 
-          keybindings = lib.mkOptionDefault {
-            "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
-            "${mod}+s" = "exec ${term}";
-            "${mod}+d" = "exec ${FIREFOX}/bin/firefox";
-          };
-
-          modifier = mod;
-          terminal = term;
-        };
-
+      services.pipewire = {
         enable = true;
+        alsa.enable = true; # low level soundcard interface
+        pulse.enable = true; # pulseaudio interface
       };
     };
-  };
-
-  # Control brightness
-  programs.light.enable = true;
-
-  # Allow swaylock to unlock computer after sleeping
-  # If not the screen freezes
-  security.pam.services.swaylock.text = "auth include login";
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true; # low level soundcard interface
-    pulse.enable = true; # pulseaudio interface
   };
 }

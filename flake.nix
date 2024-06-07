@@ -47,18 +47,18 @@
       user_pass_hash_path_string = "/etc/nixos/user_pass_hash";
 
       /*
-        https://www.duckdns.org/install.jsp?tab=hardware
-        get the domain and token
-        echo "https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" | sudo tee ${duckdns_url_file_path_string}
-        sudo chmod 400 ${duckdns_url_file_path_string}
+      https://www.duckdns.org/install.jsp?tab=hardware
+      get the domain and token
+      echo "https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" | sudo tee ${duckdns_url_file_path_string}
+      sudo chmod 400 ${duckdns_url_file_path_string}
       */
       duckdns_url_file_path_string = "/etc/nixos/duckdns_url";
 
       /*
-        sudo ssh-keygen -t ed25519 -a 100 -N "" -C "initrd_ssh_key" -f ${initrd_ssh_host_key_file_path_string}
-        sudo chown user:users ${initrd_ssh_host_key_file_path_string} ${initrd_ssh_host_key_file_path_string}.pub
-        chmod 600 ${initrd_ssh_host_key_file_path_string}
-        chmod 644 ${initrd_ssh_host_key_file_path_string}.pub
+      sudo ssh-keygen -t ed25519 -a 100 -N "" -C "initrd_ssh_key" -f ${initrd_ssh_host_key_file_path_string}
+      sudo chown user:users ${initrd_ssh_host_key_file_path_string} ${initrd_ssh_host_key_file_path_string}.pub
+      chmod 600 ${initrd_ssh_host_key_file_path_string}
+      chmod 644 ${initrd_ssh_host_key_file_path_string}.pub
       */
       initrd_ssh_host_key_file_path_string = "/etc/nixos/initrd_ssh_host_key";
     };
@@ -71,6 +71,7 @@
         };
 
         modules = [
+          (import ./overlays)
           ./systems/laptop.nix
           nur.nixosModules.nur
         ];
@@ -83,6 +84,7 @@
         };
 
         modules = [
+          (import ./overlays)
           ./systems/desktop.nix
           nur.nixosModules.nur
         ];
