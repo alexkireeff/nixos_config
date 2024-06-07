@@ -92,8 +92,7 @@ tab[selected="true"] .tab-background {
 }
 
 /* make non selected tab themed */
-.tabbrowser-tab:not([visuallyselected="true"]),
-.tabbrowser-tab:-moz-lwtheme {
+.tabbrowser-tab {
   color: rgba(var(--light-color), 1) !important;
   background: rgba(var(--dark-color), 1) !important;
   box-shadow: none !important;
