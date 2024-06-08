@@ -107,7 +107,6 @@ in {
           # TODO https://docs.helix-editor.com/configuration.html
 
           editor = {
-            # auto-info = false; # TODO eventually disable
             bufferline = "always";
             line-number = "relative";
             middle-click-paste = false;
