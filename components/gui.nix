@@ -11,9 +11,8 @@ in {
   imports = ["${CD}/base.nix"];
 
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.dwl}/bin/dwl'';
+    # loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river''; # TODO
     systemPackages = with pkgs; [
-      dwl
       pulseaudio
     ];
   };
@@ -24,16 +23,6 @@ in {
   home-manager = {
     users.user = {
       home.packages = with pkgs; [
-        swayidle # idle controller
-        swaylock # lock screen
-        # TODO run i3status-rust `${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml`
-        # TODO add keybindings back
-        # "${mod}+a" = "exec ${pkgs.speedcrunch}/bin/speedcrunch";
-        # "${mod}+s" = "exec ${term}";
-        # "${mod}+d" = "exec ${pkgs.firefox-bin}/bin/firefox";
-        i3status-rust # status for bar
-
-        # gui programs
         speedcrunch # calculator
       ];
 
@@ -243,7 +232,7 @@ in {
             # remove picture in picture
             "media.videocontrols.picture-in-picture.enabled" = false;
           };
-          userChrome = builtins.readFile "${CD}/configs/firefox.css";
+          userChrome = builtins.readFile "${CD}/configs/firefox.config";
         };
       };
 
@@ -349,6 +338,14 @@ in {
         indicator-caps-lock = false;
 
         disable-caps-lock-text = true;
+      };
+
+      wayland.windowManager.river = {
+        enable = true;
+        systemd.enable = true;
+        xwayland.enable = false;
+        extraConfig = builtins.readFile ./configs/river.config;
+        # TODO run i3status-rust `${pkgs.i3status-rust}/bin/i3status-rs config-bottom.toml`
       };
     };
   };

@@ -71,7 +71,6 @@
         };
 
         modules = [
-          (import ./overlays)
           ./systems/laptop.nix
           nur.nixosModules.nur
         ];
@@ -84,7 +83,6 @@
         };
 
         modules = [
-          (import ./overlays)
           ./systems/desktop.nix
           nur.nixosModules.nur
         ];
