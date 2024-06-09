@@ -11,7 +11,7 @@ in {
   imports = ["${CD}/base.nix"];
 
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river &; sleep 60; ${pkgs.yambar}/bin/yambar'';
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river'';
     systemPackages = with pkgs; [
       pulseaudio
     ];
@@ -418,6 +418,7 @@ in {
         enable = true;
         systemd.enable = true;
         xwayland.enable = false;
+        extraCommands = "${pkgs.yambar}/bin/yambar";
         extraConfig = builtins.readFile ./configs/river.config;
       };
     };
