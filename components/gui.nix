@@ -275,7 +275,6 @@ in {
         disable-caps-lock-text = true;
       };
 
-      # TODO starts too quickly and then a race condition occurs
       programs.yambar = {
         enable = true;
         settings = {
@@ -292,19 +291,11 @@ in {
             };
 
             # TODO WIP
-            # left = [
-            #   river.anchors.base.map.conditions = {
-            #     "id == 1".string.text = "1";
-            #     "id == 2".string.text = "2";
-            #     "id == 3".string.text = "3";
-            #     "id == 4".string.text = "4";
-            #     "id == 5".string.text = "5";
-            #     "id == 6".string.text = "6";
-            #     "id == 7".string.text = "7";
-            #     "id == 8".string.text = "8";
-            #     "id == 9".string.text = "9";
-            #   };
-            # ];
+            left = [
+              {
+              river.content.string.text = "{id}";
+              }
+            ];
 
             right = [
               {
@@ -332,7 +323,6 @@ in {
                 mem.content.string.text = "MEM {percent_used}% | ";
               }
               {
-                # TODO onclick open nmtui
                 network = {
                   content.map.conditions."name != lo".map.conditions = {
                     "state == unknown".string = {
@@ -397,8 +387,8 @@ in {
                   content.string = {
                     text = "| BRIGHT {percent}% | ";
                     on-click = {
-                      wheel-up = "light -A 1"; # TODO ???
-                      wheel-down = "light -U 1"; # TODO ???
+                      wheel-up = "light -A 1";
+                      wheel-down = "light -U 1"; # TODO min light limit
                     };
                   };
                 };
