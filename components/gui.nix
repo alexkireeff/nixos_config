@@ -275,6 +275,7 @@ in {
         disable-caps-lock-text = true;
       };
 
+      # TODO starts too quickly and then a race condition occurs
       programs.yambar = {
         enable = true;
         settings = {
@@ -396,8 +397,8 @@ in {
                   content.string = {
                     text = "| BRIGHT {percent}% | ";
                     on-click = {
-                      wheel-up = "light -A 1";
-                      wheel-down = "light -U 1";
+                      wheel-up = "light -A 1"; # TODO ???
+                      wheel-down = "light -U 1"; # TODO ???
                     };
                   };
                 };
