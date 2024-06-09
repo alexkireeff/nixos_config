@@ -11,7 +11,7 @@ in {
   imports = ["${CD}/base.nix"];
 
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river &; ${pkgs.yambar}/bin/yambar'';
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river &; sleep 60; ${pkgs.yambar}/bin/yambar'';
     systemPackages = with pkgs; [
       pulseaudio
     ];
