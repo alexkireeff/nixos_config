@@ -396,8 +396,8 @@ in {
                   content.string = {
                     text = "| BRIGHT {percent}% | ";
                     on-click = {
-                      wheel-up = ""; # TODO
-                      wheel-down = ""; # TODO
+                      wheel-up = "light -A 1";
+                      wheel-down = "light -U 1";
                     };
                   };
                 };
