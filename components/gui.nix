@@ -11,7 +11,7 @@ in {
   imports = ["${CD}/base.nix"];
 
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river'';
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.yambar}/bin/yambar &; ${pkgs.river}/bin/river'';
     systemPackages = with pkgs; [
       pulseaudio
     ];
@@ -22,8 +22,8 @@ in {
 
   home-manager = {
     users.user = {
-      home.packages = with pkgs; [
-        speedcrunch # calculator
+      home.packages = [
+        pkgs.speedcrunch # calculator
       ];
 
       # blue light filter
@@ -275,86 +275,139 @@ in {
         disable-caps-lock-text = true;
       };
 
-      # programs.i3status-rust = {
-      #   bars.bottom = {
-      #     blocks = [
-      #       {
-      #         block = "battery";
-      #         empty_format = " BAT $percentage {$time|} ";
-      #         format = " BAT $percentage {$time|} ";
-      #         full_format = " BAT $percentage {$time|} ";
-      #         interval = 60;
-      #         not_charging_format = " BAT $percentage {$time|} ";
-      #       }
-      #       {
-      #         block = "cpu";
-      #         format = " CPU $utilization ";
-      #         interval = 1;
-      #       }
-      #       {
-      #         block = "disk_space";
-      #         format = " DISK $used/$total ";
-      #         path = "/";
-      #       }
-      #       {
-      #         block = "memory";
-      #         format = " MEM $mem_used/$mem_total ";
-      #         format_alt = " SWP $swap_used/$swap_total ";
-      #         interval = 5;
-      #       }
-      #       {
-      #         block = "net";
-      #         format = " {AP $ssid|LAN} {$ip|$ipv6}{ $signal_strength|} ";
-      #         click = [
-      #           {
-      #             button = "left";
-      #             cmd = "${pkgs.alacritty}/bin/alacritty -e nmtui";
-      #           }
-      #         ];
-      #       }
-      #       {
-      #         block = "sound";
-      #         max_vol = 100;
-      #         show_volume_when_muted = true;
-      #         step_width = 1;
-      #       }
-      #       {
-      #         block = "backlight";
-      #         cycle = [1 100];
-      #         device = "intel_backlight";
-      #         maximum = 100;
-      #         minimum = 1;
-      #         step_width = 1;
-      #       }
-      #       {
-      #         block = "time";
-      #         format = " $timestamp.datetime(f:'%Y/%m/%d %H:%M:%S') ";
-      #         interval = 1;
-      #         timezone = "America/New_York";
-      #       }
-      #     ];
-
-      #     settings.theme.theme = "plain";
-      #   };
-
-      #   enable = true;
-      # };
-
       programs.yambar = {
         enable = true;
         settings = {
           bar = {
-            location = "bot";
-            height = 26;
+            location = "bottom";
+            height = 25;
             background = "000000FF";
+            font = "Roboto Mono Nerd Font:pixelsize=24";
+
+            border = {
+              width = 1;
+              color = "FFFFFFFF";
+              margin = 1;
+            };
+
+            # TODO WIP
+            # left = [
+            #   river.anchors.base.map.conditions = {
+            #     "id == 1".string.text = "1";
+            #     "id == 2".string.text = "2";
+            #     "id == 3".string.text = "3";
+            #     "id == 4".string.text = "4";
+            #     "id == 5".string.text = "5";
+            #     "id == 6".string.text = "6";
+            #     "id == 7".string.text = "7";
+            #     "id == 8".string.text = "8";
+            #     "id == 9".string.text = "9";
+            #   };
+            # ];
 
             right = [
               {
-                clock.content = [
-                  {
-                    string.text = "{time}";
-                  }
-                ];
+                battery = {
+                  name = "BAT1";
+                  content.map = {
+                    default.string.text = "BAT: {capacity}% {estimate}";
+                    conditions = {
+                      "(state == discharging || state == \"not charging\") && capacity < 10".string = {
+                        text = "BAT: {capacity}% {estimate}";
+                        foreground = "FF0000FF";
+                      };
+                      "state == unkown".string = {
+                        text = "BAT: Unknown";
+                        foreground = "FF0000FF";
+                      };
+                    };
+                  };
+                };
+              }
+              {
+                cpu.content.map.conditions."id < 0".string.text = " | CPU {cpu}% | ";
+              }
+              {
+                mem.content.string.text = "MEM {percent_used}% | ";
+              }
+              {
+                # TODO onclick open nmtui
+                network = {
+                  content.map.conditions."name != lo".map.conditions = {
+                    "state == unknown".string = {
+                      text = "Unknown | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == \"not present\"".string = {
+                      text = "Not Present | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == down".string = {
+                      text = "Down | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == \"lower layers down\"".string = {
+                      text = "Lower Layers Down | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == testing".string = {
+                      text = "Testing | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == dormant".string = {
+                      text = "Dormant | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == up && ipv4 != \"\"".string = {
+                      text = "{ssid}: {ipv4} {quality}% | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                    "state == up && ipv6 != \"\"".string = {
+                      text = "{ssid}: {ipv6} {quality}% | ";
+                      on-click.right = "${pkgs.alacritty}/bin/alacritty -e nmtui";
+                    };
+                  };
+                };
+              }
+              {
+                pulse.content.map = {
+                  default.string = {
+                    text = "VOL {sink_percent}%";
+                    on-click = {
+                      right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                      wheel-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%"; # TODO max volume limit?
+                      wheel-down = "pactl -- set-sink-volume @DEFAULT_SINK@ -1%";
+                    };
+                  };
+                  conditions."sink_muted".string = {
+                    text = "VOL {sink_percent}%";
+                    foreground = "ff0000ff";
+                    on-click = {
+                      right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+                      wheel-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%"; # TODO max volume limit?
+                      wheel-down = "pactl -- set-sink-volume @DEFAULT_SINK@ -1%";
+                    };
+                  };
+                };
+              }
+              {
+                backlight = {
+                  name = "intel_backlight";
+                  content.string = {
+                    text = "| BRIGHT {percent}% | ";
+                    on-click = {
+                      wheel-up = ""; # TODO
+                      wheel-down = ""; # TODO
+                    };
+                  };
+                };
+              }
+              {
+                clock = {
+                  content.string.text = "{date} {time}";
+                  date-format = "%Y/%m/%d";
+                  time-format = "%H:%M:%S";
+                };
               }
             ];
           };
