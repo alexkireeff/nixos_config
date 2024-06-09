@@ -344,9 +344,9 @@ in {
         enable = true;
         settings = {
           bar = {
-            location = "top";
+            location = "bot";
             height = 26;
-            background = "00000066";
+            background = "000000FF";
 
             right = [
               {
