@@ -290,10 +290,17 @@ in {
               margin = 1;
             };
 
-            # TODO WIP
             left = [
               {
-              river.content.string.text = "{id}";
+                river.content.map.conditions."id < 10".map = {
+                  default.string.text = " {id} |";
+                  conditions = {
+                    "urgent".string.text = " {id}!|";
+                    "visible".string.text = " {id}V|";
+                    "focused".string.text = " {id}*|";
+                    "occupied".string.text = " {id}O|";
+                  };
+                };
               }
             ];
 
