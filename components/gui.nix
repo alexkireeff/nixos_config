@@ -418,7 +418,6 @@ in {
         enable = true;
         systemd.enable = true;
         xwayland.enable = false;
-        extraCommands = "${pkgs.yambar}/bin/yambar";
         extraConfig = builtins.readFile ./configs/river.config;
       };
     };
