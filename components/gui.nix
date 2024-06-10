@@ -140,7 +140,6 @@ in {
             "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
             "layout.css.prefers-color-scheme.content-override" = 0;
             "media.eme.enabled" = true;
-            "widget.gtk.overlay-scrollbars.enabled" = true;
 
             # Home
             "browser.newtabpage.enabled" = false;
