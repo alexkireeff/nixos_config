@@ -78,6 +78,11 @@ in {
         };
       };
 
+      # NOTE have to manually:
+      # delete unwanted search engines
+      # change search engine
+      # enable installed extensions
+      # clear toolbar extensions and slots
       programs.firefox = {
         enable = true;
         package = pkgs.firefox-bin;
@@ -123,6 +128,7 @@ in {
           };
           settings = {
             # Go through about:preferences, changing what you want and compare that to about:config
+            # https://kb.mozillazine.org/About:config_entries
             # General
             "browser.display.background_color" = "#000000";
             "browser.download.always_ask_before_handling_new_types" = true;
@@ -149,11 +155,6 @@ in {
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
             # Search
-            # NOTE have to manually:
-            # delete unwanted search engines
-            # change search engine
-            # enable installed extensions
-            # clear toolbar extensions and slots
             "browser.search.suggest.enabled" = false;
             "browser.urlbar.shortcuts.bookmarks" = false;
             "browser.urlbar.shortcuts.history" = false;
