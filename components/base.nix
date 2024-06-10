@@ -24,7 +24,7 @@ in {
       "/crypto_keyfile.bin" = null;
     };
 
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_hardened;
 
     kernelModules = ["tcp_bbr"];
 
@@ -252,6 +252,8 @@ in {
     auditd.enable = true;
 
     sudo.execWheelOnly = true;
+
+    unprivilegedUsernsClone = true;
   };
 
   services.interception-tools = {
