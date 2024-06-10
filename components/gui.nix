@@ -147,7 +147,6 @@ in {
             "browser.newtabpage.activity-stream.showSearch" = false;
             "browser.newtabpage.activity-stream.showSponsored" = false;
             "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-            "browser.startup.homepage" = "duckduckgo.com";
 
             # Search
             # NOTE have to manually:
@@ -176,6 +175,7 @@ in {
             "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
             "browser.urlbar.suggest.quicksuggest.sponsored" = false;
             "browser.urlbar.suggest.topsites" = false;
+            "dom.forms.autocomplete.formautofill" = false;
             "datareporting.healthreport.uploadEnabled" = false;
             "datareporting.policy.dataSubmissionEnabled" = false;
             "dom.security.https_only_mode" = true;
@@ -231,6 +231,9 @@ in {
 
             # remove picture in picture
             "media.videocontrols.picture-in-picture.enabled" = false;
+
+            # startup page is blank by default
+            "browser.startup.page" = 0;
           };
           userChrome = builtins.readFile "${CD}/configs/firefox.config";
         };
