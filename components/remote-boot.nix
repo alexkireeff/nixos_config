@@ -26,6 +26,9 @@
         authorizedKeys = config.users.users.user.openssh.authorizedKeys.keys;
         hostKeys = [impure-info.initrd_ssh_host_key_file_path_string];
       };
+
+      # make sure we connect to network
+      udhcpc.extraArgs = ["--retries" "100"];
     };
 
     # copy files to initrd

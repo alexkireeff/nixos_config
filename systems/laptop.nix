@@ -33,7 +33,7 @@ in {
     buildMachines = [
       {
         # NOTE: it uses the root user's config/settings, so we have to set it up there for this to work
-        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/etc/nixos/ssh_key"; # TODO clean up
+        hostName = "user@9wfscoalrb.duckdns.org?ssh-key=/etc/nixos/ssh_key";
         systems = ["x86_64-linux" "i686-linux"];
         maxJobs = 12;
         speedFactor = 2;

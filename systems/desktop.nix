@@ -13,9 +13,6 @@ in {
     # enable network card for remote-boot.nix
     boot.initrd.availableKernelModules = ["r8169"];
 
-    # local network takes a while to connect to
-    boot.initrd.network.udhcpc.extraArgs = ["--retries" "10"];
-
     environment.systemPackages = with pkgs; [];
 
     # nvidia driver
@@ -36,7 +33,6 @@ in {
         allowSFTP = true; # sshfs
 
         settings = {
-          X11Forwarding = true; # gui applications
           PasswordAuthentication = false;
           PermitRootLogin = "no";
         };
