@@ -49,9 +49,9 @@ in {
       # Or on ipv6
       "net.ipv6.conf.all.accept_redirects" = 0;
       "net.ipv6.conf.default.accept_redirects" = 0;
-      # Do not send ICMP redirects (we not hacker)
+      # Do not send ICMP redirects
       "net.ipv4.conf.all.send_redirects" = 0;
-      # Do not accept IP source route packets (we not router)
+      # Do not accept IP source route packets
       "net.ipv4.conf.all.accept_source_route" = 0;
       "net.ipv6.conf.all.accept_source_route" = 0;
       # Protect against tcp time wait assasination hazards
