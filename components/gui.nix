@@ -42,7 +42,7 @@ in {
         events = [
           {
             event = "before-sleep";
-            command = "${pkgs.swaylock}/bin/swaylock";
+            command = "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x7F7F7F -input-color 0xFFFFFF -fail-color 0x7F0000";
           }
         ];
       };
@@ -244,45 +244,6 @@ in {
         };
       };
 
-      programs.swaylock.settings = {
-        show-failed-attempts = false;
-
-        font-size = 0;
-
-        color = "000000";
-
-        ring-color = "ffffff";
-        inside-color = "000000";
-        line-color = "000000";
-        text-color = "000000";
-
-        ring-clear-color = "ffffff";
-        inside-clear-color = "000000";
-        line-clear-color = "000000";
-        text-clear-color = "000000";
-
-        ring-caps-lock-color = "ffffff";
-        inside-caps-lock-color = "000000";
-        line-caps-lock-color = "000000";
-        text-caps-lock-color = "000000";
-
-        ring-ver-color = "0061ff";
-        inside-ver-color = "000000";
-        line-ver-color = "000000";
-        text-ver-color = "000000";
-
-        ring-wrong-color = "ff0000";
-        inside-wrong-color = "000000";
-        line-wrong-color = "000000";
-        text-wrong-color = "000000";
-
-        indicator-radius = 10;
-        indicator-idle-visible = true;
-        indicator-caps-lock = false;
-
-        disable-caps-lock-text = true;
-      };
-
       programs.yambar = {
         enable = true;
         settings = {
@@ -429,12 +390,11 @@ in {
     };
   };
 
-  # Control brightness
+  # control brightness
   programs.light.enable = true;
 
-  # Allow swaylock to unlock computer after sleeping
-  # If not the screen freezes
-  security.pam.services.swaylock.text = "auth include login";
+  # allow waylock to unlock computer after sleeping
+  security.pam.services.waylock = {};
 
   services.pipewire = {
     enable = true;
