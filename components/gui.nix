@@ -11,7 +11,7 @@ in {
   imports = ["${CD}/base.nix"];
 
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && ${pkgs.river}/bin/river'';
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && light -N 1 && ${pkgs.river}/bin/river'';
     systemPackages = with pkgs; [
       pulseaudio
     ];
@@ -342,7 +342,14 @@ in {
                     text = "VOL {sink_percent}%";
                     on-click = {
                       right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                      wheel-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%"; # TODO max volume limit?
+                      wheel-up = ''
+                      sh -c "
+                      current=$(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g')
+                      if [ $current -lt 100 ]; then
+                        pactl set-sink-volume @DEFAULT_SINK@ +1%
+                      fi
+                      "
+                      '';
                       wheel-down = "pactl -- set-sink-volume @DEFAULT_SINK@ -1%";
                     };
                   };
@@ -351,7 +358,14 @@ in {
                     foreground = "ff0000ff";
                     on-click = {
                       right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-                      wheel-up = "pactl set-sink-volume @DEFAULT_SINK@ +1%"; # TODO max volume limit?
+                      wheel-up = ''
+                      sh -c "
+                      current=$(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g')
+                      if [ $current -lt 100 ]; then
+                        pactl set-sink-volume @DEFAULT_SINK@ +1%
+                      fi
+                      "
+                      '';
                       wheel-down = "pactl -- set-sink-volume @DEFAULT_SINK@ -1%";
                     };
                   };
@@ -364,7 +378,7 @@ in {
                     text = "| BRIGHT {percent}% | ";
                     on-click = {
                       wheel-up = "light -A 1";
-                      wheel-down = "light -U 1"; # TODO min light limit
+                      wheel-down = "light -U 1";
                     };
                   };
                 };
