@@ -104,8 +104,6 @@ in {
       programs.helix = {
         enable = true;
         settings = {
-          # TODO https://docs.helix-editor.com/configuration.html
-
           editor = {
             bufferline = "always";
             line-number = "relative";
