@@ -78,6 +78,11 @@ in {
         };
       };
 
+      # TODO firefox has no riverwm border
+      # debugging notes:
+      # when we try to add a border it only adds the border to the top and left sides
+      # this leads me to believe the window is somehow offcenter
+      # TODO fix some of the below
       # NOTE have to manually:
       # delete unwanted search engines
       # change search engine
