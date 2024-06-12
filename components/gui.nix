@@ -351,12 +351,12 @@ in {
                     on-click = {
                       right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
                       wheel-up = ''
-                      sh -c "
-                      current=$(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g')
-                      if [ $current -lt 100 ]; then
-                        pactl set-sink-volume @DEFAULT_SINK@ +1%
-                      fi
-                      "
+                        sh -c "
+                        current=$(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g')
+                        if [ $current -lt 100 ]; then
+                          pactl set-sink-volume @DEFAULT_SINK@ +1%
+                        fi
+                        "
                       '';
                       wheel-down = "pactl -- set-sink-volume @DEFAULT_SINK@ -1%";
                     };
@@ -367,12 +367,12 @@ in {
                     on-click = {
                       right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
                       wheel-up = ''
-                      sh -c "
-                      current=$(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g')
-                      if [ $current -lt 100 ]; then
-                        pactl set-sink-volume @DEFAULT_SINK@ +1%
-                      fi
-                      "
+                        sh -c "
+                        current=$(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g')
+                        if [ $current -lt 100 ]; then
+                          pactl set-sink-volume @DEFAULT_SINK@ +1%
+                        fi
+                        "
                       '';
                       wheel-down = "pactl -- set-sink-volume @DEFAULT_SINK@ -1%";
                     };
