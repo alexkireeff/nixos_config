@@ -4,7 +4,10 @@
   lib,
   impure-info,
   ...
-}: {
+}: let
+  initrd_ca_cert_file = "/etc/ssl/certs/ca-certificates.crt";
+  initrd_duckdns_file = "/etc/nixos/duckdns_url";
+in {
   boot.initrd = {
     # copy programs to initrd
     extraUtilsCommands = ''
@@ -17,7 +20,7 @@
 
       # after initrd done, run this command
       postCommands = ''
-        curl --cacert /etc/ssl/certs/ca-certificates.crt "$(cat /etc/nixos/duckdns_url)" > /dev/null
+        curl --cacert ${initrd_ca_cert_file} "$(cat ${initrd_duckdns_file})" > /dev/null
       '';
 
       # ssh setup
@@ -33,8 +36,8 @@
 
     # copy files to initrd
     secrets = {
-      "/etc/nixos/duckdns_url" = impure-info.duckdns_url_file_path_string;
-      "/etc/ssl/certs/ca-certificates.crt" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+      "${initrd_ca_cert_file}" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+      "${initrd_duckdns_file}" = impure-info.duckdns_url_file_path_string;
     };
   };
 
@@ -45,7 +48,7 @@
         bash
         pkgsStatic.curl
       ];
-      script = "curl --cacert /etc/ssl/certs/ca-certificates.crt \"$(cat /etc/nixos/duckdns_url)\" > /dev/null";
+      script = "curl --cacert ${initrd_ca_cert_file} \"$(cat ${initrd_duckdns_file})\" > /dev/null";
       startAt = "minutely";
     };
   };

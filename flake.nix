@@ -24,7 +24,7 @@
       config.contentAddressedByDefault = true;
     };
     # TODO FUTURE clean up repo so that all related settings are set here
-    # server dns, computer names, waylock?, font stuff, file path stuff for remote boot (can keep where it is)
+    # server dns, computer names, font stuff
     impure-info = {
       /*
       sudo ssh-keygen -t ed25519 -a 100 -N "" -C "ssh_key" -f ${ssh_key_path_string}
