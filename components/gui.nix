@@ -406,8 +406,119 @@ in {
       wayland.windowManager.river = {
         enable = true;
         systemd.enable = true;
-        xwayland.enable = false;
-        extraConfig = builtins.readFile ./configs/river.config;
+        xwayland.enable = false; # TODO window issue is because this is disabled, isn't it?
+
+        settings = {
+          background-color = "0x000000";
+          border-color-focused = "0xFFFFFF";
+          border-color-unfocused = "0x7F7F7F";
+          border-color-urgent = "0xFF0000";
+          map.normal = {
+            "Super S" = "spawn alacritty";
+            "Super D" = "spawn firefox";
+            "Super A" = "spawn speedcrunch";
+
+            "Super Q" = "close";
+            "Super+Shift E" = "exit";
+
+            "Super J" = "focus-view next";
+            "Super K" = "focus-view previous";
+
+            "Super Period" = "focus-output next";
+            "Super Comma" = "focus-output previous";
+
+            "Super+Shift Period" = "send-to-output next";
+            "Super+Shift Comma" = "send-to-output previous";
+
+            "Super+Return" = "zoom";
+
+            "Super H" = "send-layout-cmd rivertile \"main-ratio -0.05\"";
+            "Super L" = "send-layout-cmd rivertile \"main-ratio +0.05\"";
+
+            "Super+Shift H" = "send-layout-cmd rivertile \"main-count +1\"";
+            "Super+Shift L" = "send-layout-cmd rivertile \"main-count -1\"";
+
+            "Super+Alt H" = "move left 100";
+            "Super+Alt J" = "move down 100";
+            "Super+Alt K" = "move up 100";
+            "Super+Alt L" = "move right 100";
+
+            "Supet+Alt+Control H" = "snap left";
+            "Supet+Alt+Control J" = "snap down";
+            "Supet+Alt+Control K" = "snap up";
+            "Supet+Alt+Control L" = "snap right";
+
+            "Super+Alt+Shift H" = "resize horizontal -100";
+            "Super+Alt+Shift J" = "resize vertical 100";
+            "Super+Alt+Shift K" = "resize vertical -100";
+            "Super+Alt+Shift L" = "resize horizontal 100";
+
+            # tags are set using individual bits
+
+            "Super 1" = "set-focused-tags 1";
+            "Super 2" = "set-focused-tags 2";
+            "Super 3" = "set-focused-tags 4";
+            "Super 4" = "set-focused-tags 8";
+            "Super 5" = "set-focused-tags 16";
+            "Super 6" = "set-focused-tags 32";
+            "Super 7" = "set-focused-tags 64";
+            "Super 8" = "set-focused-tags 128";
+            "Super 9" = "set-focused-tags 256";
+
+            "Super+Shift 1" = "set-view-tags 1";
+            "Super+Shift 2" = "set-view-tags 2";
+            "Super+Shift 3" = "set-view-tags 4";
+            "Super+Shift 4" = "set-view-tags 8";
+            "Super+Shift 5" = "set-view-tags 16";
+            "Super+Shift 6" = "set-view-tags 32";
+            "Super+Shift 7" = "set-view-tags 64";
+            "Super+Shift 8" = "set-view-tags 128";
+            "Super+Shift 9" = "set-view-tags 256";
+
+            "Super+Control 1" = "toggle-focused-tags 1";
+            "Super+Control 2" = "toggle-focused-tags 2";
+            "Super+Control 3" = "toggle-focused-tags 4";
+            "Super+Control 4" = "toggle-focused-tags 8";
+            "Super+Control 5" = "toggle-focused-tags 16";
+            "Super+Control 6" = "toggle-focused-tags 32";
+            "Super+Control 7" = "toggle-focused-tags 64";
+            "Super+Control 8" = "toggle-focused-tags 128";
+            "Super+Control 9" = "toggle-focused-tags 256";
+
+            "Super+Shift+Control 1" = "toggle-view-tags 1";
+            "Super+Shift+Control 2" = "toggle-view-tags 2";
+            "Super+Shift+Control 3" = "toggle-view-tags 4";
+            "Super+Shift+Control 4" = "toggle-view-tags 8";
+            "Super+Shift+Control 5" = "toggle-view-tags 16";
+            "Super+Shift+Control 6" = "toggle-view-tags 32";
+            "Super+Shift+Control 7" = "toggle-view-tags 64";
+            "Super+Shift+Control 8" = "toggle-view-tags 128";
+            "Super+Shift+Control 9" = "toggle-view-tags 256";
+
+            "Super 0" = "set-focused-tags 2147483648";
+            "Super+Shift 0" = "set-view-tags 2147483648";
+
+            "Super Space" = "toggle-float";
+            "Super F" = "toggle-fullscreen";
+
+            "Super Left" = "send-layout-cmd rivertile \"main-location left\"";
+            "Super Down" = "send-layout-cmd rivertile \"main-location bottom\"";
+            "Super Up" = "send-layout-cmd rivertile \"main-location top\"";
+            "Super Right" = "send-layout-cmd rivertile \"main-location right\"";
+          };
+          map-pointer.normal = {
+            "Super BTN_LEFT" = "move-view";
+            "Super BTN_RIGHT" = "resize-view";
+            "Super BTN_MIDDLE" = "toggle-float";
+          };
+          set-repeat = "50 300";
+          spawn = ["\"wlr-randr --output eDP-1 --scale 2\"" "\"yambar -b wayland\""];
+        };
+
+        extraConfig = ''
+          riverctl default-layout rivertile
+          rivertile &
+        '';
       };
     };
   };
