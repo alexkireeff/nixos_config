@@ -82,10 +82,8 @@ in {
       # debugging notes:
       # when we try to add a border it only adds the border to the top and left sides
       # this leads me to believe the window is somehow offcenter
-      # TODO fix some of the below
       # NOTE have to manually:
       # delete unwanted search engines
-      # change search engine
       # enable installed extensions
       # clear toolbar extensions and slots
       programs.firefox = {
@@ -126,9 +124,18 @@ in {
               keyword = "!y";
               url = "https://www.youtube.com/results?search_query=%s";
             };
-            "desmos" = {
-              keyword = "!d";
-              url = "https://www.desmos.com/calculator";
+          };
+          search = {
+            force = true;
+            default = "Google";
+            privateDefault = "Google";
+
+            engines = {
+              "Bing".metaData.hidden = true;
+              "ebay".metaData.hidden = true;
+              "Amazon.com".metaData.hidden = true;
+              "DuckDuckGo".metaData.hidden = true;
+              "Wikipedia (en)".metaData.hidden = true;
             };
           };
           settings = {
