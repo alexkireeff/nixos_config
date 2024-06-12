@@ -430,7 +430,7 @@ in {
             "Super+Shift Period" = "send-to-output next";
             "Super+Shift Comma" = "send-to-output previous";
 
-            "Super+Return" = "zoom";
+            "Super Return" = "zoom";
 
             "Super H" = "send-layout-cmd rivertile \"main-ratio -0.05\"";
             "Super L" = "send-layout-cmd rivertile \"main-ratio +0.05\"";
