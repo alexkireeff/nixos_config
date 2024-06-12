@@ -14,6 +14,7 @@ in {
     loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && light -N 1 && ${pkgs.river}/bin/river'';
     systemPackages = with pkgs; [
       pulseaudio
+      wlr-randr
     ];
   };
 
