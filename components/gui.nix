@@ -406,7 +406,7 @@ in {
       wayland.windowManager.river = {
         enable = true;
         systemd.enable = true;
-        xwayland.enable = false; # TODO window issue is because this is disabled, isn't it?
+        xwayland.enable = false;
 
         settings = {
           background-color = "0x000000";
