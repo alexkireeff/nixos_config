@@ -81,9 +81,6 @@ in {
         alejandra # nix formatter
         sshfs # connect to ssh filesystem
 
-        # font
-        (nerdfonts.override {fonts = ["RobotoMono"];})
-
         # command line utilities
         dtach # for keeping ssh open
         tree # see whats in a dir

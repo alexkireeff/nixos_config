@@ -7,6 +7,7 @@
   ...
 }: let
   CD = builtins.toString ./.;
+  font = "Roboto Mono";
 in {
   imports = ["${CD}/base.nix"];
 
@@ -15,6 +16,7 @@ in {
     systemPackages = with pkgs; [
       pulseaudio
       wlr-randr
+      (nerdfonts.override {fonts = [(builtins.replaceStrings [" "] [""] font)];})
     ];
   };
 
@@ -60,19 +62,19 @@ in {
           ];
           font = {
             bold = {
-              family = "Roboto Mono Nerd Font";
+              family = "${font} Nerd Font";
               style = "Bold";
             };
             bold_italic = {
-              family = "Roboto Mono Nerd Font";
+              family = "${font} Nerd Font";
               style = "Bold Italic";
             };
             italic = {
-              family = "Roboto Mono Nerd Font";
+              family = "${font} Nerd Font";
               style = "Italic";
             };
             normal = {
-              family = "Roboto Mono Nerd Font";
+              family = "${font} Nerd Font";
               style = "Regular";
             };
           };
@@ -259,7 +261,7 @@ in {
             location = "bottom";
             height = 25;
             background = "000000FF";
-            font = "Roboto Mono Nerd Font:pixelsize=24";
+            font = "${font} Nerd Font:pixelsize=24";
 
             border = {
               width = 1;
