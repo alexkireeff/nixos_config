@@ -13,9 +13,9 @@ in {
 
   environment = {
     loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && light -N 1 && ${pkgs.river}/bin/river'';
-    systemPackages = with pkgs; [
-      pulseaudio
-      wlr-randr
+    systemPackages = [
+      pkgs.pulseaudio
+      pkgs.wlr-randr
     ];
   };
 
@@ -93,19 +93,21 @@ in {
         enable = true;
         package = pkgs.firefox-bin;
         profiles.default = {
-          extensions = with config.nur.repos.rycee.firefox-addons; [
+          extensions = let
+            pkgs = config.nur.repos.rycee.firefox-addons;
+          in [
             # privacy
-            privacy-badger
-            ublock-origin
+            pkgs.privacy-badger
+            pkgs.ublock-origin
 
             # dark mode
-            darkreader
+            pkgs.darkreader
 
             # paywalls
-            bypass-paywalls-clean
+            pkgs.bypass-paywalls-clean
 
             # control video speed
-            videospeed
+            pkgs.videospeed
           ];
           id = 0;
           name = "default";

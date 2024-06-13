@@ -70,22 +70,22 @@ in {
   environment = {
     shellAliases = lib.mkForce {};
     defaultPackages = lib.mkForce [];
-    systemPackages = with pkgs; [
-      home-manager
+    systemPackages = [
+      pkgs.home-manager
     ];
   };
 
   home-manager = {
     users.user = {pkgs, ...}: {
-      home.packages = with pkgs; [
-        alejandra # nix formatter
-        sshfs # connect to ssh filesystem
+      home.packages = [
+        pkgs.alejandra # nix formatter
+        pkgs.sshfs # connect to ssh filesystem
 
         # command line utilities
-        dtach # for keeping ssh open
-        tree # see whats in a dir
-        unzip # open .zip files
-        zip # make .zip files
+        pkgs.dtach # for keeping ssh open
+        pkgs.tree # see whats in a dir
+        pkgs.unzip # open .zip files
+        pkgs.zip # make .zip files
       ];
 
       programs.home-manager.enable = true;

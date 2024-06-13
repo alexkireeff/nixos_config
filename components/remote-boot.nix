@@ -44,9 +44,9 @@ in {
   # update ddns every minute once decrypted
   systemd.services = {
     ddns-updater = {
-      path = with pkgs; [
-        bash
-        pkgsStatic.curl
+      path = [
+        pkgs.bash
+        pkgs.pkgsStatic.curl
       ];
       script = "curl --cacert ${initrd_ca_cert_file} \"$(cat ${initrd_duckdns_file})\" > /dev/null";
       startAt = "minutely";
