@@ -118,7 +118,7 @@ in {
         matchBlocks = {
           "desktop" = {
             extraOptions = {hostKeyAlias = "desktop";};
-            hostname = "9wfscoalrb.duckdns.org";
+            hostname = impure-info.desktop_dns;
             identityFile = impure-info.ssh_key_path_string;
             identitiesOnly = true;
             user = "user";
@@ -126,7 +126,7 @@ in {
 
           "fde-desktop" = {
             extraOptions = {hostKeyAlias = "fde-desktop";};
-            hostname = "9wfscoalrb.duckdns.org";
+            hostname = impure-info.desktop_dns;
             identityFile = impure-info.ssh_key_path_string;
             identitiesOnly = true;
             user = "root";
@@ -134,7 +134,7 @@ in {
 
           "gitserver" = {
             extraOptions = {hostKeyAlias = "gitserver";};
-            hostname = "9wfscoalrb.duckdns.org";
+            hostname = impure-info.desktop_dns;
             identityFile = impure-info.git_key_path_string;
             identitiesOnly = true;
             user = "git";

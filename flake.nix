@@ -49,6 +49,12 @@
       user_pass_hash_path_string = "/etc/nixos/user_pass_hash";
 
       /*
+      https://www.duckdns.org
+      make a subdomain and add it here
+      */
+      desktop_dns = "9wfscoalrb.duckdns.org";
+
+      /*
       https://www.duckdns.org/install.jsp?tab=hardware
       get the domain and token
       echo "https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" | sudo tee ${duckdns_url_file_path_string}
