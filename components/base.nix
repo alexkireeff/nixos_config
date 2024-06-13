@@ -270,7 +270,7 @@ in {
     users.root.hashedPassword = ".";
 
     users.user = {
-      extraGroups = ["wheel" "networkmanager" "video"];
+      extraGroups = ["dialout" "networkmanager" "video" "wheel"];
       isNormalUser = true;
       # TODO FUTURE use secrets
       # https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes
