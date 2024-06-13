@@ -16,7 +16,6 @@ in {
     systemPackages = with pkgs; [
       pulseaudio
       wlr-randr
-      (nerdfonts.override {fonts = [(builtins.replaceStrings [" "] [""] font)];})
     ];
   };
 
@@ -27,6 +26,7 @@ in {
     users.user = {
       home.packages = [
         pkgs.speedcrunch # calculator
+        (pkgs.nerdfonts.override {fonts = [(builtins.replaceStrings [" "] [""] font)];})
       ];
 
       # blue light filter
