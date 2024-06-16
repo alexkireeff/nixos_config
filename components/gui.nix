@@ -499,8 +499,9 @@ in {
             "Super+Shift+Control 8" = "toggle-view-tags 128";
             "Super+Shift+Control 9" = "toggle-view-tags 256";
 
-            "Super 0" = "set-focused-tags 2147483648";
-            "Super+Shift 0" = "set-view-tags 2147483648";
+            # (2 << 31) - 1 = 2147483647
+            "Super 0" = "set-focused-tags 2147483647";
+            "Super+Shift 0" = "set-view-tags 2147483647";
 
             "Super Space" = "toggle-float";
             "Super F" = "toggle-fullscreen";
