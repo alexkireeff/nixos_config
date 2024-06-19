@@ -305,13 +305,20 @@ in {
                 };
               }
               {
-                cpu.content.map.conditions."id < 0".string.text = " | CPU {cpu}% | ";
+                cpu = {
+                  poll-interval = 10000;
+                  content.map.conditions."id < 0".string.text = " | CPU {cpu}% | "; 
+                };
               }
               {
-                mem.content.string.text = "MEM {percent_used}% | ";
+                mem = {
+                  poll-interval = 10000;
+                  content.string.text = "MEM {percent_used}% | ";
+                };
               }
               {
                 network = {
+                  poll-interval = 10000;
                   content.map.conditions."name != lo".map.conditions = {
                     "state == unknown".string = {
                       text = "Unknown | ";
